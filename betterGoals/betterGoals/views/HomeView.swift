@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct tabView :View {
+struct HomeView :View {
    
     
     @State private var tabSelection = 0
@@ -24,7 +24,7 @@ struct tabView :View {
                 }
                 .tag(0)
             
-            Text("Goals")
+            goalsHomeView()
                 .font(.title)
                 .tabItem{
                     Text("goals").font(.caption)
