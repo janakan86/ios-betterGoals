@@ -12,16 +12,36 @@ struct goalsHomeView: View {
     var body: some View {
         VStack{
             HStack{
+                ItemView(imageName:"piggybank",
+                         itemName:"Meditation")
+                   .padding(.leading,10)
+
+                
+                Spacer().frame(width:10)
+                
+                ItemView(imageName:"shoe",
+                        itemName:"Meditation")
+                  .padding(.trailing,10)
+            }
+            
+            Spacer().frame(height:10)
+            
+            HStack{
                 ItemView(imageName:"shoe",
                          itemName:"Meditation")
-                    .offset(y:-130)
-                    .padding(.bottom,-130)
+                   .padding(.leading,10)
                 
-                Spacer()
+                Spacer().frame(width:10)
                 
+                ItemView(imageName:"piggybank",
+                        itemName:"Meditation")
+                   .padding(.trailing,10)
             }
 
         }
+        
+        
+        
     }
 }
 
