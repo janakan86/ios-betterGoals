@@ -11,8 +11,9 @@ import SwiftUI
 
 
 struct GoalTypesUIDefaults {
-    static let sportsGoalTypeUI = ItemUIValues(name:"sports",color:UIColor.paleBlue,defaultIcon:"shoe")
-    static let financialGoalTypeUI = ItemUIValues(name:"financial",color:UIColor.pink,defaultIcon:"piggybank")
+    static let sportsGoalTypeUI = ItemUIValues(name:"sports",color:Color("greyishBlue"),defaultIcon:"shoe")
+    
+    static let financialGoalTypeUI = ItemUIValues(name:"financial",color:Color (.white),defaultIcon:"piggybank")
 }
 
 struct ItemUIValues {
@@ -21,10 +22,4 @@ struct ItemUIValues {
     var color:Color
     var defaultIcon:String
     
-}
-
-
-struct UIColor {
-    static let paleBlue = Color(red:65/255, green:175/255, blue:195/255, opacity:1 );
-    static let pink = Color(red:255/255, green:148/255, blue:154/255, opacity:1 );
 }

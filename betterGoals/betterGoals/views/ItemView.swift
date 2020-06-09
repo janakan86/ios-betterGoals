@@ -43,7 +43,6 @@ struct ItemViewHeading : View {
         Text(textValue)
             .foregroundColor(itemUIValues.color)
             .font(.title)
-            .shadow(radius:1)
             .padding(.top,10)
             .padding(.leading,10)
         
