@@ -11,32 +11,38 @@ import SwiftUI
 struct goalsHomeView: View {
     var body: some View {
         VStack{
+            
+            Spacer().frame(height:10)
+            
             HStack{
-                ItemView(imageName:"piggybank",
+                ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
                          itemName:"Meditation")
                    .padding(.leading,10)
 
-                
                 Spacer().frame(width:10)
                 
-                ItemView(imageName:"shoe",
-                        itemName:"Meditation")
+                ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
+                         itemName:"Running")
                   .padding(.trailing,10)
             }
             
             Spacer().frame(height:10)
             
             HStack{
-                ItemView(imageName:"shoe",
-                         itemName:"Meditation")
+                ItemView(itemUIValues:GoalTypesUIDefaults.financialGoalTypeUI,
+                         itemName:"Save money")
                    .padding(.leading,10)
                 
                 Spacer().frame(width:10)
                 
-                ItemView(imageName:"piggybank",
-                        itemName:"Meditation")
+             ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
+                      itemName:"Relax ")
                    .padding(.trailing,10)
             }
+            
+            Spacer().frame(height:10)
+            
+            
 
         }
         

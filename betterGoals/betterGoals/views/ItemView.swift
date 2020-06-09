@@ -10,24 +10,50 @@ import SwiftUI
 
 struct ItemView: View {
     
-    var imageName:String
+
+    
+    var itemUIValues:ItemUIValues;
     var itemName:String
     
     
     var body: some View {
- 
-       Image(imageName)
-        .resizable()
-        .scaledToFit()
-        .cornerRadius(15)
-        .shadow(radius:10)
+        
+        VStack{
+            
+        Image(itemUIValues.defaultIcon)
+             .resizable()
+             .scaledToFit()
+             .cornerRadius(15)
+             .shadow(radius:4).overlay(
+                ItemViewHeading(textValue: itemName,itemUIValues:itemUIValues),
+                alignment: .topLeading)
+        
+        }
        
+    }
+}
+
+
+struct ItemViewHeading : View {
+    
+    var textValue:String
+    var itemUIValues:ItemUIValues
+    
+    var body: some View{
+        Text(textValue)
+            .foregroundColor(itemUIValues.color)
+            .font(.title)
+            .shadow(radius:1)
+            .padding(.top,10)
+            .padding(.leading,10)
+        
+        
     }
 }
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView(imageName:"shoe",itemName:"Meditation")
+        ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,itemName:"Meditation ")
             .offset(y:-130)
     }
 }
