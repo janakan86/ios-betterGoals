@@ -15,13 +15,13 @@ struct goalsHomeView: View {
             Spacer().frame(height:10)
             
             HStack{
-                ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
+                ItemIconView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
                          itemName:"Meditation")
                    .padding(.leading,10)
 
                 Spacer().frame(width:10)
                 
-                ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
+                ItemIconView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
                          itemName:"Running")
                   .padding(.trailing,10)
             }
@@ -29,13 +29,13 @@ struct goalsHomeView: View {
             Spacer().frame(height:10)
             
             HStack{
-                ItemView(itemUIValues:GoalTypesUIDefaults.financialGoalTypeUI,
+                ItemIconView(itemUIValues:GoalTypesUIDefaults.financialGoalTypeUI,
                          itemName:"Save money")
                    .padding(.leading,10)
                 
                 Spacer().frame(width:10)
                 
-             ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
+             ItemIconView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,
                       itemName:"Relax ")
                    .padding(.trailing,10)
             }

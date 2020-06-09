@@ -8,9 +8,7 @@
 
 import SwiftUI
 
-struct ItemView: View {
-    
-
+struct ItemIconView: View {
     
     var itemUIValues:ItemUIValues;
     var itemName:String
@@ -52,7 +50,7 @@ struct ItemViewHeading : View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,itemName:"Meditation ")
+        ItemIconView(itemUIValues:GoalTypesUIDefaults.sportsGoalTypeUI,itemName:"Meditation ")
             .offset(y:-130)
     }
 }
