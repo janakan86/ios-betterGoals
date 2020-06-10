@@ -70,12 +70,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DE2EBCDD2484B29000CFEC00 /* goals */ = {
+		DE2EBCDD2484B29000CFEC00 /* Goals */ = {
 			isa = PBXGroup;
 			children = (
 				DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */,
 			);
-			path = goals;
+			path = Goals;
 			sourceTree = "<group>";
 		};
 		DE2EBCE22484D3B700CFEC00 /* Resources */ = {
@@ -141,7 +141,7 @@
 		DEACF7382462A04900074C28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DE2EBCDD2484B29000CFEC00 /* goals */,
+				DE2EBCDD2484B29000CFEC00 /* Goals */,
 				DEACF7392462A07600074C28 /* HomeView.swift */,
 				DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */,
 				DE8701B4248CCADD00331DE5 /* constants.swift */,
