@@ -109,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				DE2EBCE22484D3B700CFEC00 /* Resources */,
-				DEACF7382462A04900074C28 /* views */,
+				DEACF7382462A04900074C28 /* Views */,
 				DEACF6F6245BF33A00074C28 /* AppDelegate.swift */,
 				DEACF6F8245BF33A00074C28 /* SceneDelegate.swift */,
 				DEACF6FA245BF33A00074C28 /* ContentView.swift */,
@@ -138,7 +138,7 @@
 			path = betterGoalsTests;
 			sourceTree = "<group>";
 		};
-		DEACF7382462A04900074C28 /* views */ = {
+		DEACF7382462A04900074C28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				DE2EBCDD2484B29000CFEC00 /* goals */,
@@ -146,7 +146,7 @@
 				DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */,
 				DE8701B4248CCADD00331DE5 /* constants.swift */,
 			);
-			path = views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
