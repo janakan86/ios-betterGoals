@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */; };
 		DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */; };
+		DE597F7424909973007038C1 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE597F7324909973007038C1 /* Item.swift */; };
+		DE597F772490B81E007038C1 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE597F762490B81E007038C1 /* DataService.swift */; };
+		DE597F792491F0BF007038C1 /* sampleGoals.json in Resources */ = {isa = PBXBuildFile; fileRef = DE597F782491F0BF007038C1 /* sampleGoals.json */; };
 		DE8701B1248A203100331DE5 /* piggybank.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE8701B0248A203100331DE5 /* piggybank.jpg */; };
 		DE8701B3248A203800331DE5 /* shoe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE8701B2248A203800331DE5 /* shoe.jpg */; };
 		DE8701B5248CCADD00331DE5 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8701B4248CCADD00331DE5 /* constants.swift */; };
@@ -35,6 +38,9 @@
 /* Begin PBXFileReference section */
 		DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalsHomeView.swift; sourceTree = "<group>"; };
 		DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIconView.swift; sourceTree = "<group>"; };
+		DE597F7324909973007038C1 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		DE597F762490B81E007038C1 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		DE597F782491F0BF007038C1 /* sampleGoals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleGoals.json; sourceTree = "<group>"; };
 		DE8701B0248A203100331DE5 /* piggybank.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = piggybank.jpg; sourceTree = "<group>"; };
 		DE8701B2248A203800331DE5 /* shoe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shoe.jpg; sourceTree = "<group>"; };
 		DE8701B4248CCADD00331DE5 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
@@ -81,10 +87,27 @@
 		DE2EBCE22484D3B700CFEC00 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DE597F782491F0BF007038C1 /* sampleGoals.json */,
 				DE8701B2248A203800331DE5 /* shoe.jpg */,
 				DE8701B0248A203100331DE5 /* piggybank.jpg */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DE597F7224909921007038C1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DE597F7324909973007038C1 /* Item.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DE597F752490B2A1007038C1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DE597F762490B81E007038C1 /* DataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		DEACF6EA245BF33A00074C28 = {
@@ -108,8 +131,10 @@
 		DEACF6F5245BF33A00074C28 /* betterGoals */ = {
 			isa = PBXGroup;
 			children = (
-				DE2EBCE22484D3B700CFEC00 /* Resources */,
+				DE597F752490B2A1007038C1 /* Services */,
 				DEACF7382462A04900074C28 /* Views */,
+				DE597F7224909921007038C1 /* Models */,
+				DE2EBCE22484D3B700CFEC00 /* Resources */,
 				DEACF6F6245BF33A00074C28 /* AppDelegate.swift */,
 				DEACF6F8245BF33A00074C28 /* SceneDelegate.swift */,
 				DEACF6FA245BF33A00074C28 /* ContentView.swift */,
@@ -230,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE597F792491F0BF007038C1 /* sampleGoals.json in Resources */,
 				DEACF703245BF33F00074C28 /* LaunchScreen.storyboard in Resources */,
 				DEACF700245BF33F00074C28 /* Preview Assets.xcassets in Resources */,
 				DE8701B1248A203100331DE5 /* piggybank.jpg in Resources */,
@@ -252,10 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE597F772490B81E007038C1 /* DataService.swift in Sources */,
 				DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */,
 				DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */,
 				DEACF6F7245BF33A00074C28 /* AppDelegate.swift in Sources */,
 				DE8701B5248CCADD00331DE5 /* constants.swift in Sources */,
+				DE597F7424909973007038C1 /* Item.swift in Sources */,
 				DEACF6F9245BF33A00074C28 /* SceneDelegate.swift in Sources */,
 				DEACF73A2462A07600074C28 /* HomeView.swift in Sources */,
 				DEACF6FB245BF33A00074C28 /* ContentView.swift in Sources */,

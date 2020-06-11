@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 
-struct GoalTypesUIDefaults {
+struct ItemTypesUIDefaults {
     static let sportsGoalTypeUI = ItemUIValues(name:"sports",color:Color("greyishBlue"),defaultIcon:"shoe")
     
     static let financialGoalTypeUI = ItemUIValues(name:"financial",color:Color (.white),defaultIcon:"piggybank")
