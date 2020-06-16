@@ -11,9 +11,16 @@ import SwiftUI
 
 
 struct ItemTypesUIDefaults {
-    static let sportsGoalTypeUI = ItemUIValues(name:"sports",color:Color("greyishBlue"),defaultIcon:"shoe")
     
-    static let financialGoalTypeUI = ItemUIValues(name:"financial",color:Color (.white),defaultIcon:"piggybank")
+    static let uiDefaults = [
+        "sports": ItemUIValues(name:"sports",color:Color("greyishBlue"),defaultIcon:"shoe"),
+        "financial": ItemUIValues(name:"financial",color:Color (.white),defaultIcon:"piggybank")
+    ]
+    
+    static func getItemUIDefault(usingUIName:String) -> ItemUIValues {
+        return uiDefaults[usingUIName]!
+    }
+
 }
 
 struct ItemUIValues {
