@@ -14,11 +14,11 @@
         "itemUIType" : "financial",
     },
     {
-           "startDate" : "12/03/2021",
-           "endDate" : "12/03/2022",
-           "itemID" : 1222,
-           "itemDescription" : "Run 15 km",
-           "itemUIType" : "financial",
+        "startDate" : "12/03/2021",
+        "endDate" : "12/03/2022",
+        "itemID" : 1222,
+        "itemDescription" : "Run 15 km",
+        "itemUIType" : "financial",
     },
     {
         "startDate" : "12/03/2020",
@@ -27,5 +27,5 @@
         "itemDescription" : "Run 5 km",
         "itemUIType" : "sports",
     }
-   
+    
 ]
