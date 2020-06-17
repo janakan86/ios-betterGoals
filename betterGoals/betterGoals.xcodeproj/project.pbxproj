@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE10DA312499DF6F0042D7BE /* createGoals.swift */; };
 		DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */; };
 		DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */; };
 		DE597F7424909973007038C1 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE597F7324909973007038C1 /* Item.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE10DA312499DF6F0042D7BE /* createGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoals.swift; sourceTree = "<group>"; };
 		DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalsHomeView.swift; sourceTree = "<group>"; };
 		DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIconView.swift; sourceTree = "<group>"; };
 		DE597F7324909973007038C1 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */,
+				DE10DA312499DF6F0042D7BE /* createGoals.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */,
 				DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */,
 				DEACF6F7245BF33A00074C28 /* AppDelegate.swift in Sources */,
+				DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */,
 				DE8701B5248CCADD00331DE5 /* constants.swift in Sources */,
 				DE597F7424909973007038C1 /* Item.swift in Sources */,
 				DEACF6F9245BF33A00074C28 /* SceneDelegate.swift in Sources */,
