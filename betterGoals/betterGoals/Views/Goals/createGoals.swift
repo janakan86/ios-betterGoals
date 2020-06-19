@@ -24,20 +24,30 @@ struct createGoalsStep1: View {
 
 
 struct createGoalsQuestion: View {
-    @State var questionResponse: String
+    @State var question1Response: String
+    
     var questionPlaceHolder:String
     var questionLabel:String
     
     var body: some View {
         VStack{
             
+            Image("mountain")
+                      .resizable()
+                      .scaledToFit()
+                      .cornerRadius(15)
+                      .shadow(radius:4)
+            
+            
             Text(questionLabel).font(Font.system(size: 15, weight: .medium, design: .serif))
                 .foregroundColor(Color("purple"))
             
             
-            TextField(questionPlaceHolder, text: $questionResponse)
+            TextField(questionPlaceHolder, text:   $question1Response)
                 .textFieldStyle((RoundedBorderTextFieldStyle()))
                 .padding()
+            
+            Spacer()
         }
         
     
@@ -46,7 +56,7 @@ struct createGoalsQuestion: View {
 
 struct createGoals_Previews: PreviewProvider {
     static var previews: some View {
-        createGoalsQuestion(questionResponse:"",
+        createGoalsQuestion(question1Response:"",
              questionPlaceHolder:"My Goal is ...",
              questionLabel:"What is your Goal?")
     }
