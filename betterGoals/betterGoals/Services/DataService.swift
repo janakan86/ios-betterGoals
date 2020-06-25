@@ -7,24 +7,81 @@
 //
 
 import Foundation
+import CoreData
 
 class DataService{
     
+    private init(){}
     static let sharedDataService = DataService()
     
     
     func getGoals()-> [Goal]{
         
-        //load sample data
-        let goalsSampleData: [Goal] = self.load("sampleGoals.json")
-        // end of loading sample data
-        return goalsSampleData
+        var storedGoals:[Goal] = []
+        
+        let  managedContext = PersistenceManager.shared.context
+        
+        let goalsFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
+        
+        do{
+            storedGoals = try managedContext.fetch(goalsFetchRequest)
+            
+        }
+        catch{
+            print("\(error)")
+        }
+        
+        return storedGoals
     }
-
-
-
-
-
+    
+    
+    
+    func storeGoalsSampleData(){
+        let goalsSampleData: [Goal] = self.load("sampleGoals.json")
+        
+        for goal in goalsSampleData {
+            insertGoal(goal: goal)
+        }
+    }
+    
+    
+    func clearGoalsSampleData(){
+        let  managedContext = PersistenceManager.shared.context
+        
+        let storedCityFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
+        
+        do {
+            //we can loop and delete since it is sample data
+            let goals = try managedContext.fetch(storedCityFetchRequest)
+            
+            for goal in goals {
+                managedContext.delete(goal)
+            }
+            try managedContext.save()
+            
+        } catch{
+            managedContext.rollback()
+        }
+    }
+    
+    
+    func insertGoal(goal:Goal){
+        let  managedContext = PersistenceManager.shared.context
+        managedContext.insert(goal)
+        
+        do {
+            try managedContext.save()
+            
+        } catch{
+            managedContext.rollback()
+        }
+        
+    }
+    
+    
+    
+    
+    
     
     //json loader code taken from SWIFT UI official tutorial
     func load<T: Decodable>(_ filename: String) -> T {
@@ -44,12 +101,12 @@ class DataService{
         do {
             let decoder = JSONDecoder()
             let dateFormatter = DateFormatter()
-               dateFormatter.dateFormat = "dd/MM/yyyy"
-               decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
             
             return try decoder.decode(T.self, from: data)
         } catch {
-             fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+            fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
         }
     }
 

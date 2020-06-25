@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol Item {
     
@@ -17,26 +18,52 @@ protocol Item {
 }
 
 
-class Goal: Item , Codable {
+final class Goal: NSManagedObject, Codable, Item {
     
-    init(startDate: Date? = nil, endDate: Date? = nil, itemID: Int32, itemDescription: String, itemUIType: String) {
-        self.startDate = startDate
-        self.endDate = endDate
-        self.itemID = itemID
-        self.itemDescription = itemDescription
-        self.itemUIType = itemUIType
-    }
-    
-     
-    var startDate:Date?
-    var endDate:Date?
+    @NSManaged var startDate:Date?
+    @NSManaged var endDate:Date?
     
     //following properties are from Item Protocol
-    var itemID: Int32
-    var itemDescription: String
-    var itemUIType: String
+    @NSManaged var itemID: Int32
+    @NSManaged var itemDescription: String
+    @NSManaged var itemUIType: String
+    
+    enum CodingKeys: String, CodingKey {
+        case itemDescription
+        case itemUIType
+        case startDate
+        case endDate
+        case itemID
+    }
     
     
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    init(from decoder: Decoder) throws {
+        guard let
+            entityDescription = NSEntityDescription.entity(forEntityName: "Goals", in: PersistenceManager.shared.context)
+            else { fatalError() }
+        
+        super.init(entity:entityDescription, insertInto:PersistenceManager.shared.context)
+        
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        itemID = try values.decode(Int32.self, forKey:.itemID)
+        itemDescription = try values.decode(String.self, forKey:.itemDescription)
+        itemUIType = try values.decode(String.self, forKey:.itemUIType)
+        startDate = try values.decode(Date.self, forKey:.startDate)
+        endDate = try values.decode(Date.self, forKey:.endDate)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(itemID, forKey: .itemID)
+        try container.encode(itemDescription, forKey: .itemDescription)
+        try container.encode(itemUIType, forKey: .itemUIType)
+        try container.encode(startDate, forKey: .startDate)
+        try container.encode(endDate, forKey: .endDate)
+    }
 }
 
 
