@@ -28,7 +28,7 @@ struct goalsHomeView: View {
                 
                 if goals.indices.contains(1){
                     ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingUIName:              goals[1].itemUIType),itemName:goals[1].itemDescription)
-                        .padding(.leading,10)
+                        .padding(.trailing,10)
                 }
                 
             }
@@ -46,7 +46,7 @@ struct goalsHomeView: View {
                 
                 if goals.indices.contains(3){
                     ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingUIName:              goals[3].itemUIType),itemName:goals[3].itemDescription)
-                        .padding(.leading,10)
+                        .padding(.trailing,10)
                 }
             }
             
