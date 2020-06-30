@@ -21,8 +21,9 @@ struct ItemIconView: View {
         Image(itemUIValues.defaultIcon)
              .resizable()
              .scaledToFit()
-             .cornerRadius(15)
-             .shadow(radius:4).overlay(
+             .cornerRadius(8)
+             //.shadow(radius:4)
+             .overlay(
                 ItemViewHeading(textValue: itemName,itemUIValues:itemUIValues),
                 alignment: .topLeading)
         
