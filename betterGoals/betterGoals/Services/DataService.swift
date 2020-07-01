@@ -15,7 +15,7 @@ class DataService{
     static let sharedDataService = DataService()
     
     
-    func getGoals()-> [Goal]{
+    func getGoals(inContext context: NSManagedObjectContext)-> [Goal]{
         
         var storedGoals:[Goal] = []
         
@@ -62,6 +62,11 @@ class DataService{
         } catch{
             managedContext.rollback()
         }
+    }
+    
+    
+    func createGoal() -> Goal {
+        return Goal()
     }
     
     

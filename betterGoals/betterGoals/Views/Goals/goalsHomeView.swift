@@ -7,10 +7,17 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct goalsHomeView: View {
     
-    var goals = DataService.sharedDataService.getGoals()
+    @Environment(\.managedObjectContext) var sharedManagedContext
+    
+    var goals:[Goal] = []
+    
+    init(){
+        goals = DataService.sharedDataService.getGoals(inContext : sharedManagedContext)
+    }
     
     var body: some View {
         VStack{
