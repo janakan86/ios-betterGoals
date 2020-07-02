@@ -48,11 +48,11 @@ class DataService{
     func clearGoalsSampleData(){
         let  managedContext = PersistenceManager.shared.context
         
-        let storedCityFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
+        let storedGoalsFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
         
         do {
             //we can loop and delete since it is sample data
-            let goals = try managedContext.fetch(storedCityFetchRequest)
+            let goals = try managedContext.fetch(storedGoalsFetchRequest)
             
             for goal in goals {
                 managedContext.delete(goal)
@@ -65,8 +65,8 @@ class DataService{
     }
     
     
-    func createGoal() -> Goal {
-        return Goal()
+    func createGoal(inContext context: NSManagedObjectContext) -> Goal {
+        return Goal(context:context)
     }
     
     

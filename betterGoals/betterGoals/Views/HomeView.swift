@@ -24,6 +24,13 @@ struct HomeView :View {
                 }
                 .tag(0)
             
+            createGoals()
+                .font(.title)
+                .tabItem {
+                    Text("test").font(.caption)
+                }
+                .tag(0)
+            
             goalsHomeView()
                 .font(.title)
                 .tabItem{
