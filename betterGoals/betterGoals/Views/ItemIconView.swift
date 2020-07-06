@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ItemIconView: View {
     
-    var itemUIValues:ItemUIValues;
+    var itemUIValues:ItemUI;
     var itemName:String
     
     
@@ -36,15 +36,15 @@ struct ItemIconView: View {
 struct ItemViewHeading : View {
     
     var textValue:String
-    var itemUIValues:ItemUIValues
+    var itemUIValues:ItemUI
     
     var body: some View{
+        
         Text(textValue)
             .foregroundColor(itemUIValues.color)
             .font(.title)
             .padding(.top,10)
             .padding(.leading,10)
-        
         
     }
 }

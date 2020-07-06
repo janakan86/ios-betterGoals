@@ -23,17 +23,16 @@ struct createGoals: View {
     var body: some View {
         VStack(){
        
-            
         Image("mountain")
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(15)
-                    .shadow(radius:4)
+            .shadow(radius:4)
             
             
             Group {
                 if questiontoBeAnswered == 1 {
-                    createGoalsQuestion(questionResponse:"",
+                    createGoalsQuestion1(questionResponse:"",
                                         questionPlaceHolder:"My Goal is ...",
                                         questionLabel:"What is your Goal?",
                                         questionNumber: 1,
@@ -41,7 +40,7 @@ struct createGoals: View {
                 }
                 else if questiontoBeAnswered == 2 {
                     
-                    createGoalsQuestion(questionResponse:"",
+                    createGoalsQuestion2(questionResponse:"",
                                         questionPlaceHolder:"My Goal 2 ...",
                                         questionLabel:"What is your Goal 2?",
                                         questionNumber: 2,
@@ -49,7 +48,7 @@ struct createGoals: View {
                 }
                 else if questiontoBeAnswered == 3 {
                     
-                    createGoalsQuestion(questionResponse:"",
+                    createGoalsQuestion2(questionResponse:"",
                                         questionPlaceHolder:"My Goal 3 ...",
                                         questionLabel:"What is your Goal 3?",
                                         questionNumber: 3,
@@ -57,7 +56,7 @@ struct createGoals: View {
                 }
                 
             }
-
+        
         }
         .padding(5)
     }
@@ -84,8 +83,47 @@ extension createGoals: questionButtonClick{
     
 }
 
+struct createGoalsQuestion1: View {
+    
+    @State var questionResponse: String
+    
+    var questionPlaceHolder:String
+    var questionLabel:String
+    var questionNumber:Int
+    var buttonClickObserver:questionButtonClick
 
-struct createGoalsQuestion: View {
+    
+    var body: some View {
+        VStack{
+            
+            Text(questionLabel).font(Font.system(size: 15, weight: .medium, design: .serif))
+                .foregroundColor(Color("purple"))
+            
+            ItemTypeList()
+            
+            HStack{
+                Button("next",
+                       action:{
+                        self.buttonClickObserver.nextButtonClicked(inQuestionNumber: self.questionNumber)
+                })
+                
+                Spacer()
+                
+                Button("Back",
+                       action:{
+                        self.buttonClickObserver.backButtonClicked(inQuestionNumber: self.questionNumber)
+                })
+            }
+            
+            
+            Spacer()
+        }
+        
+    
+    }
+}
+
+struct createGoalsQuestion2: View {
     
     @State var questionResponse: String
     
@@ -136,7 +174,6 @@ protocol questionButtonClick {
     func nextButtonClicked(inQuestionNumber:Int)
     func backButtonClicked(inQuestionNumber:Int)
 }
-
 
 
 struct createGoals_Previews: PreviewProvider {
