@@ -28,6 +28,7 @@
 		DEACF73A2462A07600074C28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEACF7392462A07600074C28 /* HomeView.swift */; };
 		DEB962A024B2EF290083A82C /* ItemTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9629F24B2EF290083A82C /* ItemTypeList.swift */; };
 		DEB962A224B32E880083A82C /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB962A124B32E870083A82C /* Styling.swift */; };
+		DEB962A424B46F230083A82C /* piggybank_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB962A324B46F220083A82C /* piggybank_transparent.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		DEACF7392462A07600074C28 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DEB9629F24B2EF290083A82C /* ItemTypeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeList.swift; sourceTree = "<group>"; };
 		DEB962A124B32E870083A82C /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
+		DEB962A324B46F220083A82C /* piggybank_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piggybank_transparent.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		DE2EBCE22484D3B700CFEC00 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DEB962A324B46F220083A82C /* piggybank_transparent.png */,
 				DE597F782491F0BF007038C1 /* sampleGoals.json */,
 				DE8701B2248A203800331DE5 /* shoe.jpg */,
 				DE8701B0248A203100331DE5 /* piggybank.jpg */,
@@ -273,6 +276,7 @@
 				DE597F792491F0BF007038C1 /* sampleGoals.json in Resources */,
 				DEACF703245BF33F00074C28 /* LaunchScreen.storyboard in Resources */,
 				DEACF700245BF33F00074C28 /* Preview Assets.xcassets in Resources */,
+				DEB962A424B46F230083A82C /* piggybank_transparent.png in Resources */,
 				DE8701B1248A203100331DE5 /* piggybank.jpg in Resources */,
 				DEACF6FD245BF33F00074C28 /* Assets.xcassets in Resources */,
 				DE8701B3248A203800331DE5 /* shoe.jpg in Resources */,

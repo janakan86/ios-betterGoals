@@ -10,17 +10,35 @@ import SwiftUI
 
 struct ItemTypeList: View {
     
+    @State var selectedItem:ItemUI?
+    
     var itemUIValues:[ItemUI] = ItemTypesUIDefaults.getAllItemUIValues()
     
     var body: some View {
         
         List(itemUIValues)
         { itemUIValue in
+            
             ItemTypeRow(itemUI: itemUIValue)
+                .onTapGesture {
+                    self.selectedItem = itemUIValue
+                }
+                .background(
+                    self.selectedItem?.id == itemUIValue.id ? Color("lightPink") : Color(.white))
+                .cornerRadius(6)
+                .shadow(color:Color("lightPink"), radius: 1, x: 1, y: 1)
+            
+        }
+        .onAppear { UITableView.appearance().separatorStyle = .none }
+        
+                    
+                    
+            
+                
             
         }
     }
-}
+
 
 struct ItemTypeRow : View {
     
@@ -33,15 +51,18 @@ struct ItemTypeRow : View {
             Image(itemUI.defaultIcon)
                  .resizable()
                  .frame(width: 50, height: 50)
-                 .cornerRadius(8)
+                 //.cornerRadius(8)
                 
             Text(itemUI.name)
-                .foregroundColor(.black)
+                .foregroundColor(Color("pink"))
                 .font(.title)
                 .padding(.top,10)
-                . padding(.leading,10)
+                .padding(.leading,10)
+            
+            Spacer()
             
         }
+        .contentShape(Rectangle()) //makes the spacer clickable/ selectable
        
     }
 }
