@@ -27,6 +27,7 @@
 		DEACF70E245BF33F00074C28 /* betterGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEACF70D245BF33F00074C28 /* betterGoalsTests.swift */; };
 		DEACF73A2462A07600074C28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEACF7392462A07600074C28 /* HomeView.swift */; };
 		DEB962A024B2EF290083A82C /* ItemTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9629F24B2EF290083A82C /* ItemTypeList.swift */; };
+		DEB962A224B32E880083A82C /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB962A124B32E870083A82C /* Styling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		DEACF70F245BF33F00074C28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEACF7392462A07600074C28 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DEB9629F24B2EF290083A82C /* ItemTypeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeList.swift; sourceTree = "<group>"; };
+		DEB962A124B32E870083A82C /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */,
 				DE8701B4248CCADD00331DE5 /* constants.swift */,
 				DEB9629F24B2EF290083A82C /* ItemTypeList.swift */,
+				DEB962A124B32E870083A82C /* Styling.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			files = (
 				DE597F772490B81E007038C1 /* DataService.swift in Sources */,
 				DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */,
+				DEB962A224B32E880083A82C /* Styling.swift in Sources */,
 				DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */,
 				DEACF6F7245BF33A00074C28 /* AppDelegate.swift in Sources */,
 				DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */,
