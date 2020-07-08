@@ -92,34 +92,26 @@ struct createGoalsQuestion1: View {
     var questionNumber:Int
     var buttonClickObserver:questionButtonClick
 
+    @State private var show_modal: Bool = false
+    
     
     var body: some View {
-        VStack{
-            
-            Text(questionLabel).font(Font.system(size: 15, weight: .medium, design: .serif))
-                .foregroundColor(Color("purple"))
-            
-            ItemTypeList()
-            
-            HStack{
-                Button("next",
-                       action:{
-                        self.buttonClickObserver.nextButtonClicked(inQuestionNumber: self.questionNumber)
-                })
+        
+        Button(action: {
+            self.show_modal = true
+        }) {
+            Text("Select the goal type")
+        }
+        .sheet(isPresented: self.$show_modal) { //popup
+
                 
-                Spacer()
-                
-                Button("Back",
-                       action:{
-                        self.buttonClickObserver.backButtonClicked(inQuestionNumber: self.questionNumber)
-                })
-            }
+                ItemTypeList(listHeading: self.questionLabel)
+ 
             
-            
-            Spacer()
         }
         
-    
+        
+        
     }
 }
 
@@ -131,7 +123,7 @@ struct createGoalsQuestion2: View {
     var questionLabel:String
     var questionNumber:Int
     var buttonClickObserver:questionButtonClick
-
+    
     
     var body: some View {
         VStack{

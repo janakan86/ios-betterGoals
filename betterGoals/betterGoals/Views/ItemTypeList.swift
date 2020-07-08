@@ -12,52 +12,74 @@ struct ItemTypeList: View {
     
     
     @State var selectedItem:ItemUI?
-    
+    @Environment(\.presentationMode) var presentationMode
+
+    var listHeading:String
     var itemUIValues:[ItemUI] = ItemTypesUIDefaults.getAllItemUIValues()
+    
     
     var body: some View {
         
-        List(itemUIValues)
-        { itemUIValue in
+        VStack{
+            Text(self.listHeading).font(Font.system(size: 15, weight: .medium, design: .serif))
+                .foregroundColor(Color("purple")).customStyle(style:TitleStyle())
             
-            HStack{
+            
+            List(itemUIValues)
+            { itemUIValue in
                 
-                Image(itemUIValue.defaultIcon)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                //.cornerRadius(8)
-                
-                Text(itemUIValue.name)
-                    .foregroundColor(Color("pink"))
-                    .font(.title)
-                    .padding(.top,10)
-                    .padding(.leading,10)
-                
-                Spacer()
-                
-                if(itemUIValue.id == self.selectedItem?.id){
+                HStack{
                     
-                    Image(systemName: "checkmark")
-                        .imageScale(.medium)
+                    Image(itemUIValue.defaultIcon)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                    //.cornerRadius(8)
+                    
+                    Text(itemUIValue.name)
                         .foregroundColor(Color("pink"))
+                        .font(.title)
+                        .padding(.top,10)
+                        .padding(.leading,10)
+                    
+                    Spacer()
+                    
+                    if(itemUIValue.id == self.selectedItem?.id){
+                        
+                        Image(systemName: "checkmark")
+                            .imageScale(.medium)
+                            .foregroundColor(Color("pink"))
+                    }
+                    
                 }
+                    
+                //tap
+                .contentShape(Rectangle())//define tappable area
+                .onTapGesture {
+                    self.selectedItem = itemUIValue
+                }
+                    
+                //style
+                .cornerRadius(6)
+                .shadow(color:Color("lightPink"), radius: 1, x: 1, y: 1)
+                
+       
                 
             }
-                
-            //tap
-            .contentShape(Rectangle())//define tappable area
-            .onTapGesture {
-                self.selectedItem = itemUIValue
-            }
-                
-            //style
-            .cornerRadius(6)
-            .shadow(color:Color("lightPink"), radius: 1, x: 1, y: 1)
+            //hide the lines inbetween rows
+            .onAppear { UITableView.appearance().separatorStyle = .none }
             
+            Button(action: {
+                               self.presentationMode.wrappedValue.dismiss()
+                           }) {
+                               Text("OK")
+                                   
+                           }.foregroundColor(.green)
+                           
+                           
+                           Spacer()
             
         }
-            
-        .onAppear { UITableView.appearance().separatorStyle = .none }
+        
         
     }
     
@@ -66,6 +88,7 @@ struct ItemTypeList: View {
  
 struct ItemTypeList_Previews: PreviewProvider {
     static var previews: some View {
-        ItemTypeList()
+        ItemTypeList(listHeading: "test")
+        
     }
 }
