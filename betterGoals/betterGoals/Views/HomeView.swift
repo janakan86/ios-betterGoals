@@ -17,26 +17,21 @@ struct HomeView :View {
         
         TabView(selection:$tabSelection){
             
-            Text("Home page")
-                .font(.title)
-                .tabItem {
-                    Text("home").font(.caption)
-                }
-                .tag(0)
+
             
             createGoals()
                 .font(.title)
                 .tabItem {
                     Text("test").font(.caption)
                 }
-                .tag(0)
+                .tag(1)
             
             goalsHomeView()
                 .font(.title)
                 .tabItem{
                     Text("goals").font(.caption)
                 }
-                .tag(1)
+                .tag(0)
             
             Text("habits")
                 .font(.title)
