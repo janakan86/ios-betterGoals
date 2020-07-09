@@ -9,10 +9,12 @@
 import SwiftUI
 
 struct createGoals: View {
+    
+    @Environment(\.managedObjectContext) var sharedManagedContext
         
     var newGoal:Goal?
+    
     @State var questiontoBeAnswered = 1
-    @Environment(\.managedObjectContext) var sharedManagedContext
     var maxQuestionNumber:Int = 3
     
     init(){
@@ -32,11 +34,12 @@ struct createGoals: View {
             
             Group {
                 if questiontoBeAnswered == 1 {
-                    createGoalsQuestion1(questionResponse:"",
+                    createGoalsQuestion1(
                                         questionPlaceHolder:"My Goal is ...",
                                         questionLabel:"What is your Goal?",
                                         questionNumber: 1,
                                         buttonClickObserver:self )
+                        .environmentObject(newGoal!)
                 }
                 else if questiontoBeAnswered == 2 {
                     
@@ -45,6 +48,7 @@ struct createGoals: View {
                                         questionLabel:"What is your Goal 2?",
                                         questionNumber: 2,
                                         buttonClickObserver:self )
+                        .environmentObject(newGoal!)
                 }
                 else if questiontoBeAnswered == 3 {
                     
@@ -53,6 +57,7 @@ struct createGoals: View {
                                         questionLabel:"What is your Goal 3?",
                                         questionNumber: 3,
                                         buttonClickObserver:self )
+                        .environmentObject(newGoal!)
                 }
                 
             }
@@ -63,7 +68,7 @@ struct createGoals: View {
 }
 
 
-extension createGoals: questionButtonClick{
+extension createGoals: QuestionNavigationCB{
     
     func nextButtonClicked(inQuestionNumber: Int) {
         if inQuestionNumber == self.maxQuestionNumber{
@@ -84,45 +89,64 @@ extension createGoals: questionButtonClick{
 }
 
 struct createGoalsQuestion1: View {
-    
-    @State var questionResponse: String
-    
+
     var questionPlaceHolder:String
     var questionLabel:String
     var questionNumber:Int
-    var buttonClickObserver:questionButtonClick
+    var buttonClickObserver:QuestionNavigationCB
 
     @State private var show_modal: Bool = false
+    @EnvironmentObject var newGoal : Goal
     
     
     var body: some View {
         
-        Button(action: {
-            self.show_modal = true
-        }) {
-            Text("Select the goal type")
-        }
-        .sheet(isPresented: self.$show_modal) { //popup
-
-                
-                ItemTypeList(listHeading: self.questionLabel)
- 
+        VStack{
             
+            // popup
+            Button(action: {
+                self.show_modal = true
+            }) {
+                Text("Select the goal type")
+            }
+            .sheet(isPresented: self.$show_modal) { //popup
+                
+                ItemTypeList(listHeading: self.questionLabel).environmentObject(self.newGoal)
+            }
+            
+            
+            // navigation buttons
+            HStack{
+                        Button("next",
+                               action:{
+                                self.buttonClickObserver.nextButtonClicked(inQuestionNumber: self.questionNumber)
+                        })
+                            .disabled(self.newGoal.itemID == 0)
+                        
+                        Spacer()
+                        
+                        Button("Back",
+                               action:{
+                                self.buttonClickObserver.backButtonClicked(inQuestionNumber: self.questionNumber)
+                        })
+                    }
         }
         
-        
-        
+  
     }
+    
+
 }
 
 struct createGoalsQuestion2: View {
     
     @State var questionResponse: String
+    @EnvironmentObject var newGoal : Goal
     
     var questionPlaceHolder:String
     var questionLabel:String
     var questionNumber:Int
-    var buttonClickObserver:questionButtonClick
+    var buttonClickObserver:QuestionNavigationCB
     
     
     var body: some View {
@@ -161,12 +185,11 @@ struct createGoalsQuestion2: View {
 
 
 
-// protocol to receive callbacks
-protocol questionButtonClick {
+// protocol to receive callbacks when navigation from a quesiton is invoked
+protocol QuestionNavigationCB {
     func nextButtonClicked(inQuestionNumber:Int)
     func backButtonClicked(inQuestionNumber:Int)
 }
-
 
 struct createGoals_Previews: PreviewProvider {
     static var previews: some View {

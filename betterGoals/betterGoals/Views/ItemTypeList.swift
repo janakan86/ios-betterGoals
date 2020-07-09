@@ -10,13 +10,15 @@ import SwiftUI
 
 struct ItemTypeList: View {
     
+
     
-    @State var selectedItem:ItemUI?
     @Environment(\.presentationMode) var presentationMode
+    
 
     var listHeading:String
     var itemUIValues:[ItemUI] = ItemTypesUIDefaults.getAllItemUIValues()
     
+    @EnvironmentObject var newGoal : Goal
     
     var body: some View {
         
@@ -33,7 +35,7 @@ struct ItemTypeList: View {
                     Image(itemUIValue.defaultIcon)
                         .resizable()
                         .frame(width: 50, height: 50)
-                    //.cornerRadius(8)
+
                     
                     Text(itemUIValue.name)
                         .foregroundColor(Color("pink"))
@@ -43,7 +45,7 @@ struct ItemTypeList: View {
                     
                     Spacer()
                     
-                    if(itemUIValue.id == self.selectedItem?.id){
+                    if(itemUIValue.id == self.newGoal.itemID){
                         
                         Image(systemName: "checkmark")
                             .imageScale(.medium)
@@ -52,10 +54,12 @@ struct ItemTypeList: View {
                     
                 }
                     
-                //tap
+               
                 .contentShape(Rectangle())//define tappable area
+                    
+                 //on tap, set the value for the shared goal object
                 .onTapGesture {
-                    self.selectedItem = itemUIValue
+                    self.newGoal.itemID = Int16(itemUIValue.id)
                 }
                     
                 //style
