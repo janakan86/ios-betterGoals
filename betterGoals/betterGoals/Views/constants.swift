@@ -13,12 +13,12 @@ import SwiftUI
 struct ItemTypesUIDefaults {
     
     static let uiDefaults = [
-        "sports": ItemUI(id:1, name:"sports",color:Color("greyishBlue"),defaultIcon:"shoe"),
-        "financial": ItemUI(id:2,name:"financial",color:Color (.black),defaultIcon:"piggybank")
+        1: ItemUI(id:1, name:"sports",color:Color("greyishBlue"),defaultIcon:"shoe"),
+        2: ItemUI(id:2,name:"financial",color:Color (.black),defaultIcon:"piggybank")
     ]
     
-    static func getItemUIDefault(usingUIName:String) -> ItemUI {
-        return uiDefaults[usingUIName]!
+    static func getItemUIDefault(usingID:Int) -> ItemUI {
+        return uiDefaults[usingID]!
     }
     
     

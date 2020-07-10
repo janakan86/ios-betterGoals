@@ -26,7 +26,7 @@ struct goalsHomeView: View {
             
             HStack{
                 if goals.indices.contains(0){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingUIName:              goals[0].itemUIType),itemName:goals[0].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[0].itemUIType)),itemName:goals[0].itemDescription)
                         .padding(.leading,10)
                     
                     Spacer().frame(width:10)
@@ -34,7 +34,7 @@ struct goalsHomeView: View {
                 
                 
                 if goals.indices.contains(1){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingUIName:              goals[1].itemUIType),itemName:goals[1].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[1].itemUIType)),itemName:goals[1].itemDescription)
                         .padding(.trailing,10)
                 }
                 
@@ -44,7 +44,7 @@ struct goalsHomeView: View {
             
             HStack{
                 if goals.indices.contains(2){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingUIName:              goals[2].itemUIType),itemName:goals[2].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[2].itemUIType)),itemName:goals[2].itemDescription)
                         .padding(.leading,10)
                     
                     Spacer().frame(width:10)
@@ -52,7 +52,7 @@ struct goalsHomeView: View {
                 
                 
                 if goals.indices.contains(3){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingUIName:              goals[3].itemUIType),itemName:goals[3].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[3].itemUIType)),itemName:goals[3].itemDescription)
                         .padding(.trailing,10)
                 }
             }

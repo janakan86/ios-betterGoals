@@ -24,7 +24,7 @@ struct ItemTypeList: View {
         
         VStack{
             Text(self.listHeading).font(Font.system(size: 15, weight: .medium, design: .serif))
-                .foregroundColor(Color("purple")).customStyle(style:TitleStyle())
+                .foregroundColor(Color("purple")).customStyle(style:Heading1Style())
             
             
             List(itemUIValues)
@@ -45,7 +45,7 @@ struct ItemTypeList: View {
                     
                     Spacer()
                     
-                    if(itemUIValue.id == self.newGoal.itemID){
+                    if(itemUIValue.id == self.newGoal.itemUIType){
                         
                         Image(systemName: "checkmark")
                             .imageScale(.medium)
@@ -59,7 +59,7 @@ struct ItemTypeList: View {
                     
                  //on tap, set the value for the shared goal object
                 .onTapGesture {
-                    self.newGoal.itemID = Int16(itemUIValue.id)
+                    self.newGoal.itemUIType = Int16(itemUIValue.id)
                 }
                     
                 //style

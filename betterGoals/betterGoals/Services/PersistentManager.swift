@@ -52,7 +52,6 @@ class PersistenceManager{
 
 
 
-
     func saveCoreDataContext () {
         
         if context.hasChanges {
@@ -67,4 +66,20 @@ class PersistenceManager{
         }
     
     }
+    
+    // this function deletes the database. Use with caution
+    func deleteStore() {
+        
+        guard let storeUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            .first?.appendingPathComponent("betterGoals") else { return  }
+        
+       let fileManager = FileManager.default
+        
+        do {
+              try fileManager.removeItem(at: storeUrl)
+           } catch {
+               print(error)
+           }
+        
+   }
 }

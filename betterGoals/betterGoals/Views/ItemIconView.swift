@@ -51,7 +51,7 @@ struct ItemViewHeading : View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemIconView(itemUIValues:ItemTypesUIDefaults.getItemUIDefault(usingUIName:              "financial"),itemName:"Meditation ")
+        ItemIconView(itemUIValues:ItemTypesUIDefaults.getItemUIDefault(usingID:              1),itemName:"Meditation ")
             .offset(y:-130)
     }
 }

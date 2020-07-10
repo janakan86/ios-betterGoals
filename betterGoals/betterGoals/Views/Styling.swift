@@ -9,12 +9,21 @@
 import SwiftUI
 
 // Text styles
-struct TitleStyle: ViewModifier {
+struct Heading1Style: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.title)
             .lineSpacing(8)
-            .foregroundColor(Color("pink"))
+            .foregroundColor(Color(.black))
+    }
+}
+
+struct Heading2Style: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.headline)
+            .lineSpacing(8)
+            .foregroundColor(Color(.gray))
     }
 }
 
@@ -23,7 +32,16 @@ struct ContentStyle: ViewModifier {
         content
             .font(.body)
             .lineSpacing(4)
-            .foregroundColor(Color("greyishBlue"))
+            .foregroundColor(Color(.black))
+    }
+}
+
+struct ContentStylePink: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.body)
+            .lineSpacing(4)
+            .foregroundColor(Color("pink"))
     }
 }
 
@@ -35,6 +53,17 @@ extension Text {
 
 
 // buttons styles
+struct navigationButtonStyle: ButtonStyle {
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding()
+            .background(Color("pink"))
+            .cornerRadius(8.0)
+            .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
+    }
+}
 
 
 // list style
@@ -42,7 +71,7 @@ extension Text {
 struct Styling_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
-                 Text("Sample text").customStyle(style: TitleStyle())
+                 Text("Sample text").customStyle(style: Heading1Style())
                  Text("A lot of sample text").customStyle(style: ContentStyle())
         }
    

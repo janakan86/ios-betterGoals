@@ -13,7 +13,7 @@ protocol Item {
     
     var itemID:Int16 { get set }
     var itemDescription:String { get set }
-    var itemUIType:String { get set } //what type of UI to display this ( e.g color and icon )
+    var itemUIType:Int16 { get set } //what type of UI to display this ( e.g color and icon )
     
 }
 
@@ -26,7 +26,7 @@ final class Goal: NSManagedObject, Codable, Item {
     //following properties are from Item Protocol
     @NSManaged var itemID: Int16
     @NSManaged var itemDescription: String
-    @NSManaged var itemUIType: String
+    @NSManaged var itemUIType: Int16
     
     enum CodingKeys: String, CodingKey {
         case itemDescription
@@ -51,7 +51,7 @@ final class Goal: NSManagedObject, Codable, Item {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         itemID = try values.decode(Int16.self, forKey:.itemID)
         itemDescription = try values.decode(String.self, forKey:.itemDescription)
-        itemUIType = try values.decode(String.self, forKey:.itemUIType)
+        itemUIType = try values.decode(Int16.self, forKey:.itemUIType)
         startDate = try values.decode(Date.self, forKey:.startDate)
         endDate = try values.decode(Date.self, forKey:.endDate)
     }
