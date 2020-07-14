@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let context = PersistenceManager.shared.context
         _ = goalsHomeView().environment(\.managedObjectContext, context)
+        _ = HomeView().environment(\.managedObjectContext, context)
         
        
         DataService.sharedDataService.clearGoalsSampleData()

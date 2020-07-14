@@ -66,41 +66,6 @@ struct navigationButtonStyle: ButtonStyle {
 }
 
 
-// list style
-
-// custom multi line view using UIKit. This will be replaced by the new TextEditor soon
-struct UIKitTextArea: UIViewRepresentable {
-    
-    @Binding var textValue: String
-
-    func makeUIView(context: Context) -> UITextView {
-        let view = UITextView()
-
-        view.textContainer.maximumNumberOfLines = 3
-        view.isEditable = true
-        view.isScrollEnabled = true
-        view.isUserInteractionEnabled = true
-        view.textColor = UIColor.black
-        
-        
-        return view
-    }
-
-    func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = textValue
-    }
-}
-
-struct CustomTextArea : View {
-    
-    @Binding var textValue: String
-    
-    var body: some View {
-        UIKitTextArea(textValue: self.$textValue)
-    }
-    
-    
-}
 
 
 

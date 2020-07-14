@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeView :View {
    
+    @Environment(\.managedObjectContext) var sharedManagedContext
     
     @State private var tabSelection = 0
     
@@ -20,6 +21,7 @@ struct HomeView :View {
 
             
             createGoals()
+                .environmentObject(DataService.sharedDataService.createGoal(inContext: sharedManagedContext))
                 .font(.title)
                 .tabItem {
                     Text("test").font(.caption)

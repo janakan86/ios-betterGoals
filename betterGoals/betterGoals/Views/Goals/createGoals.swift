@@ -10,17 +10,10 @@ import SwiftUI
 
 struct createGoals: View {
     
-    @Environment(\.managedObjectContext) var sharedManagedContext
-        
-    var newGoal:Goal?
+    @EnvironmentObject var newGoal:Goal
     
     @State var questiontoBeAnswered = 1
     var maxQuestionNumber:Int = 3
-    
-    init(){
-        newGoal =  DataService.sharedDataService.createGoal(inContext: sharedManagedContext)
-    }
-    
     
     var body: some View {
         VStack{
@@ -34,50 +27,49 @@ struct createGoals: View {
                 Image("mountain")
                     .resizable()
                     .scaledToFit()
-                    //.cornerRadius(8)
-                    //.shadow(radius:4)
             }
             
             
             VStack(alignment: .leading){
                 
-                Text("Start creating a goal").customStyle(style:Heading1Style())
-                           Text("It is time to create a goal, work on it and achieve greater things in life").customStyle(style:ContentStyle())
-                           
-                           
-                           Group {
-                               if questiontoBeAnswered == 1 {
-                                   createGoalsQuestionView1(
-                                                       questionPlaceHolder:"My Goal is ...",
-                                                       questionLabel:"What is your Goal?",
-                                                       questionNumber: 1,
-                                                       buttonClickObserver:self )
-                                       .environmentObject(newGoal!)
-                               }
-                               else if questiontoBeAnswered == 2 {
-                                   
-                                   createGoalsQuestion2(questionResponse:"",
-                                                       questionPlaceHolder:"My Goal 2 ...",
-                                                       questionLabel:"What is your Goal 2?",
-                                                       questionNumber: 2,
-                                                       buttonClickObserver:self )
-                                       .environmentObject(newGoal!)
-                               }
-                               else if questiontoBeAnswered == 3 {
-                                   
-                                   createGoalsQuestion2(questionResponse:"",
-                                                       questionPlaceHolder:"My Goal 3 ...",
-                                                       questionLabel:"What is your Goal 3?",
-                                                       questionNumber: 3,
-                                                       buttonClickObserver:self )
-                                       .environmentObject(newGoal!)
-                               }
-                               
-                           }
-                       
+                Text("Let's create a goal").customStyle(style:Heading1Style())
+                Text("It is time to create a goal, work on it and achieve greater things in life").customStyle(style:ContentStyle())
+                
+                
+                Group {
+                    if questiontoBeAnswered == 1 {
+                        
+                        createGoalsQuestionView1(
+                            questionPlaceHolder:"My Goal is ...",
+                            questionLabel:"What is your Goal?",
+                            questionNumber: 1,
+                            buttonClickObserver:self )
+                            .environmentObject(newGoal)
+                    }
+                    else if questiontoBeAnswered == 2 {
+                        
+                        createGoalsQuestion2(questionResponse:"",
+                                             questionPlaceHolder:"My Goal 2 ...",
+                                             questionLabel:"What is your Goal 2?",
+                                             questionNumber: 2,
+                                             buttonClickObserver:self )
+                            .environmentObject(newGoal)
+                    }
+                    else if questiontoBeAnswered == 3 {
+                        
+                        createGoalsQuestion2(questionResponse:"",
+                                             questionPlaceHolder:"My Goal 3 ...",
+                                             questionLabel:"What is your Goal 3?",
+                                             questionNumber: 3,
+                                             buttonClickObserver:self )
+                            .environmentObject(newGoal)
+                    }
+                    
                 }
-                .padding(20)
+                
             }
+            .padding(20)
+        }
             
            
     }
@@ -86,21 +78,21 @@ struct createGoals: View {
 
 extension createGoals: QuestionNavigationCB{
     
-    func nextButtonClicked(inQuestionNumber: Int) {
+    func nextButtonClicked() {
         
-        if inQuestionNumber == self.maxQuestionNumber{
+        if self.questiontoBeAnswered == self.maxQuestionNumber{
             return
         }
         
-        self.questiontoBeAnswered = inQuestionNumber + 1
+        self.questiontoBeAnswered+=1
     }
     
-    func backButtonClicked(inQuestionNumber: Int) {
-        if inQuestionNumber == 1 {
+    func backButtonClicked() {
+        if self.questiontoBeAnswered == 1 {
             return
         }
         
-        self.questiontoBeAnswered = inQuestionNumber - 1
+        self.questiontoBeAnswered-=1
     }
     
 }
@@ -110,9 +102,8 @@ extension createGoals: QuestionNavigationCB{
    1. select a goal type
    2. describe your goal
  */
-struct createGoalsQuestionView1: View {
+struct createGoalsQuestionView1: View, navigationButtonEnablement {
 
-    @State var goalDescriptionInputValue: String = ""
     var questionPlaceHolder:String
     var questionLabel:String
     var questionNumber:Int
@@ -120,7 +111,6 @@ struct createGoalsQuestionView1: View {
 
     @State private var show_modal: Bool = false
     @EnvironmentObject var newGoal : Goal
-    
     
     var body: some View {
         
@@ -138,7 +128,7 @@ struct createGoalsQuestionView1: View {
                 }
                 
             }
-            .padding(.top,30)
+            
             .sheet(isPresented: self.$show_modal) { //popup
                 
                 ItemTypeList(listHeading: self.questionLabel).environmentObject(self.newGoal)
@@ -148,57 +138,40 @@ struct createGoalsQuestionView1: View {
                  Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name)
             }
             
-           
-            
             Spacer()
+            
+            
             Text("Describe your goal").customStyle(style: Heading2Style())
             
-            TextField(questionPlaceHolder, text: $goalDescriptionInputValue)
-                           .textFieldStyle((RoundedBorderTextFieldStyle()))
-                           .padding(.bottom,30)
+            // replace this with TextEditor when a stable release of Xcode 12 happens
+            TextField(questionPlaceHolder, text: $newGoal.itemDescription)
+                .padding(.bottom,10).padding(.top,10).padding(.leading,10).padding(.trailing,10)
+                .background(Color("lightPink"))
+                .cornerRadius(4)
             
             
-            // navigation buttons
-            HStack{
-
-                Button(
-                    action:{
-                        self.newGoal.itemDescription = self.goalDescriptionInputValue
-                        self.buttonClickObserver.backButtonClicked(inQuestionNumber: self.questionNumber)
-                }){
-                    Image(systemName: "arrowtriangle.left.fill")
-                        .accentColor(Color("pink"))
-                }
-                .padding(.leading,30)
-                .disabled(true) // back button is always disabled since this is the first qt
-                
-                Spacer()
-                
-                Button(
-                    action:{
-                        self.newGoal.itemDescription = self.goalDescriptionInputValue
-                        self.buttonClickObserver.nextButtonClicked(inQuestionNumber: self.questionNumber)
-                }){
-                    HStack{
-                        Image(systemName: "arrowtriangle.right.fill")
-                                               .accentColor(Color("pink"))
-                    }
-                   
-                }
-                .padding(.trailing,30)
-                .disabled(self.newGoal.itemUIType == 0)
-
-            }
-        }
-        
+            navigationButtons(buttonClickObserver: buttonClickObserver,
+                              buttonEnablement: self)
+                                .environmentObject(newGoal)
+            
+ 
+        }.padding(.top,30)
   
+    }
+    
+    func isbackButtonEnabled()->Bool {
+        return false
+    }
+    
+    func isnextButtonEnabled()->Bool {
+        return (self.newGoal.itemUIType != 0)
     }
     
 
 }
 
-struct createGoalsQuestion2: View {
-    
+struct createGoalsQuestion2: View, navigationButtonEnablement {
+
     @State var questionResponse: String
     @EnvironmentObject var newGoal : Goal
     
@@ -220,19 +193,9 @@ struct createGoalsQuestion2: View {
                 .padding()
             
             
-            HStack{
-                Button("next",
-                       action:{
-                        self.buttonClickObserver.nextButtonClicked(inQuestionNumber: self.questionNumber)
-                })
-                
-                Spacer()
-                
-                Button("Back",
-                       action:{
-                        self.buttonClickObserver.backButtonClicked(inQuestionNumber: self.questionNumber)
-                })
-            }
+            navigationButtons(buttonClickObserver:buttonClickObserver,
+                              buttonEnablement: self)
+                                .environmentObject(newGoal)
             
             
             Spacer()
@@ -240,14 +203,73 @@ struct createGoalsQuestion2: View {
         
     
     }
+    
+    func isbackButtonEnabled()->Bool {
+        return true
+    }
+    
+    func isnextButtonEnabled()->Bool {
+        return true
+    }
 }
 
 
 
 // protocol to receive callbacks when navigation from a quesiton is invoked
 protocol QuestionNavigationCB {
-    func nextButtonClicked(inQuestionNumber:Int)
-    func backButtonClicked(inQuestionNumber:Int)
+    func nextButtonClicked()
+    func backButtonClicked()
+}
+
+// protocol to provide logic based on which the navigation buttons would be enabled
+protocol navigationButtonEnablement {
+    func isbackButtonEnabled()->Bool
+    func isnextButtonEnabled()->Bool
+}
+
+
+struct navigationButtons : View {
+    
+    var buttonClickObserver:QuestionNavigationCB //to provide callbacks upon button clicks
+    var buttonEnablement:navigationButtonEnablement // to determine  whether buttons are enabled
+    
+    @EnvironmentObject var newGoal : Goal
+   
+    var body: some View {
+        // navigation buttons
+         HStack{
+
+            //back button
+             Button(
+                 action:{
+                     self.buttonClickObserver.backButtonClicked()
+             }){
+                 Image(systemName: "arrowtriangle.left.fill")
+                     .accentColor(Color("pink"))
+             }
+             .padding(.leading,30)
+             .disabled(!buttonEnablement.isbackButtonEnabled())
+             
+             Spacer()
+             
+            //next button
+             Button(
+                 action:{
+                     self.buttonClickObserver.nextButtonClicked()
+             }){
+                 HStack{
+                     Image(systemName: "arrowtriangle.right.fill")
+                                            .accentColor(Color("pink"))
+                 }
+                
+             }
+             .padding(.trailing,30)
+             .disabled(!buttonEnablement.isnextButtonEnabled())
+
+         }.padding(.top,25)
+    }
+    
+    
 }
 
 struct createGoals_Previews: PreviewProvider {
@@ -255,6 +277,3 @@ struct createGoals_Previews: PreviewProvider {
         createGoals()
     }
 }
-
-
-
