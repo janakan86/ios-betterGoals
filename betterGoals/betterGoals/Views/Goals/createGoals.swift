@@ -28,38 +28,30 @@ struct createGoals: View {
                     .resizable()
                     .scaledToFit()
             }
+            .padding(.top,10)
             
             
             VStack(alignment: .leading){
-                
-                Text("Let's create a goal").customStyle(style:Heading1Style())
-                Text("It is time to create a goal, work on it and achieve greater things in life").customStyle(style:ContentStyle())
-                
                 
                 Group {
                     if questiontoBeAnswered == 1 {
                         
                         createGoalsQuestionView1(
-                            questionPlaceHolder:"My Goal is ...",
-                            questionLabel:"What is your Goal?",
-                            questionNumber: 1,
-                            buttonClickObserver:self )
+                                            questionPlaceHolder:"My Goal is ...",
+                                            questionNumber: 1,
+                                            buttonClickObserver:self )
                             .environmentObject(newGoal)
                     }
                     else if questiontoBeAnswered == 2 {
                         
-                        createGoalsQuestion2(questionResponse:"",
-                                             questionPlaceHolder:"My Goal 2 ...",
-                                             questionLabel:"What is your Goal 2?",
+                        createGoalsQuestion2(
                                              questionNumber: 2,
                                              buttonClickObserver:self )
                             .environmentObject(newGoal)
                     }
                     else if questiontoBeAnswered == 3 {
                         
-                        createGoalsQuestion2(questionResponse:"",
-                                             questionPlaceHolder:"My Goal 3 ...",
-                                             questionLabel:"What is your Goal 3?",
+                        createGoalsQuestion2(
                                              questionNumber: 3,
                                              buttonClickObserver:self )
                             .environmentObject(newGoal)
@@ -105,7 +97,6 @@ extension createGoals: QuestionNavigationCB{
 struct createGoalsQuestionView1: View, navigationButtonEnablement {
 
     var questionPlaceHolder:String
-    var questionLabel:String
     var questionNumber:Int
     var buttonClickObserver:QuestionNavigationCB
 
@@ -115,6 +106,9 @@ struct createGoalsQuestionView1: View, navigationButtonEnablement {
     var body: some View {
         
         VStack(alignment: .leading){
+            
+            Text("Let's create a goal").customStyle(style:Heading1Style())
+            Text("It is time to create a goal, work on it and achieve greater things in life").customStyle(style:ContentStyle())
             
             // popup
             Button(action: {
@@ -131,23 +125,31 @@ struct createGoalsQuestionView1: View, navigationButtonEnablement {
             
             .sheet(isPresented: self.$show_modal) { //popup
                 
-                ItemTypeList(listHeading: self.questionLabel).environmentObject(self.newGoal)
+                ItemTypeList(listHeading: "select a goal type").environmentObject(self.newGoal)
             }
             
             if 0 != newGoal.itemUIType  {
-                 Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name)
+                Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name).font(Font.system(size: 15, weight: .bold))
+                    .padding(.bottom,10)
+            }
+            else{
+                 Spacer().padding(10)
             }
             
             Spacer()
             
             
-            Text("Describe your goal").customStyle(style: Heading2Style())
+            Text("Name your goal").customStyle(style: Heading2Style())
             
-            // replace this with TextEditor when a stable release of Xcode 12 happens
-            TextField(questionPlaceHolder, text: $newGoal.itemDescription)
-                .padding(.bottom,10).padding(.top,10).padding(.leading,10).padding(.trailing,10)
-                .background(Color("lightPink"))
-                .cornerRadius(4)
+            TextField(questionPlaceHolder, text: $newGoal.itemID)
+                .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+               .background(Color("lightPink"))
+               .font(Font.system(size: 15, design: .default))
+               .cornerRadius(4)
+            
+            Spacer().padding(.bottom,10)
+            
+
             
             
             navigationButtons(buttonClickObserver: buttonClickObserver,
@@ -155,7 +157,8 @@ struct createGoalsQuestionView1: View, navigationButtonEnablement {
                                 .environmentObject(newGoal)
             
  
-        }.padding(.top,30)
+        }
+         .padding(.bottom,10)
   
     }
     
@@ -164,7 +167,7 @@ struct createGoalsQuestionView1: View, navigationButtonEnablement {
     }
     
     func isnextButtonEnabled()->Bool {
-        return (self.newGoal.itemUIType != 0)
+        return (self.newGoal.itemUIType != 0 && self.newGoal.itemID != "")
     }
     
 
@@ -172,11 +175,9 @@ struct createGoalsQuestionView1: View, navigationButtonEnablement {
 
 struct createGoalsQuestion2: View, navigationButtonEnablement {
 
-    @State var questionResponse: String
     @EnvironmentObject var newGoal : Goal
     
-    var questionPlaceHolder:String
-    var questionLabel:String
+    
     var questionNumber:Int
     var buttonClickObserver:QuestionNavigationCB
     
@@ -184,22 +185,28 @@ struct createGoalsQuestion2: View, navigationButtonEnablement {
     var body: some View {
         VStack(alignment: .leading){
             
-            Text(questionLabel).font(Font.system(size: 15, weight: .medium, design: .serif))
-                .foregroundColor(Color("purple"))
+            Spacer()
             
+            Text("Goal Description")
+                .customStyle(style: Heading2Style())
+                .padding(.top,30)
             
-            TextField(questionPlaceHolder, text:   $questionResponse)
-                .textFieldStyle((RoundedBorderTextFieldStyle()))
-                .padding()
+            // replace this with TextEditor when a stable release of Xcode 12 happens
+            TextField("describe your goal", text: $newGoal.itemDescription)
+                .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+                .background(Color("lightPink"))
+                .font(Font.system(size: 15, design: .default))
+                .cornerRadius(4)
             
+            Spacer()
             
             navigationButtons(buttonClickObserver:buttonClickObserver,
                               buttonEnablement: self)
                                 .environmentObject(newGoal)
             
             
-            Spacer()
-        }
+           
+        }.padding(.bottom,10)
         
     
     }

@@ -3,7 +3,7 @@
     <entity name="Goals" representedClassName=".Goal" syncable="YES">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
-        <attribute name="itemID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="String"/>
         <attribute name="itemUIType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>

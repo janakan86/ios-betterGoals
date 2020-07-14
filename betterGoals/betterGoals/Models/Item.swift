@@ -11,7 +11,7 @@ import CoreData
 
 protocol Item {
     
-    var itemID:Int16 { get set }
+    var itemID:String { get set }
     var itemDescription:String { get set }
     var itemUIType:Int16 { get set } //what type of UI to display this ( e.g color and icon )
     
@@ -24,7 +24,7 @@ final class Goal: NSManagedObject, Codable, Item {
     @NSManaged var endDate:Date?
     
     //following properties are from Item Protocol
-    @NSManaged var itemID: Int16
+    @NSManaged var itemID: String
     @NSManaged var itemDescription: String
     @NSManaged var itemUIType: Int16
     
@@ -49,7 +49,7 @@ final class Goal: NSManagedObject, Codable, Item {
         super.init(entity:entityDescription, insertInto:PersistenceManager.shared.context)
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        itemID = try values.decode(Int16.self, forKey:.itemID)
+        itemID = try values.decode(String.self, forKey:.itemID)
         itemDescription = try values.decode(String.self, forKey:.itemDescription)
         itemUIType = try values.decode(Int16.self, forKey:.itemUIType)
         startDate = try values.decode(Date.self, forKey:.startDate)
