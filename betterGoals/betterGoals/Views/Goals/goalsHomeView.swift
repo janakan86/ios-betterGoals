@@ -12,29 +12,42 @@ import CoreData
 struct goalsHomeView: View {
     
     @Environment(\.managedObjectContext) var sharedManagedContext
+    @EnvironmentObject var retrievedGoals:Goals
     
-    var goals:[Goal] = []
-    
-    init(){
-        goals = DataService.sharedDataService.getGoals(inContext : sharedManagedContext)
-    }
     
     var body: some View {
         VStack{
             
             Spacer().frame(height:10)
             
+            Button(action:{
+                let goal = Goal(context: self.sharedManagedContext)
+                goal.itemID = "HI IH"
+                goal.itemUIType = 2
+                goal.itemDescription = "hope this works"
+                
+                do{
+                    try self.sharedManagedContext.save()
+                }
+                catch{
+                    print(error)
+                }
+                
+            }){
+                Text("create goal")
+            }
+            
             HStack{
-                if goals.indices.contains(0){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[0].itemUIType)),itemName:goals[0].itemDescription)
+                if retrievedGoals.goals.indices.contains(0){
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[0].itemUIType)),itemName:retrievedGoals.goals[0].itemDescription)
                         .padding(.leading,10)
                     
                     Spacer().frame(width:10)
                 }
                 
                 
-                if goals.indices.contains(1){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[1].itemUIType)),itemName:goals[1].itemDescription)
+                if retrievedGoals.goals.indices.contains(1){
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[1].itemUIType)),itemName:retrievedGoals.goals[1].itemDescription)
                         .padding(.trailing,10)
                 }
                 
@@ -43,16 +56,16 @@ struct goalsHomeView: View {
             Spacer().frame(height:10)
             
             HStack{
-                if goals.indices.contains(2){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[2].itemUIType)),itemName:goals[2].itemDescription)
+                if retrievedGoals.goals.indices.contains(2){
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[2].itemUIType)),itemName:retrievedGoals.goals[2].itemDescription)
                         .padding(.leading,10)
                     
                     Spacer().frame(width:10)
                 }
                 
                 
-                if goals.indices.contains(3){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(goals[3].itemUIType)),itemName:goals[3].itemDescription)
+                if retrievedGoals.goals.indices.contains(3){
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[3].itemUIType)),itemName:retrievedGoals.goals[3].itemDescription)
                         .padding(.trailing,10)
                 }
             }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE10DA312499DF6F0042D7BE /* createGoals.swift */; };
+		DE21356A24BE8A8500A29EDC /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE21356924BE8A8500A29EDC /* Validations.swift */; };
 		DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */; };
 		DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */; };
 		DE597F7424909973007038C1 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE597F7324909973007038C1 /* Item.swift */; };
@@ -20,7 +21,6 @@
 		DE8E9F6324A30DDC008B2461 /* PersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E9F6224A30DDC008B2461 /* PersistentManager.swift */; };
 		DEACF6F7245BF33A00074C28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEACF6F6245BF33A00074C28 /* AppDelegate.swift */; };
 		DEACF6F9245BF33A00074C28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEACF6F8245BF33A00074C28 /* SceneDelegate.swift */; };
-		DEACF6FB245BF33A00074C28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEACF6FA245BF33A00074C28 /* ContentView.swift */; };
 		DEACF6FD245BF33F00074C28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEACF6FC245BF33F00074C28 /* Assets.xcassets */; };
 		DEACF700245BF33F00074C28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEACF6FF245BF33F00074C28 /* Preview Assets.xcassets */; };
 		DEACF703245BF33F00074C28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEACF701245BF33F00074C28 /* LaunchScreen.storyboard */; };
@@ -43,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		DE10DA312499DF6F0042D7BE /* createGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoals.swift; sourceTree = "<group>"; };
+		DE21356924BE8A8500A29EDC /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalsHomeView.swift; sourceTree = "<group>"; };
 		DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIconView.swift; sourceTree = "<group>"; };
 		DE597F7324909973007038C1 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		DEACF6F3245BF33A00074C28 /* betterGoals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = betterGoals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEACF6F6245BF33A00074C28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEACF6F8245BF33A00074C28 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DEACF6FA245BF33A00074C28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DEACF6FC245BF33F00074C28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEACF6FF245BF33F00074C28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DEACF702245BF33F00074C28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -152,7 +152,6 @@
 				DE2EBCE22484D3B700CFEC00 /* Resources */,
 				DEACF6F6245BF33A00074C28 /* AppDelegate.swift */,
 				DEACF6F8245BF33A00074C28 /* SceneDelegate.swift */,
-				DEACF6FA245BF33A00074C28 /* ContentView.swift */,
 				DE8E9F5C24A07D1A008B2461 /* coreDataModel.xcdatamodeld */,
 				DEACF6FC245BF33F00074C28 /* Assets.xcassets */,
 				DEACF701245BF33F00074C28 /* LaunchScreen.storyboard */,
@@ -187,6 +186,7 @@
 				DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */,
 				DE8701B4248CCADD00331DE5 /* constants.swift */,
 				DEB9629F24B2EF290083A82C /* ItemTypeList.swift */,
+				DE21356924BE8A8500A29EDC /* Validations.swift */,
 				DEB962A124B32E870083A82C /* Styling.swift */,
 			);
 			path = Views;
@@ -301,6 +301,7 @@
 				DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */,
 				DEB962A224B32E880083A82C /* Styling.swift in Sources */,
 				DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */,
+				DE21356A24BE8A8500A29EDC /* Validations.swift in Sources */,
 				DEACF6F7245BF33A00074C28 /* AppDelegate.swift in Sources */,
 				DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */,
 				DE8701B5248CCADD00331DE5 /* constants.swift in Sources */,
@@ -309,7 +310,6 @@
 				DEACF73A2462A07600074C28 /* HomeView.swift in Sources */,
 				DE8E9F5E24A07D1A008B2461 /* coreDataModel.xcdatamodeld in Sources */,
 				DEB962A024B2EF290083A82C /* ItemTypeList.swift in Sources */,
-				DEACF6FB245BF33A00074C28 /* ContentView.swift in Sources */,
 				DE8E9F6324A30DDC008B2461 /* PersistentManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

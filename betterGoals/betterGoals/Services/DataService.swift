@@ -15,11 +15,10 @@ class DataService{
     static let sharedDataService = DataService()
     
     
-    func getGoals(inContext context: NSManagedObjectContext)-> [Goal]{
+    func getGoals(inContext managedContext: NSManagedObjectContext)-> [Goal]{
         
         var storedGoals:[Goal] = []
         
-        let  managedContext = PersistenceManager.shared.context
         
         let goalsFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
         
@@ -36,17 +35,17 @@ class DataService{
     
     
     
-    func storeGoalsSampleData(){
+    func storeGoalsSampleData(inContext managedContext: NSManagedObjectContext){
         let goalsSampleData: [Goal] = self.load("sampleGoals.json")
         
         for goal in goalsSampleData {
-            insertGoal(goal: goal)
+            insertGoal(goal: goal,inContext: managedContext)
         }
     }
     
     
-    func clearGoalsSampleData(){
-        let  managedContext = PersistenceManager.shared.context
+    func clearGoalsSampleData(inContext managedContext: NSManagedObjectContext){
+      
         
         let storedGoalsFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
         
@@ -70,8 +69,8 @@ class DataService{
     }
     
     
-    func insertGoal(goal:Goal){
-        let  managedContext = PersistenceManager.shared.context
+    func insertGoal(goal:Goal,inContext managedContext: NSManagedObjectContext){
+        
         managedContext.insert(goal)
         
         do {

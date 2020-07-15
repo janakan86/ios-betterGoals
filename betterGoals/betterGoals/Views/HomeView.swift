@@ -18,17 +18,11 @@ struct HomeView :View {
         
         TabView(selection:$tabSelection){
             
-
-            
-            createGoals()
-                .environmentObject(DataService.sharedDataService.createGoal(inContext: sharedManagedContext))
-                .font(.title)
-                .tabItem {
-                    Text("test").font(.caption)
-                }
-                .tag(1)
             
             goalsHomeView()
+                .environmentObject(
+                    Goals(goals: DataService.sharedDataService.getGoals(inContext : sharedManagedContext))
+                )
                 .font(.title)
                 .tabItem{
                     Text("goals").font(.caption)

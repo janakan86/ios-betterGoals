@@ -16,19 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        
-        /*  */
+        /* dangerous territory. Removed whole store */
         // PersistenceManager.shared.deleteStore()
         /* */
 
         
-        let context = PersistenceManager.shared.context
-        _ = goalsHomeView().environment(\.managedObjectContext, context)
-        _ = HomeView().environment(\.managedObjectContext, context)
-        
-       
-        DataService.sharedDataService.clearGoalsSampleData()
-        DataService.sharedDataService.storeGoalsSampleData()
+        //load sample data
+        DataService.sharedDataService.clearGoalsSampleData(inContext:PersistenceManager.shared.context)
+        DataService.sharedDataService.storeGoalsSampleData(inContext:PersistenceManager.shared.context)
         
         return true
     }
