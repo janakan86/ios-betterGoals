@@ -14,28 +14,38 @@ struct goalsHomeView: View {
     @Environment(\.managedObjectContext) var sharedManagedContext
     @EnvironmentObject var retrievedGoals:Goals
     
+    @State var isCreateGoalsShown:Bool = false
+    
+    
+    var createGoalsButton: some View{
+        Button(action:{
+            self.isCreateGoalsShown.toggle()
+        })
+        {
+            Image(systemName: "plus.circle")
+                .accentColor(Color("orange"))
+                .imageScale(.large)
+                .accessibility(label: Text("User Profile"))
+                .padding()
+        }
+    }
+    
     
     var body: some View {
+        NavigationView{
+            
+        
+            
         VStack{
+            
+            NavigationLink(destination: QuestionOne(isCreateGoalsActive: self.$isCreateGoalsShown)
+                                        .environmentObject( DataService.sharedDataService.createGoal(inContext:self.sharedManagedContext)),
+                           isActive: self.$isCreateGoalsShown)
+            {  EmptyView() }
+            .isDetailLink(false)
             
             Spacer().frame(height:10)
             
-            Button(action:{
-                let goal = Goal(context: self.sharedManagedContext)
-                goal.itemID = "HI IH"
-                goal.itemUIType = 2
-                goal.itemDescription = "hope this works"
-                
-                do{
-                    try self.sharedManagedContext.save()
-                }
-                catch{
-                    print(error)
-                }
-                
-            }){
-                Text("create goal")
-            }
             
             HStack{
                 if retrievedGoals.goals.indices.contains(0){
@@ -71,7 +81,15 @@ struct goalsHomeView: View {
             }
             
             Spacer().frame(height:10)
+                
+          /*  .sheet(isPresented: $isCreateGoalsShown) {
+                                createGoals()
+                                    .environmentObject(DataService.sharedDataService.createGoal(inContext: self.sharedManagedContext))
+                       }*/
         }
+        .navigationBarTitle("My Goals",displayMode: .inline)
+        .navigationBarItems(trailing: createGoalsButton)
+        }.navigationBarColor(backgroundColor: UIColor(named:"pink") ?? .orange, tintColor: .white)
         
         
         
