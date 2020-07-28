@@ -39,7 +39,14 @@ class DataService{
         let goalsSampleData: [Goal] = self.load("sampleGoals.json")
         
         for goal in goalsSampleData {
-            insertGoal(goal: goal,inContext: managedContext)
+            
+            managedContext.insert(goal)
+            do {
+                try managedContext.save()
+                
+            } catch{
+                managedContext.rollback()
+            }
         }
     }
     
@@ -64,14 +71,17 @@ class DataService{
     }
     
     
-    func createGoal(inContext context: NSManagedObjectContext) -> Goal {
-        return Goal(context:context)
-    }
     
-    
-    func insertGoal(goal:Goal,inContext managedContext: NSManagedObjectContext){
+   /* This function accetps a newGoal, uses the stored data and creates NSManagedObject Goal*/
+    func insertGoal(withData newGoal:NewGoal,inContext managedContext: NSManagedObjectContext){
         
-        managedContext.insert(goal)
+        let goal = Goal(context:managedContext)
+        
+        goal.itemID = newGoal.itemID
+        goal.itemUIType = newGoal.itemUIType
+        goal.startDate = newGoal.startDate
+        goal.endDate = newGoal.endDate
+        goal.itemDescription = newGoal.itemDescription
         
         do {
             try managedContext.save()

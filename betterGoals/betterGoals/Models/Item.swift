@@ -20,8 +20,8 @@ protocol Item {
 
 final class Goal: NSManagedObject, Codable, Item {
     
-    @NSManaged var startDate:Date?
-    @NSManaged var endDate:Date?
+    @NSManaged var startDate:Date
+    @NSManaged var endDate:Date
     
     //following properties are from Item Protocol
     @NSManaged var itemID: String
@@ -72,5 +72,22 @@ final class Goals: ObservableObject {
     init(goals:[Goal]){
         self.goals = goals
     }
+}
+
+
+/*
+     class used to temporarily store the new Goal details before it is persisted
+     The object will be passed around the goal creation screens.
+     This helps in solving the complexity involved passing around a NSManagedObject Goal,
+     which may or may not get saved.
+ */
+final class NewGoal : Item, ObservableObject{
+    @Published var startDate:Date = Date()
+    @Published var endDate:Date = Date()
+    
+    //following properties are from Item Protocol
+    @Published var itemID: String = ""
+    @Published var itemDescription: String = ""
+    @Published var itemUIType: Int16 = 0
 }
 

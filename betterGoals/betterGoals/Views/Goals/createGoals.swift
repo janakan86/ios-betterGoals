@@ -12,11 +12,13 @@ import SwiftUI
 
 struct QuestionOne:View{
     
-    @EnvironmentObject var newGoal : Goal
+    @EnvironmentObject var newGoal : NewGoal
     
     //for navigation
     @Binding var isCreateGoalsActive:Bool //root
     @Environment(\.presentationMode) var presentationMode //used by the custom back button
+    
+    @State private var show_modal: Bool = false
     
     var body: some View {
         
@@ -31,14 +33,26 @@ struct QuestionOne:View{
                        Text("It is time to create a goal, work on it and achieve greater things in life")
                            .customStyle(style:ContentStyle())
                        
+                       Button(action: {
+                                         self.show_modal = true
+                                     }) {
+                                         HStack{
+                                             Text("Select the goal type").customStyle(style: Heading2Style())
+                                             
+                                             Image(systemName: "chevron.right")
+                                                 .accentColor(Color("pink"))
+                                         }
+                                     }
+                                     
+                                     if 0 != newGoal.itemUIType  {
+                                         Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name).font(Font.system(size: 15, weight: .bold))
+                                             .padding(.bottom,10)
+                                             
+                                     }
+                                     else{
+                                         Spacer().padding(.bottom,10)
+                                     }
                        
-                       Text("Give a name to your Goal").customStyle(style: Heading2Style()).padding(.top,20)
-                       
-                       TextField("", text: $newGoal.itemID)
-                           .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
-                           .background(Color("lightPink"))
-                           .font(Font.system(size: 15, design: .default))
-                           .cornerRadius(4)
                        
                        Spacer()
                        
@@ -75,6 +89,8 @@ struct QuestionOne:View{
                 }
             )
         )
+        .sheet(isPresented: self.$show_modal) { //popup
+                       ItemTypeList(listHeading: "select a goal type").environmentObject(self.newGoal)
         
     }
     
@@ -82,8 +98,8 @@ struct QuestionOne:View{
 
 
 struct QuestionTwo:View{
-    @EnvironmentObject var newGoal : Goal
-    @State private var show_modal: Bool = false
+    @EnvironmentObject var newGoal : NewGoal
+    
     
     //for navigation
     @Binding var isCreateGoalsActive:Bool //root
@@ -92,33 +108,24 @@ struct QuestionTwo:View{
     var body: some View {
         
         VStack{
-            Image("mountain")
-                    .resizable()
-                    .scaledToFit()
-            
             VStack(alignment: .leading){
                 
-
-                     
-              Button(action: {
-                    self.show_modal = true
-                }) {
-                    HStack{
-                        Text("Select the goal type").customStyle(style: Heading2Style())
-                        
-                        Image(systemName: "chevron.right")
-                            .accentColor(Color("pink"))
-                    }
-                }
+                Text("Give a name to your Goal").customStyle(style: Heading2Style()).padding(.top,20)
                 
-                if 0 != newGoal.itemUIType  {
-                    Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name).font(Font.system(size: 15, weight: .bold))
-                        .padding(.bottom,10)
-                        
-                }
-                else{
-                     Spacer().padding(10)
-                }
+                TextField("", text: $newGoal.itemID)
+                    .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+                    .background(Color("lightPink"))
+                    .font(Font.system(size: 15, design: .default))
+                    .cornerRadius(4)
+                
+                
+                Text("Describe your Goal").customStyle(style: Heading2Style()).padding(.top,20)
+                                    
+                                    TextField("", text: $newGoal.itemDescription)
+                                        .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+                                        .background(Color("lightPink"))
+                                        .font(Font.system(size: 15, design: .default))
+                                        .cornerRadius(4)
                 
                 Spacer()
                        
@@ -128,7 +135,7 @@ struct QuestionTwo:View{
             
             
             NavigationLink(destination:QuestionThree(
-                  isCreateGoalsActive1: self.$isCreateGoalsActive)){
+                  isCreateGoalsActive: self.$isCreateGoalsActive).environmentObject(self.newGoal)){
                       Text("next").customStyle(style: NextLinkStyle())
             }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
             .padding(.bottom,20)
@@ -155,36 +162,45 @@ struct QuestionTwo:View{
                 }
             )
         )
-        .sheet(isPresented: self.$show_modal) { //popup
-                ItemTypeList(listHeading: "select a goal type").environmentObject(self.newGoal)
+       
         }
     }
 }
 
 
 struct QuestionThree:View{
-    @EnvironmentObject var newGoal : Goal
-    @Binding var isCreateGoalsActive1:Bool
+    @Environment(\.managedObjectContext) var sharedManagedContext
+    
+    @EnvironmentObject var newGoal : NewGoal
+    @Binding var isCreateGoalsActive:Bool
     
     var body: some View {
-        VStack{
-            VStack(alignment: .leading){
-                   Text("Let's create a goal").customStyle(style:Heading1Style())
-                                      Text("It is time to create a goal, work on it and achieve greater things in life")
-                                          .customStyle(style:ContentStyle())
-                                      
-                                      
-                                      Text("Give a name to your Goal").customStyle(style: Heading2Style()).padding(.top,20)
-                                      
-                                      TextField("", text: $newGoal.itemID)
-                                          .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
-                                          .background(Color("lightPink"))
-                                          .font(Font.system(size: 15, design: .default))
-                                          .cornerRadius(4)
-                                      
-                                      Spacer()
-            }//.padding(20)
+        VStack(alignment: .leading){
             
+            DatePicker(selection: $newGoal.startDate, in: ...Date(), displayedComponents: .date) {
+                       Text("Select a date")
+            }.onTapGesture {
+               /// self.newGoal.startDate = self.startDate;
+            }
+            
+            
+            DatePicker(selection: $newGoal.endDate, in: ...Date(), displayedComponents: .date) {
+                           Text("Select a date")
+            }.onTapGesture {
+                ///self.newGoal.endDate = self.endDate;
+            }
+            
+            
+            Button(action:{
+                //save and go back to goals home
+                //TODO validations
+                DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
+                self.isCreateGoalsActive.toggle()
+  
+                
+            }){
+                Text("save")
+            }
             
   
         }

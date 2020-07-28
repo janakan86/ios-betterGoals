@@ -18,7 +18,7 @@ struct ItemTypeList: View {
     var listHeading:String
     var itemUIValues:[ItemUI] = ItemTypesUIDefaults.getAllItemUIValues()
     
-    @EnvironmentObject var newGoal : Goal
+    @EnvironmentObject var newGoal : NewGoal
     
     var body: some View {
         

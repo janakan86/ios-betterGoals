@@ -39,7 +39,7 @@ struct goalsHomeView: View {
         VStack{
             
             NavigationLink(destination: QuestionOne(isCreateGoalsActive: self.$isCreateGoalsShown)
-                                        .environmentObject( DataService.sharedDataService.createGoal(inContext:self.sharedManagedContext)),
+                                        .environmentObject( NewGoal()),
                            isActive: self.$isCreateGoalsShown)
             {  EmptyView() }
             .isDetailLink(false)
