@@ -69,8 +69,12 @@ final class Goal: NSManagedObject, Codable, Item {
 final class Goals: ObservableObject {
     @Published var goals:[Goal] = []
     
-    init(goals:[Goal]){
-        self.goals = goals
+    init(sharedManagedContext : NSManagedObjectContext){
+        self.goals = DataService.sharedDataService.getGoals(inContext : sharedManagedContext)
+    }
+    
+    func refresh(sharedManagedContext : NSManagedObjectContext){
+        self.goals = DataService.sharedDataService.getGoals(inContext : sharedManagedContext)
     }
 }
 

@@ -174,6 +174,8 @@ struct QuestionThree:View{
     @EnvironmentObject var newGoal : NewGoal
     @Binding var isCreateGoalsActive:Bool
     
+    @EnvironmentObject var retrievedGoals:Goals
+    
     var body: some View {
         VStack(alignment: .leading){
             
@@ -195,6 +197,7 @@ struct QuestionThree:View{
                 //save and go back to goals home
                 //TODO validations
                 DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
+                self.retrievedGoals.refresh(sharedManagedContext: self.sharedManagedContext)
                 self.isCreateGoalsActive.toggle()
   
                 

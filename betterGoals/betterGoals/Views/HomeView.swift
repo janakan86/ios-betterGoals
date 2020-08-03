@@ -21,7 +21,7 @@ struct HomeView :View {
             
             goalsHomeView()
                 .environmentObject(
-                    Goals(goals: DataService.sharedDataService.getGoals(inContext : sharedManagedContext))
+                    Goals(sharedManagedContext : self.sharedManagedContext)
                 )
                 .font(.title)
                 .tabItem{
