@@ -36,6 +36,6 @@ func getDayofWeek(forDate:Date)->Int{
 
 
 func getNumberOfDaysInCurrentMonth()->Int{
-    let range = calendar.range(of: .day, in: .month, for: Date())!
-    return nrange.count
+    let range = Calendar.current.range(of: .day, in: .month, for: Date())!
+    return range.count
 }
