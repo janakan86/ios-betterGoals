@@ -12,7 +12,7 @@ struct Scheduler: View {
     var body: some View {
 
         
-        MonthlyView(currentMonth: MonthProperties())
+        MonthlyView(currentMonth: DateDisplayCalculations.getCurrentMonthProperties())
     }
 }
 
@@ -45,6 +45,11 @@ struct MonthlyView: View {
                        startDateOfWeek: (28-currentMonth.monthStartDayofWeek)+2,
                        endDateOfWeek:
                             min((28-currentMonth.monthStartDayofWeek)+8,currentMonth.noOfDays))
+            
+            WeeklyView(startDayOfWeek:  1,
+                       startDateOfWeek: (35-currentMonth.monthStartDayofWeek)+2,
+                       endDateOfWeek:
+                             min((35-currentMonth.monthStartDayofWeek)+8,currentMonth.noOfDays))
             
         }
     }
@@ -101,6 +106,7 @@ struct DayView: View {
 }
 
 struct DayViewSelected: View {
+    
     var body: some View {
         Text("00")
                .hidden()
@@ -115,10 +121,7 @@ struct DayViewSelected: View {
 }
 
 
-struct MonthProperties{
-    var noOfDays:Int = 31
-    var monthStartDayofWeek:Int = 2 //The day of the week in which the month starts
-}
+
 
 struct DaysInWeek{
     

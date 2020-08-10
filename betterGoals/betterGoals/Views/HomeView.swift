@@ -36,7 +36,7 @@ struct HomeView :View {
                 }
                 .tag(2)
             
-            Text("Scheduler")
+            Scheduler()
                 .font(.title)
                 .tabItem{
                     Text("Scheduler").font(.caption)
