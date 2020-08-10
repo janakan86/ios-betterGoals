@@ -8,48 +8,73 @@
 
 import SwiftUI
 
+
 struct Scheduler: View {
+    
+    
     var body: some View {
 
-        
-        MonthlyView(currentMonth: DateDisplayCalculations.getCurrentMonthProperties())
+        MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
     }
 }
 
 
 struct MonthlyView: View {
     
-    var currentMonth:MonthProperties
+    @State var displayedMonth:MonthProperties
     
     var body: some View {
         
         VStack{
             
-            WeeklyView(startDayOfWeek: currentMonth.monthStartDayofWeek,
+            HStack{
+                Text(displayedMonth.monthDescription)
+                
+                Text(String(displayedMonth.currentYear))
+            }
+            
+            
+            WeeklyView(startDayOfWeek: displayedMonth.monthStartDayofWeek,
                        startDateOfWeek: 1,
-                       endDateOfWeek:   7-currentMonth.monthStartDayofWeek+1)
+                       endDateOfWeek:   7-displayedMonth.monthStartDayofWeek+1)
             
             WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (7-currentMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:   (7-currentMonth.monthStartDayofWeek)+8)
+                       startDateOfWeek: (7-displayedMonth.monthStartDayofWeek)+2,
+                       endDateOfWeek:   (7-displayedMonth.monthStartDayofWeek)+8)
             
             WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (14-currentMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:   (14-currentMonth.monthStartDayofWeek)+8)
+                       startDateOfWeek: (14-displayedMonth.monthStartDayofWeek)+2,
+                       endDateOfWeek:   (14-displayedMonth.monthStartDayofWeek)+8)
             
             WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (21-currentMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:   min((21-currentMonth.monthStartDayofWeek)+8,currentMonth.noOfDays))
+                       startDateOfWeek: (21-displayedMonth.monthStartDayofWeek)+2,
+                       endDateOfWeek:   min((21-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
             
             WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (28-currentMonth.monthStartDayofWeek)+2,
+                       startDateOfWeek: (28-displayedMonth.monthStartDayofWeek)+2,
                        endDateOfWeek:
-                            min((28-currentMonth.monthStartDayofWeek)+8,currentMonth.noOfDays))
+                            min((28-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
             
             WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (35-currentMonth.monthStartDayofWeek)+2,
+                       startDateOfWeek: (35-displayedMonth.monthStartDayofWeek)+2,
                        endDateOfWeek:
-                             min((35-currentMonth.monthStartDayofWeek)+8,currentMonth.noOfDays))
+                             min((35-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
+            
+            
+            HStack{
+                Button(action:{
+                            self.displayedMonth = DateDisplayCalculations.getPreviousMonthProperties(currentMonth: self.displayedMonth)
+                        }){
+                            Text("Previous Month")
+                        }
+                
+                Button(action:{
+                            self.displayedMonth = DateDisplayCalculations.getNextMonthProperties(currentMonth: self.displayedMonth)
+                        }){
+                            Text("Next Month")
+                        }
+            }
+        
             
         }
     }
