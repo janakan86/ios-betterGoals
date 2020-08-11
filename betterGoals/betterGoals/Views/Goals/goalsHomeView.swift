@@ -23,9 +23,8 @@ struct goalsHomeView: View {
         })
         {
             Image(systemName: "plus.circle")
-                .accentColor(Color("orange"))
+                .accentColor(Color(.white))
                 .imageScale(.large)
-                .accessibility(label: Text("User Profile"))
                 .padding()
         }
     }
