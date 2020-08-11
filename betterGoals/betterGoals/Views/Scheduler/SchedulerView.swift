@@ -10,12 +10,40 @@ import SwiftUI
 
 
 struct Scheduler: View {
-    
+    @State var displayOption = 0
+    var options = ["Monthly", "Weekly"]
     
     var body: some View {
-
-        MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+        NavigationView{
+            VStack{
+                
+                
+                Picker("DisplayOption", selection: $displayOption) {
+                    ForEach(0 ..< options.count) { index in
+                        Text(self.options[index])
+                            .tag(index)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                
+                Group{
+                    if displayOption == 0{
+                        MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+                    }
+                    else if displayOption == 1{
+                        Text("ttt")
+                    }
+                    
+                }
+                
+                
+                
+                
+            }.navigationBarTitle("Scheduler",displayMode: .inline)
+        }.navigationBarColor(backgroundColor: UIColor(named:"pink") ?? .orange, tintColor: .white)
+        
     }
+       
 }
 
 
@@ -23,60 +51,66 @@ struct MonthlyView: View {
     
     @State var displayedMonth:MonthProperties
     
+
+    
     var body: some View {
-        
-        VStack{
-            
-            HStack{
-                Text(displayedMonth.monthDescription)
+         
+            VStack{
                 
-                Text(String(displayedMonth.currentYear))
-            }
-            
-            
-            WeeklyView(startDayOfWeek: displayedMonth.monthStartDayofWeek,
-                       startDateOfWeek: 1,
-                       endDateOfWeek:   7-displayedMonth.monthStartDayofWeek+1)
-            
-            WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (7-displayedMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:   (7-displayedMonth.monthStartDayofWeek)+8)
-            
-            WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (14-displayedMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:   (14-displayedMonth.monthStartDayofWeek)+8)
-            
-            WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (21-displayedMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:   min((21-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
-            
-            WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (28-displayedMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:
-                            min((28-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
-            
-            WeeklyView(startDayOfWeek:  1,
-                       startDateOfWeek: (35-displayedMonth.monthStartDayofWeek)+2,
-                       endDateOfWeek:
-                             min((35-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
-            
-            
-            HStack{
-                Button(action:{
-                            self.displayedMonth = DateDisplayCalculations.getPreviousMonthProperties(currentMonth: self.displayedMonth)
-                        }){
-                            Text("Previous Month")
-                        }
+                HStack{
+                    Text(displayedMonth.monthDescription)
+                    
+                    Text(String(displayedMonth.currentYear))
+                }
                 
-                Button(action:{
-                            self.displayedMonth = DateDisplayCalculations.getNextMonthProperties(currentMonth: self.displayedMonth)
-                        }){
-                            Text("Next Month")
-                        }
+                
+                WeeklyView(startDayOfWeek: displayedMonth.monthStartDayofWeek,
+                           startDateOfWeek: 1,
+                           endDateOfWeek:   7-displayedMonth.monthStartDayofWeek+1)
+                
+                WeeklyView(startDayOfWeek:  1,
+                           startDateOfWeek: (7-displayedMonth.monthStartDayofWeek)+2,
+                           endDateOfWeek:   (7-displayedMonth.monthStartDayofWeek)+8)
+                
+                WeeklyView(startDayOfWeek:  1,
+                           startDateOfWeek: (14-displayedMonth.monthStartDayofWeek)+2,
+                           endDateOfWeek:   (14-displayedMonth.monthStartDayofWeek)+8)
+                
+                WeeklyView(startDayOfWeek:  1,
+                           startDateOfWeek: (21-displayedMonth.monthStartDayofWeek)+2,
+                           endDateOfWeek:   min((21-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
+                
+                WeeklyView(startDayOfWeek:  1,
+                           startDateOfWeek: (28-displayedMonth.monthStartDayofWeek)+2,
+                           endDateOfWeek:
+                    min((28-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
+                
+                WeeklyView(startDayOfWeek:  1,
+                           startDateOfWeek: (35-displayedMonth.monthStartDayofWeek)+2,
+                           endDateOfWeek:
+                    min((35-displayedMonth.monthStartDayofWeek)+8,displayedMonth.noOfDays))
+                
+                
+                HStack{
+                    Button(action:{
+                        self.displayedMonth = DateDisplayCalculations.getPreviousMonthProperties(currentMonth: self.displayedMonth)
+                    }){
+                         Image(systemName: "arrowtriangle.left.fill")
+                                       .accentColor(Color("pink"))
+                    }
+                    
+                    Button(action:{
+                        self.displayedMonth = DateDisplayCalculations.getNextMonthProperties(currentMonth: self.displayedMonth)
+                    }){
+                        Image(systemName: "arrowtriangle.right.fill")
+                                        .accentColor(Color("pink"))
+                    }
+                }
+                
+                
             }
-        
-            
-        }
+         
+       
     }
 }
 
