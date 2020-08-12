@@ -28,8 +28,26 @@ class DateDisplayCalculations{
         let calendar = Calendar.current
         let forDateDayValue = calendar.component(.day, from: forDate)
     
-         return Calendar.current.date(byAdding: .day, value: (-1 * forDateDayValue+1), to: forDate)!
+        return Calendar.current.date(byAdding: .day, value: (-1 * forDateDayValue+1), to: forDate)!
+    }
+    
+    static func getFollowingDay(withOffset offsetDays:Int, forDate:Date)-> Date {
+        return Calendar.current.date(byAdding: .day, value: offsetDays, to: forDate)!
+    }
+    
+    static func firstDayOfWeek(forDate:Date)-> Date {
+        let calendar = Calendar.current
+        let forDateWeekDayValue = calendar.component(.weekday, from: forDate)
+    
+        return Calendar.current.date(byAdding: .day, value: (-1 * forDateWeekDayValue+1), to: forDate)!
      }
+    
+    static func lastDayOfWeek(forDate:Date)-> Date {
+         let calendar = Calendar.current
+         let forDateWeekDayValue = calendar.component(.weekday, from: forDate)
+     
+         return Calendar.current.date(byAdding: .day, value: (7 - forDateWeekDayValue), to: forDate)!
+      }
 
 
     static func getNumberOfDaysInMonth(forDate:Date)->Int{
@@ -88,10 +106,13 @@ class DateDisplayCalculations{
         return MonthProperties(month:previousMonth,monthDescription:monthDescription,
                                      noOfDays:noOfDays, monthStartDayofWeek:monthStartDayofWeek,currentYear:year)
     }
+    
+    
+
 }
 
 
-
+    
 
 
 class MonthProperties: ObservableObject{
