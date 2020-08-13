@@ -10,7 +10,10 @@ import SwiftUI
 
 
 struct Scheduler: View {
-    @State var displayOption = 0
+    
+    @State var orientation: UIDeviceOrientation = UIDevice.current.orientation
+    
+    @State var displayOption = 1
     var options = ["Monthly", "Weekly"]
     
     
@@ -29,17 +32,35 @@ struct Scheduler: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top,20)
                 
-                Spacer()
+               
                 
                 Group{
+                    //monthly view
                     if displayOption == 0{
-                        MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+                        if(orientation.isLandscape){
+                            ScrollView{
+                                MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+                            }
+                        }
+                        else{
+                            MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+                        }
+                       
                     }
+                        
+                    //weekly view
                     else if displayOption == 1{
                         WeeklyView(weekStartDate: DateDisplayCalculations.firstDayOfWeek(forDate: Date()))
                     }
                     
                 }
+                .frame(minWidth: 0,
+                             maxWidth: .infinity,
+                             minHeight: 0,
+                             maxHeight: .infinity,
+                             alignment: .topLeading)
+             
+                
                 
                 
                 

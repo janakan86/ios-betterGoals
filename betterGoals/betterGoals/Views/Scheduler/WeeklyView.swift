@@ -15,14 +15,31 @@ struct WeeklyView: View {
     var body: some View {
         
         ForEach(0...6, id: \.self){ index in
+    
+            WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate))
            
-          //  var DateDisplay = DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate)
-            Text(String(Calendar.current.component(.day,
-            from: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate))))
         }
         
     }
 }
+
+struct WeeklyViewRow: View {
+    
+    var dateToDisplay:Date
+    
+    var body: some View {
+        HStack{
+            
+            Text(String(Calendar.current.component(.day, from: dateToDisplay )))
+            
+            Spacer()
+            
+            Text(DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: dateToDisplay )-1])
+            
+        }.padding(20)
+    }
+}
+
 
 struct WeeklyView_Previews: PreviewProvider {
     static var previews: some View {

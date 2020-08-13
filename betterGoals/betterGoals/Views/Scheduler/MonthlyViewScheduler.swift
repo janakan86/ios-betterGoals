@@ -83,7 +83,7 @@ struct WeekForMonthlyView: View{
     
     var body: some View {
         HStack{
-            
+           
             ForEach(dayPlacements,id:\.self){ location in
 
                 Group{
@@ -101,6 +101,7 @@ struct WeekForMonthlyView: View{
             
         
         }
+        .frame(maxWidth: .infinity)
         
     }
 }
@@ -112,10 +113,9 @@ struct DayForMonthlyView: View {
     var body: some View {
         Text("00")
                .hidden()
-               .padding(8)
                .background(Color.white)
                .clipShape(Circle())
-               .padding(.vertical, 4)
+               .padding(.vertical, 7)
                .overlay(
                    Text(String(dateToDisplay))
                )
