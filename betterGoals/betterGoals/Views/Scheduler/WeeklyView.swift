@@ -31,10 +31,12 @@ struct WeeklyViewRow: View {
         HStack{
             
             Text(String(Calendar.current.component(.day, from: dateToDisplay )))
+                .foregroundColor((Calendar.current.isDateInToday(dateToDisplay)) ? Color("pink"):Color(.black))
             
             Spacer()
             
             Text(DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: dateToDisplay )-1])
+                .foregroundColor((Calendar.current.isDateInToday(dateToDisplay)) ? Color("pink"):Color(.black))
             
         }.padding(20)
     }
