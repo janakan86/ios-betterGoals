@@ -7,17 +7,26 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct WeeklyView: View {
+    
     var weekStartDate:Date
     var today = Date()
+    
+    //items to be showed for this week
+    @EnvironmentObject var scheduledItems:RetrievedScheduledItems
+    
     
     var body: some View {
         
         ForEach(0...6, id: \.self){ index in
-    
-            WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate))
-           
+            
+            
+            WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate),
+                          isTaskScheduled: self.scheduledItems.isScheduledItemExist(
+                                forDate: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate)))
+            
         }
         
     }
@@ -26,6 +35,7 @@ struct WeeklyView: View {
 struct WeeklyViewRow: View {
     
     var dateToDisplay:Date
+    var isTaskScheduled:Bool
     
     var body: some View {
         HStack{
@@ -37,6 +47,14 @@ struct WeeklyViewRow: View {
             
             Text(DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: dateToDisplay )-1])
                 .foregroundColor((Calendar.current.isDateInToday(dateToDisplay)) ? Color("pink"):Color(.black))
+            
+            Text("00")
+                .hidden()
+                .background(isTaskScheduled ? Color("pink"): Color.white)
+                .clipShape(Circle())
+                .padding(.vertical, 7)
+            
+            
             
         }.padding(20)
     }

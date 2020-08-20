@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //DataService.sharedDataService.clearGoalsSampleData(inContext:PersistenceManager.shared.context)
        // DataService.sharedDataService.storeGoalsSampleData(inContext:PersistenceManager.shared.context)
         
+        
+        DataService.sharedDataService.clearScheduledItemsSampleData(inContext:PersistenceManager.shared.context)
+        DataService.sharedDataService.loadSampleScheduledItems(inContext:PersistenceManager.shared.context)
+        
         return true
     }
 
