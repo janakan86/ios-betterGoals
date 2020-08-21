@@ -28,8 +28,18 @@ class DateDisplayCalculations{
         let calendar = Calendar.current
         let forDateDayValue = calendar.component(.day, from: forDate)
     
-        return Calendar.current.date(byAdding: .day, value: (-1 * forDateDayValue+1), to: forDate)!
+        return calendar.date(byAdding: .day, value: (-1 * forDateDayValue+1), to: forDate)!
     }
+    
+    static func getLastDayOfMonth(forDate:Date)-> Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1),
+                                     to: DateDisplayCalculations.firstDayOfMonth(forDate: forDate))!
+    }
+    
+    static func getLastDayOfMonth(withFirstDayofMonth forDate:Date)-> Date {
+         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1),
+                                      to: forDate)!
+     }
     
     static func getFollowingDay(withOffset offsetDays:Int, forDate:Date)-> Date {
         return Calendar.current.date(byAdding: .day, value: offsetDays, to: forDate)!
@@ -63,9 +73,6 @@ class DateDisplayCalculations{
         
         let currentYear = getCurrentYear()
         let month = getCurrentMonth()
-        let monthDescription = DateFormatter().monthSymbols[month - 1]
-        let noOfDays = getNumberOfDaysInMonth(forDate:Date())
-        let monthStartDayofWeek = getTheDayofWeekforFirstDayofMonth(forDate:Date())
         
         return MonthProperties(firstDayOfMonth:DateDisplayCalculations.firstDayOfMonth(forDate: Date()),month:month,currentYear:currentYear)
     }
@@ -106,13 +113,14 @@ class DateDisplayCalculations{
 class MonthProperties: ObservableObject{
     
     
-    
     init(firstDayOfMonth:Date, month:Int,currentYear:Int){
         self.noOfDays = DateDisplayCalculations.getNumberOfDaysInMonth(forDate: firstDayOfMonth)
         self.monthStartDayofWeek = DateDisplayCalculations.getTheDayofWeekforFirstDayofMonth(forDate:firstDayOfMonth)
         self.month = month
         self.monthDescription = DateFormatter().monthSymbols[month - 1]
         self.currentYear = currentYear
+        self.firstDayOfMonth = firstDayOfMonth
+        self.lastDayOfMonth = DateDisplayCalculations.getLastDayOfMonth(withFirstDayofMonth: firstDayOfMonth)
     }
     
     var month:Int
@@ -120,6 +128,7 @@ class MonthProperties: ObservableObject{
     var currentYear:Int
     var noOfDays:Int
     var monthStartDayofWeek:Int //The day of the week in which the month starts
+    var firstDayOfMonth:Date
+    var lastDayOfMonth:Date
     
-   // var scheduledItems:RetrievedScheduledItems
 }

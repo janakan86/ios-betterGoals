@@ -61,8 +61,8 @@ class DataService{
 
     func getScheduledItems(between fromDate:Date, and toDate:Date,inContext managedContext: NSManagedObjectContext)->[ScheduledItems]{
         
-        let fromPredicate = NSPredicate(format: "%@ >= %@", Date() as NSDate, fromDate as NSDate)
-        let toPredicate = NSPredicate(format: "%@ < %@", Date() as NSDate, toDate as NSDate)
+        let fromPredicate = NSPredicate(format: "date >= %@", fromDate as NSDate)
+        let toPredicate = NSPredicate(format: "date < %@", toDate as NSDate)
         let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
         
         let scheduledItemFetchRequest = NSFetchRequest<ScheduledItems>(entityName: "ScheduledItems")
@@ -70,7 +70,6 @@ class DataService{
         var fetchedResults:[ScheduledItems] = []
         
         scheduledItemFetchRequest.predicate = datePredicate
-        
         do {
             fetchedResults = try managedContext.fetch(scheduledItemFetchRequest)
             
@@ -82,6 +81,13 @@ class DataService{
         return fetchedResults
         
     }
+    
+    
+    func getScheduledItems(forMonthProperties monthProperties:MonthProperties,inContext managedContext: NSManagedObjectContext)->[ScheduledItems]{
+           
+        return self.getScheduledItems(between: monthProperties.firstDayOfMonth, and: monthProperties.lastDayOfMonth, inContext: managedContext)
+           
+       }
     
     
     //json loader code taken from SWIFT UI official tutorial
@@ -165,7 +171,7 @@ class DataService{
         
         
         let si3 = ScheduledItems(context: managedContext)
-        si3.date = DateDisplayCalculations.getFollowingDay(withOffset: 14, forDate: Date())
+        si3.date = DateDisplayCalculations.getFollowingDay(withOffset: 15, forDate: Date())
         si3.scheduledItemId = 3
         si3.taskID = 3
         

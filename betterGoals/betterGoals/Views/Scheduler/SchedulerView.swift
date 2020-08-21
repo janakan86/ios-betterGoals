@@ -17,7 +17,7 @@ struct Scheduler: View {
     @State var displayOption = 1
     var options = ["Monthly", "Weekly"]
     
-    
+    var currentMonthProperties = DateDisplayCalculations.getCurrentMonthProperties()
     
     
     var body: some View {
@@ -40,11 +40,21 @@ struct Scheduler: View {
                     if displayOption == 0{
                         if(orientation.isLandscape){
                             ScrollView{
-                                MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+                                MonthlyView(displayedMonth: currentMonthProperties,
+                                            retrievedScheduledItems: RetrievedScheduledItems(
+                                                scheduledItems: DataService.sharedDataService.getScheduledItems(
+                                                    forMonthProperties:currentMonthProperties,
+                                                    inContext: sharedManagedContext))
+                                )
                             }
                         }
                         else{
-                            MonthlyView(displayedMonth: DateDisplayCalculations.getCurrentMonthProperties())
+                             MonthlyView(displayedMonth: currentMonthProperties,
+                                         retrievedScheduledItems: RetrievedScheduledItems(
+                                            scheduledItems: DataService.sharedDataService.getScheduledItems(
+                                                forMonthProperties:currentMonthProperties,
+                                                inContext: sharedManagedContext))
+                            )
                         }
                        
                     }
