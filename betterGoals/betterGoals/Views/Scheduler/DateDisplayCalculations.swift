@@ -67,9 +67,7 @@ class DateDisplayCalculations{
         let noOfDays = getNumberOfDaysInMonth(forDate:Date())
         let monthStartDayofWeek = getTheDayofWeekforFirstDayofMonth(forDate:Date())
         
-        
-        return MonthProperties(month:month,monthDescription:monthDescription,
-                               noOfDays:noOfDays, monthStartDayofWeek:monthStartDayofWeek,currentYear:currentYear)
+        return MonthProperties(firstDayOfMonth:DateDisplayCalculations.firstDayOfMonth(forDate: Date()),month:month,currentYear:currentYear)
     }
     
     
@@ -77,34 +75,24 @@ class DateDisplayCalculations{
         
         let nextMonth =  currentMonth.month == 12 ? (1) : currentMonth.month + 1
         let year = currentMonth.month == 12 ? currentMonth.currentYear + 1 : currentMonth.currentYear
-        let monthDescription = DateFormatter().monthSymbols[nextMonth - 1]
-        
+
         //construct the first day of next month
         let components = DateComponents(year: year, month: nextMonth, day: 1)
         let firstDayofNextMonth = Calendar.current.date(from: components)!
         
-        let noOfDays = getNumberOfDaysInMonth(forDate: firstDayofNextMonth)
-        let monthStartDayofWeek = getTheDayofWeekforFirstDayofMonth(forDate:firstDayofNextMonth)
-        
-        return MonthProperties(month:nextMonth,monthDescription:monthDescription,
-                                     noOfDays:noOfDays, monthStartDayofWeek:monthStartDayofWeek,currentYear:year)
+        return MonthProperties(firstDayOfMonth:firstDayofNextMonth,month:nextMonth,currentYear:year)
     }
     
     static func getPreviousMonthProperties(currentMonth:MonthProperties)->MonthProperties{
         
         let previousMonth =  currentMonth.month == 1 ? (12) : currentMonth.month - 1
         let year = currentMonth.month == 1 ? currentMonth.currentYear - 1 : currentMonth.currentYear
-        let monthDescription = DateFormatter().monthSymbols[previousMonth - 1]
         
-        //construct the first day of next month
+        //construct the first day of previous month
         let components = DateComponents(year: year, month: previousMonth, day: 1)
         let firstDayofPreviousMonth = Calendar.current.date(from: components)!
         
-        let noOfDays = getNumberOfDaysInMonth(forDate: firstDayofPreviousMonth)
-        let monthStartDayofWeek = getTheDayofWeekforFirstDayofMonth(forDate:firstDayofPreviousMonth)
-        
-        return MonthProperties(month:previousMonth,monthDescription:monthDescription,
-                                     noOfDays:noOfDays, monthStartDayofWeek:monthStartDayofWeek,currentYear:year)
+        return MonthProperties(firstDayOfMonth:firstDayofPreviousMonth,month:previousMonth,currentYear:year)
     }
     
     
@@ -117,13 +105,14 @@ class DateDisplayCalculations{
 
 class MonthProperties: ObservableObject{
     
-    init(month:Int,monthDescription:String,noOfDays:Int,monthStartDayofWeek:Int,currentYear:Int){
-        self.noOfDays = noOfDays
-        self.monthStartDayofWeek = monthStartDayofWeek
+    
+    
+    init(firstDayOfMonth:Date, month:Int,currentYear:Int){
+        self.noOfDays = DateDisplayCalculations.getNumberOfDaysInMonth(forDate: firstDayOfMonth)
+        self.monthStartDayofWeek = DateDisplayCalculations.getTheDayofWeekforFirstDayofMonth(forDate:firstDayOfMonth)
         self.month = month
-        self.monthDescription = monthDescription
+        self.monthDescription = DateFormatter().monthSymbols[month - 1]
         self.currentYear = currentYear
-        
     }
     
     var month:Int
@@ -131,4 +120,6 @@ class MonthProperties: ObservableObject{
     var currentYear:Int
     var noOfDays:Int
     var monthStartDayofWeek:Int //The day of the week in which the month starts
+    
+   // var scheduledItems:RetrievedScheduledItems
 }
