@@ -11,23 +11,61 @@ import CoreData
 
 struct WeeklyView: View {
     
-    var weekStartDate:Date
+    @State var weekStartDate:Date
     var today = Date()
     
     //items to be showed for this week
-    @EnvironmentObject var scheduledItems:RetrievedScheduledItems
+    @State var scheduledItems:RetrievedScheduledItems
+    
+    @Environment(\.managedObjectContext) var sharedManagedContext
     
     
     var body: some View {
         
-        ForEach(0...6, id: \.self){ index in
+        VStack{
             
             
-            WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate),
-                          isTaskScheduled: self.scheduledItems.isScheduledItemExist(
-                                forDate: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate)))
+            ForEach(0...6, id: \.self){ index in
+                
+                
+                WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate),
+                              isTaskScheduled: self.scheduledItems.isScheduledItemExist(
+                                    forDate: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate)))
+                
+            }
+            
+            
+            //Navigation buttons
+            HStack{
+                Button(action:{
+                    self.weekStartDate = DateDisplayCalculations.getFollowingDay(withOffset: -7, forDate: self.weekStartDate)
+                    self.scheduledItems =  RetrievedScheduledItems(scheduledItems: DataService.sharedDataService.getScheduledItems(
+                                            between:  self.weekStartDate,
+                                            and: DateDisplayCalculations.getFollowingDay(withOffset: -7, forDate: self.weekStartDate),
+                                            inContext: self.sharedManagedContext))
+                    
+                }){
+                     Image(systemName: "arrowtriangle.left.fill")
+                                   .accentColor(Color("pink"))
+                }
+                
+                Button(action:{
+                   self.weekStartDate = DateDisplayCalculations.getFollowingDay(withOffset: 7, forDate: self.weekStartDate)
+                   self.scheduledItems =  RetrievedScheduledItems(scheduledItems: DataService.sharedDataService.getScheduledItems(
+                                             between:  self.weekStartDate,
+                                             and: DateDisplayCalculations.getFollowingDay(withOffset: 7, forDate: self.weekStartDate),
+                                             inContext: self.sharedManagedContext))
+
+                }){
+                    Image(systemName: "arrowtriangle.right.fill")
+                                    .accentColor(Color("pink"))
+                }
+            }
+            
+            Spacer()
             
         }
+        
         
     }
 }
@@ -56,13 +94,7 @@ struct WeeklyViewRow: View {
             
             
             
-        }.padding(20)
+        }.padding(9)
     }
 }
 
-
-struct WeeklyView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeeklyView(weekStartDate: DateDisplayCalculations.firstDayOfWeek(forDate: Date()))
-    }
-}

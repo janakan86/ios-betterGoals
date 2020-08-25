@@ -61,8 +61,8 @@ struct Scheduler: View {
                         
                     //weekly view
                     else if displayOption == 1{
-                        WeeklyView(weekStartDate: DateDisplayCalculations.firstDayOfWeek(forDate: Date()))
-                            .environmentObject(
+                        WeeklyView( weekStartDate: DateDisplayCalculations.firstDayOfWeek(forDate: Date()),
+                                    scheduledItems:
                                 RetrievedScheduledItems(scheduledItems: DataService.sharedDataService.getScheduledItems(
                                     between:  DateDisplayCalculations.firstDayOfWeek(forDate: Date()),
                                     and: DateDisplayCalculations.getFollowingDay(withOffset: 6, forDate:DateDisplayCalculations.firstDayOfWeek(forDate: Date())),
