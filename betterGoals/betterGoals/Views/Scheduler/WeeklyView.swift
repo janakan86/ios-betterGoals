@@ -12,7 +12,6 @@ import CoreData
 struct WeeklyView: View {
     
     @State var weekStartDate:Date
-    var today = Date()
     
     //items to be showed for this week
     @State var scheduledItems:RetrievedScheduledItems
@@ -24,15 +23,23 @@ struct WeeklyView: View {
         
         VStack{
             
-            
-            ForEach(0...6, id: \.self){ index in
+            HStack{
+                Text(DateDisplayCalculations.getMonthDescription(forMonth: DateDisplayCalculations.getMonth(forDate: self.weekStartDate)))
                 
-                
-                WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate),
-                              isTaskScheduled: self.scheduledItems.isScheduledItemExist(
-                                    forDate: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate)))
-                
+                Text(String(DateDisplayCalculations.getYear(forDate: self.weekStartDate)))
             }
+            
+            ScrollView{
+                ForEach(0...6, id: \.self){ index in
+                    
+                    
+                    WeeklyViewRow(dateToDisplay: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate),
+                                  isTaskScheduled: self.scheduledItems.isScheduledItemExist(
+                                        forDate: DateDisplayCalculations.getFollowingDay(withOffset:index, forDate:self.weekStartDate)))
+                    
+                }
+            }
+            
             
             
             //Navigation buttons
@@ -94,7 +101,7 @@ struct WeeklyViewRow: View {
             
             
             
-        }.padding(9)
+        }.padding(5)
     }
 }
 

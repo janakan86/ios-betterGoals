@@ -18,11 +18,21 @@ class DateDisplayCalculations{
         return Calendar.current.component(.year, from: Date())
     }
 
+    static func getYear(forDate:Date)->Int{
+        return Calendar.current.component(.year, from: forDate)
+    }
 
     static func getDayofWeek(forDate:Date)->Int{
         return Calendar.current.component(.weekday, from: forDate)
     }
     
+    static func getMonth(forDate:Date)->Int{
+         return Calendar.current.component(.month, from: forDate)
+    }
+    
+    static func getMonthDescription(forMonth month:Int)->String{
+        DateFormatter().monthSymbols[month - 1]
+    }
     
     static func firstDayOfMonth(forDate:Date)-> Date {
         let calendar = Calendar.current
@@ -117,7 +127,7 @@ class MonthProperties: ObservableObject{
         self.noOfDays = DateDisplayCalculations.getNumberOfDaysInMonth(forDate: firstDayOfMonth)
         self.monthStartDayofWeek = DateDisplayCalculations.getTheDayofWeekforFirstDayofMonth(forDate:firstDayOfMonth)
         self.month = month
-        self.monthDescription = DateFormatter().monthSymbols[month - 1]
+        self.monthDescription = DateDisplayCalculations.getMonthDescription(forMonth: month)
         self.currentYear = currentYear
         self.firstDayOfMonth = firstDayOfMonth
         self.lastDayOfMonth = DateDisplayCalculations.getLastDayOfMonth(withFirstDayofMonth: firstDayOfMonth)
