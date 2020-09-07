@@ -193,6 +193,14 @@ struct QuestionThree:View{
             }
             
             
+            NavigationLink(destination:CreateTasks(
+                         isParentViewActive: self.$isCreateGoalsActive,
+                         goalID: newGoal.itemID)
+                        ){
+                             Text("next").customStyle(style: NextLinkStyle())
+                   }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
+                   .padding(.bottom,20)
+            
             Button(action:{
                 //save and go back to goals home
                 //TODO validations

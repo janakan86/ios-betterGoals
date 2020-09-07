@@ -58,6 +58,23 @@ class DataService{
         }
         
     }
+    
+    func insertTask(taskID:String, goalID:String?, habitID:String?,inContext managedContext: NSManagedObjectContext){
+        
+        let task = Task(context:managedContext)
+        
+        task.goalID = goalID
+        task.habitsID = habitID
+        task.taskID = taskID
+        
+        do {
+            try managedContext.save()
+            
+        } catch{
+            managedContext.rollback()
+        }
+    }
+    
 
     func getScheduledItems(between fromDate:Date, and toDate:Date,inContext managedContext: NSManagedObjectContext)->[ScheduledItems]{
         
@@ -201,6 +218,24 @@ class DataService{
         } catch{
             managedContext.rollback()
         }
+    }
+    
+    
+    func clearTasks(inContext managedContext: NSManagedObjectContext){
+        let storedTasks = NSFetchRequest<Task>(entityName: "Tasks")
+               
+               do {
+                   //we can loop and delete since it is sample data
+                   let tasks = try managedContext.fetch(storedTasks)
+                   
+                   for si in tasks {
+                       managedContext.delete(si)
+                   }
+                   try managedContext.save()
+                   
+               } catch{
+                   managedContext.rollback()
+               }
     }
 
 }
