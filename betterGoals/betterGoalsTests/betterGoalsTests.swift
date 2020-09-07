@@ -10,41 +10,47 @@ import CoreData
 import XCTest
 @testable import betterGoals
 
-class coreDataTests: XCTestCase {
+class testGoals: XCTestCase {
     
     
     var container: NSPersistentContainer?
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        DataService.sharedDataService.clearGoalsSampleData()
+        DataService.sharedDataService.clearGoalsSampleData(inContext: PersistenceManager.shared.context)
         print("hello setUpWithError")
         
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        DataService.sharedDataService.clearGoalsSampleData(inContext: PersistenceManager.shared.context)
         print("hello tearDownWithError")
 
     }
 
     func testSimpleGoalInsert() throws {
+        let newGoal = NewGoal()
+        newGoal.itemID = "Test"
+        newGoal.itemUIType = 1
+        newGoal.itemDescription = "Desciption"
+        
+        
+        DataService.sharedDataService.insertGoal(withData: newGoal,
+                                                 inContext: PersistenceManager.shared.context)
         
     }
     
     func testGoalsRead() throws {
-        DataService.sharedDataService.storeGoalsSampleData()
-        let goals = DataService.sharedDataService.getGoals()
+        let goals = DataService.sharedDataService.getGoals(inContext: PersistenceManager.shared.context)
         
-        XCTAssertTrue(goals.count > 0, "goals couldn't be read")
-    
+        for goal in goals{
+            XCTAssertEqual(goal.itemID, "Test")
+        }
+        
         
     }
     
-    func testGoalsInsertWithSubGoal() throws {
-          // This is an example of a functional test case.
-          // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
