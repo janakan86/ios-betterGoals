@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE10DA312499DF6F0042D7BE /* createGoals.swift */; };
-		DE21356A24BE8A8500A29EDC /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE21356924BE8A8500A29EDC /* Validations.swift */; };
 		DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */; };
 		DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */; };
 		DE34832C24DA81F000CD68B5 /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE34832B24DA81F000CD68B5 /* SchedulerView.swift */; };
@@ -50,7 +49,6 @@
 
 /* Begin PBXFileReference section */
 		DE10DA312499DF6F0042D7BE /* createGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoals.swift; sourceTree = "<group>"; };
-		DE21356924BE8A8500A29EDC /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalsHomeView.swift; sourceTree = "<group>"; };
 		DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIconView.swift; sourceTree = "<group>"; };
 		DE34832B24DA81F000CD68B5 /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerView.swift; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 				DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */,
 				DE8701B4248CCADD00331DE5 /* constants.swift */,
 				DEB9629F24B2EF290083A82C /* ItemTypeList.swift */,
-				DE21356924BE8A8500A29EDC /* Validations.swift */,
 				DEB962A124B32E870083A82C /* Styling.swift */,
 			);
 			path = Views;
@@ -339,7 +336,6 @@
 				DEB962A224B32E880083A82C /* Styling.swift in Sources */,
 				DE34832C24DA81F000CD68B5 /* SchedulerView.swift in Sources */,
 				DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */,
-				DE21356A24BE8A8500A29EDC /* Validations.swift in Sources */,
 				DEACF6F7245BF33A00074C28 /* AppDelegate.swift in Sources */,
 				DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */,
 				DE8701B5248CCADD00331DE5 /* constants.swift in Sources */,
