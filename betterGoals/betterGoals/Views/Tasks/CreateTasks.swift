@@ -28,8 +28,8 @@ struct CreateTasks: View {
             Button(action:{
                 //save and go back to goals home
                 //TODO validations
-                DataService.sharedDataService.insertTask(taskID: "Test",
-                    goalID: self.goalID,habitID: nil,inContext: self.sharedManagedContext)
+            /*    DataService.sharedDataService.insertTask(taskID: "Test",
+                    goalID: self.goalID,habitID: nil,inContext: self.sharedManagedContext)*/
             }){
                 Text("save")
             }

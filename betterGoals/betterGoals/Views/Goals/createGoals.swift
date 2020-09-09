@@ -112,7 +112,7 @@ struct QuestionTwo:View{
                 
                 Text("Give a name to your Goal").customStyle(style: Heading2Style()).padding(.top,20)
                 
-                TextField("", text: $newGoal.itemID)
+                TextField("", text: $newGoal.goalID)
                     .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
                     .background(Color("lightPink"))
                     .font(Font.system(size: 15, design: .default))
@@ -121,7 +121,7 @@ struct QuestionTwo:View{
                 
                 Text("Describe your Goal").customStyle(style: Heading2Style()).padding(.top,20)
                                     
-                                    TextField("", text: $newGoal.itemDescription)
+                                    TextField("", text: $newGoal.goalDescription)
                                         .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
                                         .background(Color("lightPink"))
                                         .font(Font.system(size: 15, design: .default))
@@ -195,7 +195,7 @@ struct QuestionThree:View{
             
             NavigationLink(destination:CreateTasks(
                          isParentViewActive: self.$isCreateGoalsActive,
-                         goalID: newGoal.itemID)
+                         goalID: newGoal.goalID)
                         ){
                              Text("next").customStyle(style: NextLinkStyle())
                    }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View

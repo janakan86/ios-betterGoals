@@ -44,11 +44,11 @@ class DataService{
         
         let goal = Goal(context:managedContext)
         
-        goal.itemID = newGoal.itemID
+        goal.goalID = newGoal.goalID
         goal.itemUIType = newGoal.itemUIType
         goal.startDate = newGoal.startDate
         goal.endDate = newGoal.endDate
-        goal.itemDescription = newGoal.itemDescription
+        goal.goalDescription = newGoal.goalDescription
         
         do {
             try managedContext.save()
@@ -58,7 +58,8 @@ class DataService{
         }
         
     }
-    
+   
+    /*
     func insertTask(taskID:String, goalID:String?, habitID:String?,inContext managedContext: NSManagedObjectContext){
         
         let task = Task(context:managedContext)
@@ -74,7 +75,7 @@ class DataService{
             managedContext.rollback()
         }
     }
-    
+    */
 
     func getScheduledItems(between fromDate:Date, and toDate:Date,inContext managedContext: NSManagedObjectContext)->[ScheduledItems]{
         
@@ -135,6 +136,7 @@ class DataService{
     }
     
     
+    /*
     func storeGoalsSampleData(inContext managedContext: NSManagedObjectContext){
         let goalsSampleData: [Goal] = self.load("sampleGoals.json")
         
@@ -148,7 +150,7 @@ class DataService{
                 managedContext.rollback()
             }
         }
-    }
+    }*/
     
     
     func clearGoalsSampleData(inContext managedContext: NSManagedObjectContext){

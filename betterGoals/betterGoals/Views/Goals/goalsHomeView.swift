@@ -48,7 +48,7 @@ struct goalsHomeView: View {
             
             HStack{
                 if retrievedGoals.goals.indices.contains(0){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[0].itemUIType)),itemName:retrievedGoals.goals[0].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[0].itemUIType)),itemName:retrievedGoals.goals[0].goalDescription)
                         .padding(.leading,10)
                     
                     Spacer().frame(width:10)
@@ -56,7 +56,7 @@ struct goalsHomeView: View {
                 
                 
                 if retrievedGoals.goals.indices.contains(1){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[1].itemUIType)),itemName:retrievedGoals.goals[1].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[1].itemUIType)),itemName:retrievedGoals.goals[1].goalDescription)
                         .padding(.trailing,10)
                 }
                 
@@ -66,7 +66,7 @@ struct goalsHomeView: View {
             
             HStack{
                 if retrievedGoals.goals.indices.contains(2){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[2].itemUIType)),itemName:retrievedGoals.goals[2].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[2].itemUIType)),itemName:retrievedGoals.goals[2].goalDescription)
                         .padding(.leading,10)
                     
                     Spacer().frame(width:10)
@@ -74,7 +74,7 @@ struct goalsHomeView: View {
                 
                 
                 if retrievedGoals.goals.indices.contains(3){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[3].itemUIType)),itemName:retrievedGoals.goals[3].itemDescription)
+                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[3].itemUIType)),itemName:retrievedGoals.goals[3].goalDescription)
                         .padding(.trailing,10)
                 }
             }
