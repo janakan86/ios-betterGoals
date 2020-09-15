@@ -22,7 +22,7 @@ extension Goal {
     @NSManaged public var goalID: String
     @NSManaged public var itemUIType: Int16
     @NSManaged public var startDate: Date?
-    @NSManaged public var tasks: NSSet?
+    @NSManaged public var tasks: Set<Task>?
 
 }
 
@@ -39,7 +39,7 @@ extension Goal {
     @NSManaged public func addToTasks(_ values: NSSet)
 
     @objc(removeTasks:)
-    @NSManaged public func removeFromTasks(_ values: NSSet)
+    @NSManaged public func removeFromTasks(_ values: Set<Task>)
 
 }
 

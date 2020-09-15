@@ -17,23 +17,23 @@ class testGoals: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        DataService.sharedDataService.clearGoalsSampleData(inContext: PersistenceManager.shared.context)
+        SampleData.clearGoalsSampleData(inContext: PersistenceManager.shared.context)
         print("hello setUpWithError")
         
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        DataService.sharedDataService.clearGoalsSampleData(inContext: PersistenceManager.shared.context)
+        SampleData.clearGoalsSampleData(inContext: PersistenceManager.shared.context)
         print("hello tearDownWithError")
 
     }
 
     func testSimpleGoalInsert() throws {
         let newGoal = NewGoal()
-        newGoal.itemID = "Test"
+        newGoal.goalID = "Test"
         newGoal.itemUIType = 1
-        newGoal.itemDescription = "Desciption"
+        newGoal.goalDescription = "Desciption"
         
         
         DataService.sharedDataService.insertGoal(withData: newGoal,
@@ -45,7 +45,7 @@ class testGoals: XCTestCase {
         let goals = DataService.sharedDataService.getGoals(inContext: PersistenceManager.shared.context)
         
         for goal in goals{
-            XCTAssertEqual(goal.itemID, "Test")
+            XCTAssertEqual(goal.goalID, "Test")
         }
         
         

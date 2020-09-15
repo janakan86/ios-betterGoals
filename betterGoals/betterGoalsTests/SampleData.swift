@@ -12,10 +12,10 @@ import CoreData
 
 class SampleData{
     
-    func storeSampleGoal(inContext managedContext: NSManagedObjectContext){
+    static func storeSampleGoal(withGoalID goalID:String, inContext managedContext: NSManagedObjectContext){
               let goal = Goal(context:managedContext)
               
-              goal.goalID = "1"
+              goal.goalID = goalID
               goal.itemUIType = 1
               goal.startDate = Date()
               goal.endDate = Date()
@@ -41,7 +41,7 @@ class SampleData{
       //  }
     }
     
-    func clearGoalsSampleData(inContext managedContext: NSManagedObjectContext){
+    static func clearGoalsSampleData(inContext managedContext: NSManagedObjectContext){
       
         
         let storedGoalsFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
@@ -61,7 +61,7 @@ class SampleData{
     }
     
     
-    func loadSampleScheduledItems(inContext managedContext: NSManagedObjectContext){
+    static func loadSampleScheduledItems(inContext managedContext: NSManagedObjectContext){
         
         let si = ScheduledItems(context: managedContext)
         
@@ -93,7 +93,7 @@ class SampleData{
     }
     
     
-    func clearScheduledItemsSampleData(inContext managedContext: NSManagedObjectContext){
+    static func clearScheduledItemsSampleData(inContext managedContext: NSManagedObjectContext){
         
         let storedScheduledItems = NSFetchRequest<ScheduledItems>(entityName: "ScheduledItems")
         
@@ -112,7 +112,7 @@ class SampleData{
     }
     
     
-    func clearTasks(inContext managedContext: NSManagedObjectContext){
+    static func clearTasks(inContext managedContext: NSManagedObjectContext){
         let storedTasks = NSFetchRequest<Task>(entityName: "Tasks")
                
                do {

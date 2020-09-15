@@ -97,24 +97,95 @@ class DataService{
     }
    
     
-    func insertTask(taskID:String,goalID:String,inContext managedContext: NSManagedObjectContext){
+    func insertTask(forGoalWithID goalID:String,taskID:String,inContext managedContext: NSManagedObjectContext){
         
         let task = Task(context:managedContext)
         task.taskID = taskID
         
         let goals = getGoals(byGoalID: goalID, inContext: managedContext)
         
-        //TODO validate to see whether only one goal exists.
         
-        //add as an entity relationship
-        goals[0].addToTasks(task)
-        
-        do {
-            try managedContext.save()
+        if(goals.count == 1){
+            //add as an entity relationship
+            goals[0].addToTasks(task)
             
-        } catch{
-            managedContext.rollback()
+            do {
+                try managedContext.save()
+                
+            } catch{
+                managedContext.rollback()
+            }
         }
+        else{
+            //TODO handle
+        }
+       
+    }
+    
+    
+    func getTasks(taskID:String ,inContext managedContext: NSManagedObjectContext) -> [Task] {
+        var retrievedTasks:[Task] = []
+        
+        let fetchByIDPredicate = NSPredicate(format: "taskID == %@", taskID)
+        let tasksFetchRequest = NSFetchRequest<Task>(entityName: "Tasks")
+
+        
+        tasksFetchRequest.predicate = fetchByIDPredicate
+        
+        do{
+            retrievedTasks = try managedContext.fetch(tasksFetchRequest)
+            
+        }
+        catch{
+            print("\(error)")
+        }
+        
+        return retrievedTasks
+    }
+    
+    
+    func deleteTasks(forGoalWithID goalID:String ,inContext managedContext: NSManagedObjectContext) {
+        
+        let retrievedGoals:[Goal] = getGoals(byGoalID: goalID, inContext: managedContext)
+        
+        if(retrievedGoals.count == 1){
+            
+            guard let unWrappedtasks = retrievedGoals[0].tasks else{
+              return
+            }
+                    
+            retrievedGoals[0].removeFromTasks(unWrappedtasks)
+           
+        }
+        else{
+            //TODO bug.handle
+        }
+        
+        
+    }
+    
+    
+    /*
+       retrieve the goal and use the 1:many relationship to access the tasks
+     */
+    func getTasks(byGoalID goalID:String ,inContext managedContext: NSManagedObjectContext) -> [Task] {
+        
+        let retrievedGoals:[Goal] = self.getGoals(byGoalID: goalID, inContext: managedContext)
+        
+        var retrievedTasks:[Task] = []
+
+        if(retrievedGoals.count == 1){
+            guard let unwrappedTasks = retrievedGoals[0].tasks else{
+                return retrievedTasks
+            }
+            
+            retrievedTasks = Array(unwrappedTasks)
+        }
+        else{
+            //error handle TODO
+        }
+        
+        return retrievedTasks
     }
     
 
