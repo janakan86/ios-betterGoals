@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE10DA312499DF6F0042D7BE /* createGoals.swift */; };
 		DE22C8CF250F38930009A3D7 /* createGoalsSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22C8CE250F38930009A3D7 /* createGoalsSuccess.swift */; };
+		DE22C8D125104B760009A3D7 /* RetrievedEntityObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22C8D025104B760009A3D7 /* RetrievedEntityObjects.swift */; };
 		DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */; };
 		DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */; };
 		DE34832C24DA81F000CD68B5 /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE34832B24DA81F000CD68B5 /* SchedulerView.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		DE10DA312499DF6F0042D7BE /* createGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoals.swift; sourceTree = "<group>"; };
 		DE22C8CE250F38930009A3D7 /* createGoalsSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoalsSuccess.swift; sourceTree = "<group>"; };
+		DE22C8D025104B760009A3D7 /* RetrievedEntityObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievedEntityObjects.swift; sourceTree = "<group>"; };
 		DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalsHomeView.swift; sourceTree = "<group>"; };
 		DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIconView.swift; sourceTree = "<group>"; };
 		DE34832B24DA81F000CD68B5 /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				DE650B0925089FA3005172F5 /* Task+CoreDataProperties.swift */,
 				DE650B0325089E77005172F5 /* Task+CoreDataClass.swift */,
 				DE804FCB24EA5E2300409AD9 /* ScheduledItems+CoreDataClass.swift */,
+				DE22C8D025104B760009A3D7 /* RetrievedEntityObjects.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				DE650B0E2508A1BA005172F5 /* Goal+CoreDataProperties.swift in Sources */,
 				DEACF73A2462A07600074C28 /* HomeView.swift in Sources */,
 				DE650B0D2508A1BA005172F5 /* Goal+CoreDataClass.swift in Sources */,
+				DE22C8D125104B760009A3D7 /* RetrievedEntityObjects.swift in Sources */,
 				DE8E9F5E24A07D1A008B2461 /* coreDataModel.xcdatamodeld in Sources */,
 				DEB962A024B2EF290083A82C /* ItemTypeList.swift in Sources */,
 				DE34832E24DAA98E00CD68B5 /* DateDisplayCalculations.swift in Sources */,

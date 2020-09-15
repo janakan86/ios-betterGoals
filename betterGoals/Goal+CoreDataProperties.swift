@@ -43,21 +43,6 @@ extension Goal {
 
 }
 
-/*
-   This class is used to store the goals as observable
- */
-final class Goals: ObservableObject {
-    @Published var goals:[Goal] = []
-    
-    init(sharedManagedContext : NSManagedObjectContext){
-        self.goals = DataService.sharedDataService.getGoals(inContext : sharedManagedContext)
-    }
-    
-    func refresh(sharedManagedContext : NSManagedObjectContext){
-        self.goals = DataService.sharedDataService.getGoals(inContext : sharedManagedContext)
-    }
-}
-
 
 /*
      class used to temporarily store the new Goal details before it is persisted
