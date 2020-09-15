@@ -174,7 +174,10 @@ struct QuestionThree:View{
     @EnvironmentObject var newGoal : NewGoal
     @Binding var isCreateGoalsActive:Bool
     
-    @EnvironmentObject var retrievedGoals:Goals
+    
+    @State var isGoalCreated:Bool = false
+    
+    @State var newlyCreatedGoal:Goal?
     
     var body: some View {
         VStack(alignment: .leading){
@@ -193,20 +196,24 @@ struct QuestionThree:View{
             }
             
             
-            NavigationLink(destination:CreateTasks(
-                         isParentViewActive: self.$isCreateGoalsActive,
-                         goalID: newGoal.goalID)
+            NavigationLink(destination:createGoalsSuccess(
+                           isCreateGoalsActive: self.$isCreateGoalsActive,
+                           createdGoal: $newlyCreatedGoal),
+                            isActive: $isGoalCreated
                         ){
                              Text("next").customStyle(style: NextLinkStyle())
                    }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
-                   .padding(.bottom,20)
+                    .padding(.bottom,20)
+                    
             
             Button(action:{
                 //save and go back to goals home
                 //TODO validations
-                DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
-                self.retrievedGoals.refresh(sharedManagedContext: self.sharedManagedContext)
-                self.isCreateGoalsActive.toggle()
+                self.newlyCreatedGoal = DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
+                
+                self.isGoalCreated.toggle()
+                
+               // self.isCreateGoalsActive.toggle()
   
                 
             }){

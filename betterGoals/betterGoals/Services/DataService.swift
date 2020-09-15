@@ -35,12 +35,46 @@ class DataService{
     
     
     
+    func getGoals(byGoalID goalID:String ,inContext managedContext: NSManagedObjectContext) -> [Goal] {
+        var retrievedGoal:[Goal] = []
+        
+        let fetchByIDPredicate = NSPredicate(format: "goalID == %@", goalID)
+        let goalsFetchRequest = NSFetchRequest<Goal>(entityName: "Goals")
+
+        
+        goalsFetchRequest.predicate = fetchByIDPredicate
+        
+        do{
+            retrievedGoal = try managedContext.fetch(goalsFetchRequest)
+            
+        }
+        catch{
+            print("\(error)")
+        }
+        
+        return retrievedGoal
+    }
     
     
     
+    func deleteGoal(byGoalID goalID:String ,inContext managedContext: NSManagedObjectContext) {
+        let retrievedGoals:[Goal] = getGoals(byGoalID: goalID, inContext: managedContext)
+        
+        do{
+            for goal in retrievedGoals{
+                managedContext.delete(goal)
+            }
+            try managedContext.save()
+        }
+        catch{
+            print("\(error)")
+        }
+        
+    }
+
     
    /* This function accetps a newGoal, uses the stored data and creates NSManagedObject Goal*/
-    func insertGoal(withData newGoal:NewGoal,inContext managedContext: NSManagedObjectContext){
+    func insertGoal(withData newGoal:NewGoal,inContext managedContext: NSManagedObjectContext)-> Goal?{
         
         let goal = Goal(context:managedContext)
         
@@ -52,21 +86,28 @@ class DataService{
         
         do {
             try managedContext.save()
+            return goal
             
         } catch{
             managedContext.rollback()
         }
         
+        return nil
+        
     }
    
-    /*
-    func insertTask(taskID:String, goalID:String?, habitID:String?,inContext managedContext: NSManagedObjectContext){
+    
+    func insertTask(taskID:String,goalID:String,inContext managedContext: NSManagedObjectContext){
         
         let task = Task(context:managedContext)
-        
-        task.goalID = goalID
-        task.habitsID = habitID
         task.taskID = taskID
+        
+        let goals = getGoals(byGoalID: goalID, inContext: managedContext)
+        
+        //TODO validate to see whether only one goal exists.
+        
+        //add as an entity relationship
+        goals[0].addToTasks(task)
         
         do {
             try managedContext.save()
@@ -75,7 +116,7 @@ class DataService{
             managedContext.rollback()
         }
     }
-    */
+    
 
     func getScheduledItems(between fromDate:Date, and toDate:Date,inContext managedContext: NSManagedObjectContext)->[ScheduledItems]{
         
