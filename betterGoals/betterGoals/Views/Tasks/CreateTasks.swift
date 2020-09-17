@@ -35,10 +35,6 @@ struct CreateTasks: View {
             
             Button(action:{
                 self.show_modal.toggle()
-            /*    DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: "Test",inContext: self.sharedManagedContext)
-                let tasks = self.getTasksforGoal()
-                self.retrievedTasks.removeAll()
-                self.retrievedTasks.append(contentsOf: tasks)*/
                 
             }){
                 Text("Add sample task")
