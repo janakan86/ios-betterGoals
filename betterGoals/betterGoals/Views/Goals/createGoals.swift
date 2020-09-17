@@ -95,7 +95,7 @@ struct QuestionOne:View{
     }
     
 }
-
+}
 
 struct QuestionTwo:View{
     @EnvironmentObject var newGoal : NewGoal
@@ -165,7 +165,7 @@ struct QuestionTwo:View{
        
         }
     }
-}
+
 
 
 struct QuestionThree:View{
@@ -252,4 +252,67 @@ struct createGoalsPoptoRootButton: View {
        }
     
     
+}
+
+
+/* previews */
+struct createGoals_Previews: PreviewProvider {
+    
+    
+    static var previews: some View {
+        previewWrapperQuestionThree()
+    }
+}
+
+struct previewWrapperQuestionsOne: View {
+    
+    @State var isActive:Bool = true
+
+    
+    var body: some View {
+        
+        NavigationView{
+            NavigationLink(destination:  QuestionOne(isCreateGoalsActive: $isActive).environmentObject(NewGoal()),
+                                     isActive: $isActive)
+                      {  EmptyView() }
+                      .isDetailLink(false)
+        }
+       
+    }
+}
+
+
+struct previewWrapperQuestionTwo: View {
+    
+    @State var isActive:Bool = true
+
+    
+    var body: some View {
+        
+        NavigationView{
+            NavigationLink(destination:  QuestionTwo(isCreateGoalsActive: $isActive).environmentObject(NewGoal()),
+                                     isActive: $isActive)
+                      {  EmptyView() }
+                      .isDetailLink(false)
+        }
+       
+    }
+}
+
+
+struct previewWrapperQuestionThree: View {
+    
+    @State var isActive:Bool = true
+
+    
+    var body: some View {
+        
+        NavigationView{
+            NavigationLink(destination:  QuestionThree(isCreateGoalsActive: $isActive).environmentObject(NewGoal()),
+                                     isActive: $isActive)
+                      {  EmptyView() }
+                      .isDetailLink(false)
+        }
+       
+    }
 }
