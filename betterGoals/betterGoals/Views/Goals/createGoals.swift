@@ -195,17 +195,6 @@ struct QuestionThree:View{
                 ///self.newGoal.endDate = self.endDate;
             }
             
-            
-            NavigationLink(destination:createGoalsSuccess(
-                           isCreateGoalsActive: self.$isCreateGoalsActive,
-                           createdGoal: $newlyCreatedGoal),
-                            isActive: $isGoalCreated
-                        ){
-                             Text("next").customStyle(style: NextLinkStyle())
-                   }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
-                    .padding(.bottom,20)
-                    
-            
             Button(action:{
                 //save and go back to goals home
                 //TODO validations
@@ -213,14 +202,24 @@ struct QuestionThree:View{
                 
                 self.isGoalCreated.toggle()
                 
-               // self.isCreateGoalsActive.toggle()
-  
+                // self.isCreateGoalsActive.toggle()
+                
                 
             }){
-                Text("save")
+                Text("save Goal")
             }
             
-  
+            
+            NavigationLink(destination:createGoalsSuccess(
+                isCreateGoalsActive: self.$isCreateGoalsActive,
+                createdGoal: $newlyCreatedGoal),
+                           isActive: $isGoalCreated
+                
+            ){
+                EmptyView()
+            }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
+                .padding(.bottom,20)
+                    
         }
         
        

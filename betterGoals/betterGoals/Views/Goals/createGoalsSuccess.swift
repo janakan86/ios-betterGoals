@@ -23,29 +23,13 @@ struct createGoalsSuccess: View {
       var body: some View {
           VStack(alignment: .leading){
               
-              
-              
               NavigationLink(destination:CreateTasks(
                            isParentViewActive: self.$isCreateGoalsActive,
                            goalID: createdGoal?.goalID)// TODO handle nil
                           ){
-                               Text("next").customStyle(style: NextLinkStyle())
+                               Text("create tasks").customStyle(style: NextLinkStyle())
                      }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
                      .padding(.bottom,20)
-            
-              
-              Button(action:{
-                  //save and go back to goals home
-                  //TODO validations
-                //  DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
-                 // self.retrievedGoals.refresh(sharedManagedContext: self.sharedManagedContext)
-                 // self.isCreateGoalsActive.toggle()
-    
-                  
-              }){
-                  Text("Create Tasks")
-              }
-              
     
           }
           

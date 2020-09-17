@@ -10,10 +10,11 @@ import SwiftUI
 
 struct CreateTasks: View {
     
-    @Environment(\.managedObjectContext) var sharedManagedContext
+   
     
     @Binding var isParentViewActive:Bool
     @Environment(\.presentationMode) var presentationMode //used by the custom back button
+    @Environment(\.managedObjectContext) var sharedManagedContext
     
     
     @State private var show_modal: Bool = false
@@ -21,20 +22,50 @@ struct CreateTasks: View {
     var goalID:String?
     var habitsID:String?
     
+    
+    @State var retrievedTasks:[Task] = []
+    
     var body: some View {
         VStack {
             Text(goalID!)
             
-            Button(action:{
-                //save and go back to goals home
-                //TODO validations
-            /*    DataService.sharedDataService.insertTask(taskID: "Test",
-                    goalID: self.goalID,habitID: nil,inContext: self.sharedManagedContext)*/
-            }){
-                Text("save")
+            ForEach(retrievedTasks, id: \.self){ task in
+                Text((task as Task).taskID!)
             }
             
-        }.navigationBarTitle("Goal Type",displayMode: .inline)
+            Button(action:{
+                self.show_modal.toggle()
+            /*    DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: "Test",inContext: self.sharedManagedContext)
+                let tasks = self.getTasksforGoal()
+                self.retrievedTasks.removeAll()
+                self.retrievedTasks.append(contentsOf: tasks)*/
+                
+            }){
+                Text("Add sample task")
+            }
+            
+        }
+        .onAppear(){
+            guard self.habitsID != nil || self.goalID != nil else {
+                return
+            }
+            
+            if self.habitsID != nil{
+              //TODO implement
+            }
+            else if self.goalID != nil{
+                self.getTasksforGoal()
+            }
+            
+
+            
+        }
+        .sheet(isPresented: self.$show_modal) { //popup
+            createTasksSheet(goalID:self.goalID,successCallBack:self.getTasksforGoal)
+                .environment(\.managedObjectContext, self.sharedManagedContext)
+        }
+        
+        .navigationBarTitle("Goal Type",displayMode: .inline)
             
         //hide the default back button
         .navigationBarBackButtonHidden(true)
@@ -57,8 +88,43 @@ struct CreateTasks: View {
         )
         
     }
+    
+    func getTasksforGoal()->(){
+        self.retrievedTasks.removeAll()
+        let tasks =  DataService.sharedDataService.getTasks(byGoalID: self.goalID!, inContext: self.sharedManagedContext)
+        self.retrievedTasks.append(contentsOf: tasks)
+    }
 }
 
+
+
+
+struct createTasksSheet:View{
+    
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var sharedManagedContext
+    
+
+    
+    var goalID:String?
+    var habitsID:String?
+    
+    var successCallBack:()->()
+    
+    var body: some View {
+        VStack{
+            Button(action:{
+                 //TODO - handle goalID and Habits ID nil values
+                 //TODO validations
+                 DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: "Test",inContext: self.sharedManagedContext)
+                 self.successCallBack()
+                 self.presentationMode.wrappedValue.dismiss()
+            }){
+                Text("dismiss")
+            }
+        }
+    }
+}
 
 
 
