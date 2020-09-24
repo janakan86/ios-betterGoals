@@ -118,10 +118,12 @@ struct QuestionTwo:View{
                     .font(Font.system(size: 15, design: .default))
                     .cornerRadius(4)
                 
+                Spacer()
                 
                 Text("Describe your Goal").customStyle(style: Heading2Style()).padding(.top,20)
                                     
-                                    TextField("", text: $newGoal.goalDescription)
+                                    TextEditor( text: $newGoal.goalDescription)
+                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
                                         .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
                                         .background(Color("lightPink"))
                                         .font(Font.system(size: 15, design: .default))
