@@ -18,7 +18,7 @@ struct QuestionOne:View{
     @Binding var isCreateGoalsActive:Bool //root
     @Environment(\.presentationMode) var presentationMode //used by the custom back button
     
-    @State private var show_modal: Bool = false
+    
     
     var body: some View {
         
@@ -29,35 +29,30 @@ struct QuestionOne:View{
             
             VStack(alignment: .leading){
                        
-                       Text("Let's create a goal").customStyle(style:Heading1Style())
-                       Text("It is time to create a goal, work on it and achieve greater things in life")
-                           .customStyle(style:ContentStyle())
+                Text("Let's create a goal").customStyle(style:Heading1Style())
+                Text("It is time to create a goal, work on it and achieve greater things in life")
+                    .customStyle(style:ContentStyle())
+                
+                TextField("", text: $newGoal.goalID)
+                    .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+                    .background(Color("lightPink"))
+                    .font(Font.system(size: 15, design: .default))
+                    .cornerRadius(4)
+                
+                Spacer()
+                
+                Text("Describe your Goal").customStyle(style: Heading2Style()).padding(.top,20)
+                
+                TextEditor( text: $newGoal.goalDescription)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
+                    .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+                    .background(Color("lightPink"))
+                    .font(Font.system(size: 15, design: .default))
+                    .cornerRadius(4)
+
                        
-                       Button(action: {
-                                         self.show_modal = true
-                                     }) {
-                                         HStack{
-                                             Text("Select the goal type").customStyle(style: Heading2Style())
-                                             
-                                             Image(systemName: "chevron.right")
-                                                 .accentColor(Color("pink"))
-                                         }
-                                     }
-                                     
-                                     if 0 != newGoal.itemUIType  {
-                                         Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name).font(Font.system(size: 15, weight: .bold))
-                                             .padding(.bottom,10)
-                                             
-                                     }
-                                     else{
-                                         Spacer().padding(.bottom,10)
-                                     }
-                       
-                       
-                       Spacer()
-                       
-                   }
-                   .padding(20)
+            }
+            .padding(20)
             
             
             NavigationLink(destination:QuestionTwo(
@@ -89,21 +84,27 @@ struct QuestionOne:View{
                 }
             )
         )
-        .sheet(isPresented: self.$show_modal) { //popup
-                       ItemTypeList(listHeading: "select a goal type").environmentObject(self.newGoal)
-        
-    }
+
     
 }
 }
 
 struct QuestionTwo:View{
+    
+    @Environment(\.managedObjectContext) var sharedManagedContext
+    @EnvironmentObject var retrievedGoals:Goals
     @EnvironmentObject var newGoal : NewGoal
     
     
     //for navigation
     @Binding var isCreateGoalsActive:Bool //root
     @Environment(\.presentationMode) var presentationMode //used by the custom back button
+    
+    @State private var show_modal: Bool = false
+    
+    @State var isGoalCreated:Bool = false
+    
+    @State var newlyCreatedGoal:Goal?
     
     var body: some View {
         
@@ -112,35 +113,71 @@ struct QuestionTwo:View{
                 
                 Text("Give a name to your Goal").customStyle(style: Heading2Style()).padding(.top,20)
                 
-                TextField("", text: $newGoal.goalID)
-                    .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
-                    .background(Color("lightPink"))
-                    .font(Font.system(size: 15, design: .default))
-                    .cornerRadius(4)
+                Button(action: {
+                    self.show_modal = true
+                }) {
+                    HStack{
+                        Text("Select the goal type").customStyle(style: Heading2Style())
+                        
+                        Image(systemName: "chevron.right")
+                            .accentColor(Color("pink"))
+                    }
+                }
+                
+                if 0 != newGoal.itemUIType  {
+                    Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name).font(Font.system(size: 15, weight: .bold))
+                        .padding(.bottom,10)
+                    
+                }
+                else{
+                    Spacer().padding(.bottom,10)
+                }
+                
+                DatePicker(selection: $newGoal.startDate, in: ...Date(), displayedComponents: .date) {
+                           Text("Select a date")
+                }.onTapGesture {
+                   /// self.newGoal.startDate = self.startDate;
+                }
+                
+                
+                DatePicker(selection: $newGoal.endDate, in: ...Date(), displayedComponents: .date) {
+                               Text("Select a date")
+                }.onTapGesture {
+                    ///self.newGoal.endDate = self.endDate;
+                }
+                
+                Button(action:{
+                    //save and go back to goals home
+                    //TODO validations
+                    self.newlyCreatedGoal = DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
+                    
+                    self.isGoalCreated.toggle()
+                    self.retrievedGoals.refresh(sharedManagedContext: self.sharedManagedContext)
+                    // self.isCreateGoalsActive.toggle()
+                    
+                    
+                }){
+                    Text("save Goal")
+                }
+                
                 
                 Spacer()
                 
-                Text("Describe your Goal").customStyle(style: Heading2Style()).padding(.top,20)
-                                    
-                                    TextEditor( text: $newGoal.goalDescription)
-                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
-                                        .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
-                                        .background(Color("lightPink"))
-                                        .font(Font.system(size: 15, design: .default))
-                                        .cornerRadius(4)
-                
-                Spacer()
                        
 
             }
             .padding(20)
             
             
-            NavigationLink(destination:QuestionThree(
-                  isCreateGoalsActive: self.$isCreateGoalsActive).environmentObject(self.newGoal)){
-                      Text("next").customStyle(style: NextLinkStyle())
+            NavigationLink(destination:createGoalsSuccess(
+                isCreateGoalsActive: self.$isCreateGoalsActive,
+                createdGoal: $newlyCreatedGoal),
+                           isActive: $isGoalCreated
+                
+            ){
+                EmptyView()
             }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
-            .padding(.bottom,20)
+                .padding(.bottom,20)
             
         }
         .navigationBarTitle("Goal Type",displayMode: .inline)
@@ -163,71 +200,15 @@ struct QuestionTwo:View{
                     self.isCreateGoalsActive.toggle()
                 }
             )
-        )
+        ).sheet(isPresented: self.$show_modal) { //popup
+            ItemTypeList(listHeading: "select a goal type").environmentObject(self.newGoal)
+
+            }
        
         }
     }
 
 
-
-struct QuestionThree:View{
-    @Environment(\.managedObjectContext) var sharedManagedContext
-    
-    @EnvironmentObject var newGoal : NewGoal
-    @Binding var isCreateGoalsActive:Bool
-    
-    
-    @State var isGoalCreated:Bool = false
-    
-    @State var newlyCreatedGoal:Goal?
-    
-    var body: some View {
-        VStack(alignment: .leading){
-            
-            DatePicker(selection: $newGoal.startDate, in: ...Date(), displayedComponents: .date) {
-                       Text("Select a date")
-            }.onTapGesture {
-               /// self.newGoal.startDate = self.startDate;
-            }
-            
-            
-            DatePicker(selection: $newGoal.endDate, in: ...Date(), displayedComponents: .date) {
-                           Text("Select a date")
-            }.onTapGesture {
-                ///self.newGoal.endDate = self.endDate;
-            }
-            
-            Button(action:{
-                //save and go back to goals home
-                //TODO validations
-                self.newlyCreatedGoal = DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
-                
-                self.isGoalCreated.toggle()
-                
-                // self.isCreateGoalsActive.toggle()
-                
-                
-            }){
-                Text("save Goal")
-            }
-            
-            
-            NavigationLink(destination:createGoalsSuccess(
-                isCreateGoalsActive: self.$isCreateGoalsActive,
-                createdGoal: $newlyCreatedGoal),
-                           isActive: $isGoalCreated
-                
-            ){
-                EmptyView()
-            }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
-                .padding(.bottom,20)
-                    
-        }
-        
-       
-    }
-    
-}
 
 
 struct createGoalsBackButton: View {
@@ -262,7 +243,7 @@ struct createGoals_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        previewWrapperQuestionThree()
+        previewWrapperQuestionTwo()
     }
 }
 
@@ -293,24 +274,6 @@ struct previewWrapperQuestionTwo: View {
         
         NavigationView{
             NavigationLink(destination:  QuestionTwo(isCreateGoalsActive: $isActive).environmentObject(NewGoal()),
-                                     isActive: $isActive)
-                      {  EmptyView() }
-                      .isDetailLink(false)
-        }
-       
-    }
-}
-
-
-struct previewWrapperQuestionThree: View {
-    
-    @State var isActive:Bool = true
-
-    
-    var body: some View {
-        
-        NavigationView{
-            NavigationLink(destination:  QuestionThree(isCreateGoalsActive: $isActive).environmentObject(NewGoal()),
                                      isActive: $isActive)
                       {  EmptyView() }
                       .isDetailLink(false)
