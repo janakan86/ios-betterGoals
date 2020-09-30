@@ -248,7 +248,22 @@ class DataService{
     }
     
     
-
+    func clearGoals(inContext managedContext: NSManagedObjectContext){
+        let storedGoals = NSFetchRequest<Goal>(entityName: "Goals")
+               
+               do {
+                   //we can loop and delete since it is sample data
+                   let goals = try managedContext.fetch(storedGoals)
+                   
+                   for goal in goals {
+                       managedContext.delete(goal)
+                   }
+                   try managedContext.save()
+                   
+               } catch{
+                   managedContext.rollback()
+               }
+    }
     
     
     

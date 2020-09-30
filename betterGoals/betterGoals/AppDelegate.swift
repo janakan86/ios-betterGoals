@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* dangerous territory. Removed whole store */
         // PersistenceManager.shared.deleteStore()
         /* */
+        
+        //DataService.sharedDataService.clearGoals(inContext:PersistenceManager.shared.context)
+
 
         
         
