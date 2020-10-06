@@ -22,9 +22,20 @@ struct Heading1Style: ViewModifier {
 struct Heading2Style: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.headline)
+            .font(.title2)
             .lineSpacing(8)
-            .foregroundColor(Color(.gray))
+            .font(Font.body.bold())
+            .foregroundColor(Color(.black))
+    }
+}
+
+struct Heading2StyleBrown: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.title2)
+            .lineSpacing(8)
+            .font(Font.body.bold())
+            .foregroundColor(Color("lightBrown"))
     }
 }
 
@@ -33,7 +44,13 @@ struct NextLinkStyle: ViewModifier {
         content
             .font(.title)
             .lineSpacing(8)
-            .foregroundColor(Color("pink"))
+            .foregroundColor(.white)
+            .padding(.top,5)
+            .padding(.bottom,5)
+            .padding(.leading,80)
+            .padding(.trailing,80)
+            .background(Color("pink"))
+                .cornerRadius(25)
     }
 }
 
@@ -45,6 +62,16 @@ struct ContentStyle: ViewModifier {
             .foregroundColor(Color(.black))
     }
 }
+
+struct ContentStyleBold: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Font.body.bold())
+            .lineSpacing(4)
+            .foregroundColor(Color(.black))
+    }
+}
+
 
 struct ContentStylePink: ViewModifier {
     func body(content: Content) -> some View {
@@ -115,7 +142,7 @@ struct Styling_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
                  Text("Sample text").customStyle(style: Heading1Style())
-                 Text("A lot of sample text").customStyle(style: ContentStyle())
+                 Text("Next").customStyle(style: NextLinkStyle())
         }
    
     }

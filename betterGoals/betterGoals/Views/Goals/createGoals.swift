@@ -23,47 +23,59 @@ struct QuestionOne:View{
     var body: some View {
         
         VStack{
-            Image("mountain")
+            
+            //image on top
+            VStack(spacing: 0) {
+                Image("mountain")
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFit().padding(.bottom,0)
+                
+            }
+    
             
             VStack(alignment: .leading){
                        
                 Text("Let's create a goal").customStyle(style:Heading1Style())
-                Text("It is time to create a goal, work on it and achieve greater things in life")
+                Text("It is time to create a goal and work on it")
                     .customStyle(style:ContentStyle())
+      
                 
+                Text("Name of the Goal").customStyle(style: Heading2Style()).padding(.top,20)
                 TextField("", text: $newGoal.goalID)
+                    .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
+                    .background(Color("lightPink"))
+                    .font(Font.system(size: 15, design: .default))
+                    .cornerRadius(4)
+             
+                
+                //Spacer()
+                Spacer().frame(minWidth: 0, maxWidth: .infinity, minHeight: 10, maxHeight: 100)
+                
+                Text("Goal Description").customStyle(style: Heading2Style()).padding(.top,20)
+                
+                TextEditor( text: $newGoal.goalDescription)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 100)
                     .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
                     .background(Color("lightPink"))
                     .font(Font.system(size: 15, design: .default))
                     .cornerRadius(4)
                 
                 Spacer()
-                
-                Text("Describe your Goal").customStyle(style: Heading2Style()).padding(.top,20)
-                
-                TextEditor( text: $newGoal.goalDescription)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
-                    .padding(.bottom,5).padding(.top,5).padding(.leading,10).padding(.trailing,10)
-                    .background(Color("lightPink"))
-                    .font(Font.system(size: 15, design: .default))
-                    .cornerRadius(4)
-
                        
             }
             .padding(20)
             
             
+            
             NavigationLink(destination:QuestionTwo(
                   isCreateGoalsActive: self.$isCreateGoalsActive).environmentObject(self.newGoal))
             {
-                      Text("next").customStyle(style: NextLinkStyle())
+                      Text("Next").customStyle(style: NextLinkStyle())
             }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
             .padding(.bottom,20)
             
         }
-        .navigationBarTitle("Goal Name",displayMode: .inline)
+        .navigationBarTitle("Let's create a goal",displayMode: .inline)
             
         //hide the default back button
         .navigationBarBackButtonHidden(true)
@@ -109,10 +121,23 @@ struct QuestionTwo:View{
     var body: some View {
         
         VStack{
+            
+            //image on top
+            VStack(spacing: 0) {
+                Image("mountain")
+                    .resizable()
+                    .scaledToFit().padding(.bottom,0)
+                
+                Rectangle().frame(maxWidth: .infinity,
+                     minHeight:0, maxHeight:20,
+                     alignment: .leading)
+                    .foregroundColor(Color("pink"))
+                    .padding(.top,0)
+            }
+            
             VStack(alignment: .leading){
                 
-                Text("Give a name to your Goal").customStyle(style: Heading2Style()).padding(.top,20)
-                
+                //goal type
                 Button(action: {
                     self.show_modal = true
                 }) {
@@ -124,49 +149,62 @@ struct QuestionTwo:View{
                     }
                 }
                 
+                
                 if 0 != newGoal.itemUIType  {
-                    Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name).font(Font.system(size: 15, weight: .bold))
-                        .padding(.bottom,10)
-                    
+                    Text(ItemTypesUIDefaults.getItemUIDefault(usingID:Int(newGoal.itemUIType)).name)
+                        .customStyle(style: Heading2StyleBrown())
+                        .padding(.leading,10)
                 }
-                else{
-                    Spacer().padding(.bottom,10)
-                }
-                
-                DatePicker(selection: $newGoal.startDate, in: ...Date(), displayedComponents: .date) {
-                           Text("Select a date")
-                }.onTapGesture {
-                   /// self.newGoal.startDate = self.startDate;
-                }
-                
-                
-                DatePicker(selection: $newGoal.endDate, in: ...Date(), displayedComponents: .date) {
-                               Text("Select a date")
-                }.onTapGesture {
-                    ///self.newGoal.endDate = self.endDate;
-                }
-                
-                Button(action:{
-                    //save and go back to goals home
-                    //TODO validations
-                    self.newlyCreatedGoal = DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
-                    
-                    self.isGoalCreated.toggle()
-                    self.retrievedGoals.refresh(sharedManagedContext: self.sharedManagedContext)
-                    // self.isCreateGoalsActive.toggle()
-                    
-                    
-                }){
-                    Text("save Goal")
-                }
-                
                 
                 Spacer()
                 
-                       
-
+                Group{
+                    Text("I will start working on my goal from")
+                        .customStyle(style: Heading2Style())
+                    DatePicker(selection: $newGoal.startDate, in: ...Date(), displayedComponents: .date) {
+                    }
+                    .accentColor(Color("lightBrown"))
+                    .fixedSize().frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }.padding(.leading,0)
+                
+        
+                
+                Spacer()
+                
+                Group{
+                    Text("I plan to achieve the goal by")
+                        .customStyle(style: Heading2Style())
+                    DatePicker(selection: $newGoal.endDate, in: ...Date(), displayedComponents: .date) {
+                                   
+                    }
+                    .accentColor(Color("lightBrown"))
+                    .fixedSize().frame(maxWidth: .infinity, alignment: .leading)
+                }
+               
+                
+                Spacer()
+  
+                
             }
             .padding(20)
+            
+            
+            Button(action:{
+                //save and go back to goals home
+                //TODO validations
+                self.newlyCreatedGoal = DataService.sharedDataService.insertGoal(withData: self.newGoal, inContext: self.sharedManagedContext)
+                
+                self.isGoalCreated.toggle()
+                self.retrievedGoals.refresh(sharedManagedContext: self.sharedManagedContext)
+                
+                
+            })
+            {
+                Text("Save")
+                 .customStyle(style: NextLinkStyle())
+                    
+            }
             
             
             NavigationLink(destination:createGoalsSuccess(
@@ -175,12 +213,11 @@ struct QuestionTwo:View{
                            isActive: $isGoalCreated
                 
             ){
-                EmptyView()
             }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
                 .padding(.bottom,20)
             
         }
-        .navigationBarTitle("Goal Type",displayMode: .inline)
+        .navigationBarTitle("Let's create a goal",displayMode: .inline)
             
         //hide the default back button
         .navigationBarBackButtonHidden(true)
@@ -243,11 +280,11 @@ struct createGoals_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        previewWrapperQuestionTwo()
+        previewWrapperQuestionOne()
     }
 }
 
-struct previewWrapperQuestionsOne: View {
+struct previewWrapperQuestionOne: View {
     
     @State var isActive:Bool = true
 
