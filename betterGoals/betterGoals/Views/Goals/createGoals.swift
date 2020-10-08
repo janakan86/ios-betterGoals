@@ -29,15 +29,22 @@ struct QuestionOne:View{
                 Image("mountain")
                     .resizable()
                     .scaledToFit().padding(.bottom,0)
+                   
                 
             }
+            .hideIfKeyBoardIsPresent()
     
             
             VStack(alignment: .leading){
-                       
-                Text("Let's create a goal").customStyle(style:Heading1Style())
-                Text("It is time to create a goal and work on it")
-                    .customStyle(style:ContentStyle())
+                   
+             
+                    Group{
+                        Text("Let's create a goal").customStyle(style:Heading1Style())
+                        Text("It is time to create a goal and work on it")
+                            .customStyle(style:ContentStyle())
+                    }
+                    
+              
       
                 
                 Text("Name of the Goal").customStyle(style: Heading2Style()).padding(.top,20)
@@ -48,8 +55,8 @@ struct QuestionOne:View{
                     .cornerRadius(4)
              
                 
-                //Spacer()
-                Spacer().frame(minWidth: 0, maxWidth: .infinity, minHeight: 10, maxHeight: 100)
+
+                Spacer().frame(minWidth: 0, maxWidth: .infinity, minHeight: 10, maxHeight: 80)
                 
                 Text("Goal Description").customStyle(style: Heading2Style()).padding(.top,20)
                 
@@ -63,7 +70,9 @@ struct QuestionOne:View{
                 Spacer()
                        
             }
-            .padding(20)
+            .padding(.leading,20)
+            .padding(.trailing,20)
+            .padding(.top,0)
             
             
             
