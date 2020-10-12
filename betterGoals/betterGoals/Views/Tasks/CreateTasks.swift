@@ -23,22 +23,51 @@ struct CreateTasks: View {
     var habitsID:String?
     
     
+    var successCallBack:()->()
+    
+    
+    @State var taskID:String = ""
+    
+    
+    
+    
     @State var retrievedTasks:[Task] = []
     
     var body: some View {
         VStack {
             Text(goalID!)
             
+            Text("")
+            TextEditor( text: $taskID)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 100)
+                .background(Color("lightPink"))
+                .font(Font.system(size: 15, design: .default))
+                .cornerRadius(4)
+                
+            
+            
+            Button(action:{
+                 //TODO - handle goalID and Habits ID nil values
+                 //TODO validations
+                
+                DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: self.taskID,inContext: self.sharedManagedContext)
+                    
+                 self.taskID = ""
+                 self.getTasksforGoal()
+                 self.successCallBack()
+
+            }){
+                Text("Save Task")
+                    .customStyle(style: NextLinkStyle())
+            }.disabled(self.taskID == "")
+            
+            
+            
             ForEach(retrievedTasks, id: \.self){ task in
                 Text((task as Task).taskID!)
             }
             
-            Button(action:{
-                self.show_modal.toggle()
-                
-            }){
-                Text("Add sample task")
-            }
+
             
         }
         .onAppear(){
@@ -56,10 +85,7 @@ struct CreateTasks: View {
 
             
         }
-        .sheet(isPresented: self.$show_modal) { //popup
-            createTasksSheet(goalID:self.goalID,successCallBack:self.getTasksforGoal)
-                .environment(\.managedObjectContext, self.sharedManagedContext)
-        }
+ 
         
         .navigationBarTitle("Goal Type",displayMode: .inline)
             
@@ -93,34 +119,6 @@ struct CreateTasks: View {
 }
 
 
-
-
-struct createTasksSheet:View{
-    
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) var sharedManagedContext
-    
-
-    
-    var goalID:String?
-    var habitsID:String?
-    
-    var successCallBack:()->()
-    
-    var body: some View {
-        VStack{
-            Button(action:{
-                 //TODO - handle goalID and Habits ID nil values
-                 //TODO validations
-                 DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: "Test",inContext: self.sharedManagedContext)
-                 self.successCallBack()
-                 self.presentationMode.wrappedValue.dismiss()
-            }){
-                Text("dismiss")
-            }
-        }
-    }
-}
 
 
 

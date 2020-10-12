@@ -25,7 +25,10 @@ struct createGoalsSuccess: View {
               
               NavigationLink(destination:CreateTasks(
                            isParentViewActive: self.$isCreateGoalsActive,
-                           goalID: createdGoal?.goalID)// TODO handle nil
+                                goalID: createdGoal?.goalID, successCallBack:{
+                                    
+                                    
+                                })// TODO handle nil
                           ){
                                Text("create tasks").customStyle(style: NextLinkStyle())
                      }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
