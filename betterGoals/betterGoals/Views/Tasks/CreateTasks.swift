@@ -10,10 +10,10 @@ import SwiftUI
 
 struct CreateTasks: View {
     
-   
+    @Binding var isParentViewActive:Bool //used by the custom home button to navigate to the parent that passed the binding
     
-    @Binding var isParentViewActive:Bool
-    @Environment(\.presentationMode) var presentationMode //used by the custom back button
+    @Environment(\.presentationMode) var presentationMode //used by the custom back button to go back to previous view in the navigation
+    
     @Environment(\.managedObjectContext) var sharedManagedContext
     
     
