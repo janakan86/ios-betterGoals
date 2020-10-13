@@ -42,6 +42,7 @@
 		DEB962A024B2EF290083A82C /* ItemTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9629F24B2EF290083A82C /* ItemTypeList.swift */; };
 		DEB962A224B32E880083A82C /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB962A124B32E870083A82C /* Styling.swift */; };
 		DEB962A424B46F230083A82C /* piggybank_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB962A324B46F220083A82C /* piggybank_transparent.png */; };
+		DEC113E92535521F0089A7DC /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC113E82535521F0089A7DC /* GoalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		DEB9629F24B2EF290083A82C /* ItemTypeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeList.swift; sourceTree = "<group>"; };
 		DEB962A124B32E870083A82C /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		DEB962A324B46F220083A82C /* piggybank_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piggybank_transparent.png; sourceTree = "<group>"; };
+		DEC113E82535521F0089A7DC /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */,
 				DE10DA312499DF6F0042D7BE /* createGoals.swift */,
 				DE22C8CE250F38930009A3D7 /* createGoalsSuccess.swift */,
+				DEC113E82535521F0089A7DC /* GoalView.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				DE8E9F6324A30DDC008B2461 /* PersistentManager.swift in Sources */,
 				DE7DDB8C252D7C5C00F7EFB5 /* KeyboardInformation.swift in Sources */,
 				DE804FC824E3B15600409AD9 /* WeeklyView.swift in Sources */,
+				DEC113E92535521F0089A7DC /* GoalView.swift in Sources */,
 				DE650B0A25089FA3005172F5 /* Task+CoreDataProperties.swift in Sources */,
 				DE804FCD24EA5E2300409AD9 /* ScheduledItems+CoreDataClass.swift in Sources */,
 			);

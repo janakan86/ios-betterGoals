@@ -48,8 +48,11 @@ struct goalsHomeView: View {
             
             HStack{
                 if retrievedGoals.goals.indices.contains(0){
-                    ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[0].itemUIType)),itemName:retrievedGoals.goals[0].goalDescription)
-                        .padding(.leading,10)
+                    NavigationLink(destination: GoalView(goalToDisplay: retrievedGoals.goals[0])){
+                        ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[0].itemUIType)),itemName:retrievedGoals.goals[0].goalDescription)
+                            .padding(.leading,10)
+                    }
+                   
                     
                     Spacer().frame(width:10)
                 }
