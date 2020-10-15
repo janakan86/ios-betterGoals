@@ -122,10 +122,22 @@ struct CreateTasks: View {
 
 
 
-/*
-struct CreateTasks_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateTasks()
+struct CreateTasksPreviewWrapper: View {
+    @State var isParentActive:Bool = false
+    
+    var body: some View {
+        CreateTasks(isParentViewActive: $isParentActive, goalID:"Adfsa", successCallBack: {
+            
+        }).environment(\.managedObjectContext,PersistenceManager.shared.context)
     }
 }
- */
+
+struct CreateTasks_Previews: PreviewProvider {
+    
+    
+    static var previews: some View {
+        CreateTasksPreviewWrapper()
+    }
+    
+    
+}
