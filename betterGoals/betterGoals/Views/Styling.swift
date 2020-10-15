@@ -138,6 +138,33 @@ extension View {
 // End navigation bar styling
 
 
+struct navigationBackButton: View {
+    
+    var action:() -> Void
+    
+    var body: some View{
+        Button(action:self.action){
+            Image(systemName: "arrowtriangle.left.fill")
+                .accentColor(Color(.white))
+        }
+    }
+}
+
+struct poptoHomeButton: View {
+    
+    var action: () -> Void
+    
+    var body: some View{
+           Button(action:self.action){
+               Image(systemName: "house.fill")
+                   .accentColor(Color(.white))
+           }
+       }
+    
+    
+}
+
+
 struct Styling_Previews: PreviewProvider {
     static var previews: some View {
         VStack{

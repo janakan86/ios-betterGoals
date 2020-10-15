@@ -95,14 +95,14 @@ struct CreateTasks: View {
          //TODO run validations before navigating
         .navigationBarItems(
             // add a custom button with my styling
-            leading: createGoalsBackButton(
+            leading: navigationBackButton(
                 action:{
                     self.presentationMode.wrappedValue.dismiss()
                 }
                 
             ),
             // add a button to move to Goals Home / root
-            trailing: createGoalsPoptoRootButton(
+            trailing: poptoHomeButton(
                 action:{
                     self.isParentViewActive.toggle()
                 }

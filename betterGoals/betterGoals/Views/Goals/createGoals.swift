@@ -92,14 +92,14 @@ struct QuestionOne:View{
          //TODO run validations before navigating
         .navigationBarItems(
             // add a custom button with my styling
-            leading: createGoalsBackButton(
+            leading: navigationBackButton(
                 action:{
                     self.presentationMode.wrappedValue.dismiss()
                 }
                 
             ),
             // add a button to move to Goals Home / root
-            trailing: createGoalsPoptoRootButton(
+            trailing: poptoHomeButton(
                 action:{
                     self.isCreateGoalsActive.toggle()
                 }
@@ -234,14 +234,14 @@ struct QuestionTwo:View{
          //TODO run validations before navigating
         .navigationBarItems(
             // add a custom button with my styling
-            leading: createGoalsBackButton(
+            leading: navigationBackButton(
                 action:{
                     self.presentationMode.wrappedValue.dismiss()
                 }
                 
             ),
             // add a button to move to Goals Home / root
-            trailing: createGoalsPoptoRootButton(
+            trailing: poptoHomeButton(
                 action:{
                     self.isCreateGoalsActive.toggle()
                 }
@@ -257,31 +257,7 @@ struct QuestionTwo:View{
 
 
 
-struct createGoalsBackButton: View {
-    
-    var action:() -> Void
-    
-    var body: some View{
-        Button(action:self.action){
-            Image(systemName: "arrowtriangle.left.fill")
-                .accentColor(Color(.white))
-        }
-    }
-}
 
-struct createGoalsPoptoRootButton: View {
-    
-    var action: () -> Void
-    
-    var body: some View{
-           Button(action:self.action){
-               Image(systemName: "house.fill")
-                   .accentColor(Color(.white))
-           }
-       }
-    
-    
-}
 
 
 /* previews */
