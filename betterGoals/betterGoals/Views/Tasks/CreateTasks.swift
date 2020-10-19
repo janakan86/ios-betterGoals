@@ -62,12 +62,14 @@ struct CreateTasks: View {
             }.disabled(self.taskID == "")
             
             
-            
-            ForEach(retrievedTasks, id: \.self){ task in
-                Text((task as Task).taskID!)
+            List{
+                ForEach(retrievedTasks, id: \.self){ task in
+                    Text((task as Task).taskID!)
+                }.onDelete(perform: self.deleteRow)
             }
+           
             
-
+            Spacer()
             
         }
         .onAppear(){
@@ -115,6 +117,20 @@ struct CreateTasks: View {
         self.retrievedTasks.removeAll()
         let tasks =  DataService.sharedDataService.getTasks(byGoalID: self.goalID!, inContext: self.sharedManagedContext)
         self.retrievedTasks.append(contentsOf: tasks)
+    }
+    
+    
+    func deleteRow(at offsets: IndexSet)->(){
+        let tasksToDelete = offsets.map{ self.retrievedTasks[$0]}
+        
+        for taskToDelete in tasksToDelete {
+            //delete from persistence
+            DataService.sharedDataService.deleteTask(task: taskToDelete, inContext: self.sharedManagedContext)
+            
+            //remove from array used to display
+            retrievedTasks.removeAll{$0 == taskToDelete}
+        }
+
     }
 }
 

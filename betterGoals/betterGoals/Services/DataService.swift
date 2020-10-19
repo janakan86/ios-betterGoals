@@ -165,6 +165,22 @@ class DataService{
     }
     
     
+    func deleteTask(task:Task,inContext managedContext: NSManagedObjectContext) {
+        
+        do {
+
+            managedContext.delete(task)
+            
+            try managedContext.save()
+            
+        } catch{
+            managedContext.rollback()
+        }
+        
+        
+    }
+    
+    
     /*
        retrieve the goal and use the 1:many relationship to access the tasks
      */
