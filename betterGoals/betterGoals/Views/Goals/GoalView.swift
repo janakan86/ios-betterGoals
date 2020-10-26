@@ -23,11 +23,13 @@ struct GoalView: View {
                                   
                               })// TODO handle nil
                         ){
-                             Text("create tasks").customStyle(style: NextLinkStyle())
+                             Text("Add tasks").customStyle(style: NextLinkStyle())
                    }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
                    .padding(.bottom,20)
         }
+        Text(goalToDisplay.goalID)
         Text(goalToDisplay.goalDescription)
+        Spacer()
     }
 }
 
