@@ -15,7 +15,8 @@ struct GoalView: View {
     @State var isGoalViewActive:Bool = false;
     
     var body: some View {
-        NavigationView{
+      
+            
             NavigationLink(destination:CreateTasks(
                             isParentViewActive: self.$isGoalViewActive,
                               goalID: goalToDisplay.goalID, successCallBack:{
@@ -26,10 +27,14 @@ struct GoalView: View {
                              Text("Add tasks").customStyle(style: NextLinkStyle())
                    }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
                    .padding(.bottom,20)
-        }
-        Text(goalToDisplay.goalID)
-        Text(goalToDisplay.goalDescription)
-        Spacer()
+            
+            
+            Text(goalToDisplay.goalID)
+            Text(goalToDisplay.goalDescription)
+            Spacer()
+            
+
+    
     }
 }
 
