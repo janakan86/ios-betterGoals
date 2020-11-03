@@ -34,33 +34,53 @@ struct CreateTasks: View {
     @State var retrievedTasks:[Task] = []
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+       
+            
+            Spacer()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 10, maxHeight: 20)
+            
             Text(goalID!)
+                .customStyle(style:Heading1Style())
             
-            Text("")
-            TextEditor( text: $taskID)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 100)
-                .background(Color("lightPink"))
-                .font(Font.system(size: 15, design: .default))
-                .cornerRadius(4)
+            Spacer()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 10, maxHeight: 20)
+            
                 
+            TextField("New Task", text: $taskID)
+                .padding(.bottom,5).padding(.top,5).padding(.leading,35).padding(.trailing,10)
+                .background(Color("lightPink"))
+                .font(Font.system(size: 25, design: .default))
+                .cornerRadius(4)
             
+            Spacer()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 10, maxHeight: 20)
             
             Button(action:{
-                 //TODO - handle goalID and Habits ID nil values
-                 //TODO validations
-                
-                DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: self.taskID,inContext: self.sharedManagedContext)
+                     //TODO - handle goalID and Habits ID nil values
+                     //TODO validations
                     
-                 self.taskID = ""
-                 self.getTasksforGoal()
-                 self.successCallBack()
+                    DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: self.taskID,inContext: self.sharedManagedContext)
+                        
+                     self.taskID = ""
+                     self.getTasksforGoal()
+                     self.successCallBack()
 
-            }){
-                Text("Save Task")
-                    .customStyle(style: NextLinkStyle())
-            }.disabled(self.taskID == "")
+                }){
+                    Text("Add Task")
+                        .customStyle(style: NextLinkStyle())
+                }
+                .disabled(self.taskID == "")
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 50,alignment: .center)
+                
             
+            
+            Spacer()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 20, maxHeight: 30)
+           
+            
+            Text("Tasks for " + goalID!)
+                .customStyle(style: Heading2Style()).padding(.top,20)
             
             List{
                 ForEach(retrievedTasks, id: \.self){ task in
@@ -72,6 +92,8 @@ struct CreateTasks: View {
             Spacer()
             
         }
+        .padding(.leading,20)
+        .padding(.trailing,20)
         .onAppear(){
             guard self.habitsID != nil || self.goalID != nil else {
                 return
@@ -87,9 +109,8 @@ struct CreateTasks: View {
 
             
         }
- 
         
-        .navigationBarTitle("Goal Type",displayMode: .inline)
+        .navigationBarTitle("Add Task",displayMode: .inline)
             
         //hide the default back button
         .navigationBarBackButtonHidden(true)

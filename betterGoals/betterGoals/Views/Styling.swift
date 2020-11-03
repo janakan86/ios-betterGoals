@@ -54,6 +54,27 @@ struct NextLinkStyle: ViewModifier {
     }
 }
 
+struct HalfWidthButton: ViewModifier {
+    func body(content: Content) -> some View {
+        
+        GeometryReader { geometry in
+            content
+                .font(.title)
+                .lineSpacing(8)
+                .foregroundColor(.white)
+                .padding(.top,5)
+                .padding(.bottom,5)
+                .frame(maxWidth: .infinity)
+                .background(Color("pink"))
+                .cornerRadius(12)
+                
+                .frame(width:geometry.size.width / 2)
+        }
+       
+            
+    }
+}
+
 struct ContentStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -168,7 +189,7 @@ struct poptoHomeButton: View {
 struct Styling_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
-                 Text("Sample text").customStyle(style: Heading1Style())
+                 Text("Sample text").customStyle(style: HalfWidthButton())
                  Text("Next").customStyle(style: NextLinkStyle())
         }
    
