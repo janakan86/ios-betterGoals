@@ -101,6 +101,8 @@ class DataService{
         
         let task = Task(context:managedContext)
         task.taskID = taskID
+        task.isActive = true
+        task.isFavorite = false
         
         let goals = getGoals(byGoalID: goalID, inContext: managedContext)
         
@@ -120,6 +122,23 @@ class DataService{
             //TODO handle
         }
        
+    }
+    
+    func toggleIsTaskFavorite(fortask task:Task,inContext managedContext: NSManagedObjectContext){
+        
+        if(task.isFavorite == true){
+            task.isFavorite = false
+        }
+        else{
+            task.isFavorite = true
+        }
+        
+        do {
+            try managedContext.save()
+            
+        } catch{
+            managedContext.rollback()
+        }
     }
     
     
