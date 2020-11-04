@@ -70,7 +70,8 @@ struct CreateTasks: View {
                     Text("Add Task")
                         .customStyle(style: NextLinkStyle())
                 }
-                .disabled(self.taskID == "")
+            .disabled(self.taskID == "")
+            
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 50,alignment: .center)
                 
             
@@ -84,7 +85,10 @@ struct CreateTasks: View {
             
             List{
                 ForEach(retrievedTasks, id: \.self){ task in
-                    Text((task as Task).taskID!)
+                    NavigationLink(destination: TaskView(task: task))
+                    {
+                        TaskRow(task:task)
+                    }
                 }.onDelete(perform: self.deleteRow)
             }
            
