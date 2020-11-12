@@ -10,10 +10,26 @@ import SwiftUI
 
 struct TaskView: View {
     
-    var task:Task
+    @State var task:Task
+    
+    @Environment(\.managedObjectContext) var sharedManagedContext
     
     var body: some View {
-        Text(task.taskID ?? "")
+        
+        VStack{
+            Text(task.taskID ?? "")
+            
+            Slider(value: $task.percentage, in: 0...100, step:10)
+                .accentColor(Color("pink"))
+            
+        }.onDisappear {
+            do {
+                try sharedManagedContext.save()
+                
+            } catch{
+                sharedManagedContext.rollback()
+            }
+        }
     }
 }
 

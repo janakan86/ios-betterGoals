@@ -103,6 +103,7 @@ class DataService{
         task.taskID = taskID
         task.isActive = true
         task.isFavorite = false
+        task.percentage = 0
         
         let goals = getGoals(byGoalID: goalID, inContext: managedContext)
         
@@ -141,6 +142,19 @@ class DataService{
         }
     }
     
+    
+    func setTaskPercentage(fortask task:Task,percentage:Double,
+                           inContext managedContext: NSManagedObjectContext){
+        
+        task.percentage = percentage
+        
+        do {
+            try managedContext.save()
+            
+        } catch{
+            managedContext.rollback()
+        }
+    }
     
     func getTasks(taskID:String ,inContext managedContext: NSManagedObjectContext) -> [Task] {
         var retrievedTasks:[Task] = []

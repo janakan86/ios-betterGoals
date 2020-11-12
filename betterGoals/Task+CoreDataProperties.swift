@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  betterGoals
 //
-//  Created by K Janakan on 4/11/20.
+//  Created by K Janakan on 12/11/20.
 //  Copyright © 2020 K Janakan. All rights reserved.
 //
 //
@@ -17,9 +17,10 @@ extension Task {
         return NSFetchRequest<Task>(entityName: "Tasks")
     }
 
-    @NSManaged public var taskID: String?
     @NSManaged public var isActive: Bool
     @NSManaged public var isFavorite: Bool
+    @NSManaged public var taskID: String?
+    @NSManaged public var percentage: Double
     @NSManaged public var parentGoal: Goal?
 
 }

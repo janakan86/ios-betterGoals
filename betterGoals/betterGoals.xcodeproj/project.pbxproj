@@ -41,8 +41,8 @@
 		DEB962A224B32E880083A82C /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB962A124B32E870083A82C /* Styling.swift */; };
 		DEB962A424B46F230083A82C /* piggybank_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB962A324B46F220083A82C /* piggybank_transparent.png */; };
 		DEC113E92535521F0089A7DC /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC113E82535521F0089A7DC /* GoalView.swift */; };
-		DEDAFF032551EDCB001F6C52 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAFF012551EDCB001F6C52 /* Task+CoreDataClass.swift */; };
-		DEDAFF042551EDCB001F6C52 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAFF022551EDCB001F6C52 /* Task+CoreDataProperties.swift */; };
+		DEDA4DE8255CE2570040E05F /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDA4DE6255CE2570040E05F /* Task+CoreDataClass.swift */; };
+		DEDA4DE9255CE2570040E05F /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDA4DE7255CE2570040E05F /* Task+CoreDataProperties.swift */; };
 		DEDAFF09255331E1001F6C52 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAFF08255331E1001F6C52 /* TaskRow.swift */; };
 		DEDAFF0D255335A0001F6C52 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAFF0C255335A0001F6C52 /* TaskView.swift */; };
 /* End PBXBuildFile section */
@@ -96,8 +96,8 @@
 		DEB962A124B32E870083A82C /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		DEB962A324B46F220083A82C /* piggybank_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piggybank_transparent.png; sourceTree = "<group>"; };
 		DEC113E82535521F0089A7DC /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
-		DEDAFF012551EDCB001F6C52 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DEDAFF022551EDCB001F6C52 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DEDA4DE6255CE2570040E05F /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DEDA4DE7255CE2570040E05F /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DEDAFF08255331E1001F6C52 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		DEDAFF0C255335A0001F6C52 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,8 +156,8 @@
 		DE597F7224909921007038C1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DEDAFF012551EDCB001F6C52 /* Task+CoreDataClass.swift */,
-				DEDAFF022551EDCB001F6C52 /* Task+CoreDataProperties.swift */,
+				DEDA4DE6255CE2570040E05F /* Task+CoreDataClass.swift */,
+				DEDA4DE7255CE2570040E05F /* Task+CoreDataProperties.swift */,
 				DE650B0B2508A1BA005172F5 /* Goal+CoreDataClass.swift */,
 				DE650B0C2508A1BA005172F5 /* Goal+CoreDataProperties.swift */,
 				DE804FCB24EA5E2300409AD9 /* ScheduledItems+CoreDataClass.swift */,
@@ -371,7 +371,7 @@
 				DE8701B5248CCADD00331DE5 /* constants.swift in Sources */,
 				DE22C8CF250F38930009A3D7 /* createGoalsSuccess.swift in Sources */,
 				DE650B002505EAD7005172F5 /* CreateTasks.swift in Sources */,
-				DEDAFF042551EDCB001F6C52 /* Task+CoreDataProperties.swift in Sources */,
+				DEDA4DE8255CE2570040E05F /* Task+CoreDataClass.swift in Sources */,
 				DE804FC624E3AB0100409AD9 /* MonthlyViewScheduler.swift in Sources */,
 				DEACF6F9245BF33A00074C28 /* SceneDelegate.swift in Sources */,
 				DE650B0E2508A1BA005172F5 /* Goal+CoreDataProperties.swift in Sources */,
@@ -379,7 +379,7 @@
 				DEDAFF0D255335A0001F6C52 /* TaskView.swift in Sources */,
 				DE650B0D2508A1BA005172F5 /* Goal+CoreDataClass.swift in Sources */,
 				DE22C8D125104B760009A3D7 /* RetrievedEntityObjects.swift in Sources */,
-				DEDAFF032551EDCB001F6C52 /* Task+CoreDataClass.swift in Sources */,
+				DEDA4DE9255CE2570040E05F /* Task+CoreDataProperties.swift in Sources */,
 				DE8E9F5E24A07D1A008B2461 /* coreDataModel.xcdatamodeld in Sources */,
 				DEB962A024B2EF290083A82C /* ItemTypeList.swift in Sources */,
 				DE34832E24DAA98E00CD68B5 /* DateDisplayCalculations.swift in Sources */,

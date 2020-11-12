@@ -87,8 +87,8 @@ struct CreateTasks: View {
                 ForEach(retrievedTasks, id: \.self){ task in
                     NavigationLink(destination: TaskView(task: task))
                     {
-                        TaskRow(task:task)
-                    }
+                        TaskRow(task:task,retrievedTasks: $retrievedTasks)
+                    }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation
                 }.onDelete(perform: self.deleteRow)
             }
            

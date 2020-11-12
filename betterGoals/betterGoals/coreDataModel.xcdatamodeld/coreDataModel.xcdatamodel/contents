@@ -16,12 +16,13 @@
     <entity name="Tasks" representedClassName=".Task" syncable="YES">
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="percentage" optional="YES" attributeType="Double" maxValueString="100" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="taskID" optional="YES" attributeType="String"/>
         <relationship name="parentGoal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goals" inverseName="tasks" inverseEntity="Goals"/>
     </entity>
     <elements>
         <element name="Goals" positionX="-63" positionY="-18" width="128" height="133"/>
         <element name="ScheduledItems" positionX="-63" positionY="18" width="128" height="88"/>
-        <element name="Tasks" positionX="-63" positionY="27" width="128" height="103"/>
+        <element name="Tasks" positionX="-63" positionY="27" width="128" height="118"/>
     </elements>
 </model>
