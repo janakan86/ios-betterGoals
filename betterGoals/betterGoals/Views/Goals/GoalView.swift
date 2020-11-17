@@ -14,9 +14,11 @@ struct GoalView: View {
     
     @State var isGoalViewActive:Bool = false;
     
+    @Environment(\.presentationMode) var presentationMode //used by the custom back button
+    
     var body: some View {
       
-            
+        VStack{
             NavigationLink(destination:CreateTasks(
                             isParentViewActive: self.$isGoalViewActive,
                               goalID: goalToDisplay.goalID, successCallBack:{
@@ -32,6 +34,18 @@ struct GoalView: View {
             Text(goalToDisplay.goalID)
             Text(goalToDisplay.goalDescription)
             Spacer()
+        }
+        .navigationBarBackButtonHidden(true)
+            .navigationBarItems(
+                // custom back button
+                leading: navigationBackButton(
+                    action:{
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                )
+            )
+            
             
 
     

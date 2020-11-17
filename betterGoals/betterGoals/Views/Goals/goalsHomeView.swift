@@ -52,6 +52,7 @@ struct goalsHomeView: View {
                         ItemIconView(itemUIValues: ItemTypesUIDefaults.getItemUIDefault(usingID:              Int(retrievedGoals.goals[0].itemUIType)),itemName:retrievedGoals.goals[0].goalDescription)
                             .padding(.leading,10)
                     }
+                    .isDetailLink(false)
                    
                     
                     Spacer().frame(width:10)
