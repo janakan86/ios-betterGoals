@@ -10,6 +10,7 @@
 		DE10DA322499DF6F0042D7BE /* createGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE10DA312499DF6F0042D7BE /* createGoals.swift */; };
 		DE22C8CF250F38930009A3D7 /* createGoalsSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22C8CE250F38930009A3D7 /* createGoalsSuccess.swift */; };
 		DE22C8D125104B760009A3D7 /* RetrievedEntityObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22C8D025104B760009A3D7 /* RetrievedEntityObjects.swift */; };
+		DE240EE9256396D80051273A /* RetrievedTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE240EE8256396D80051273A /* RetrievedTasks.swift */; };
 		DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */; };
 		DE2EBCE12484BE2100CFEC00 /* ItemIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */; };
 		DE34832C24DA81F000CD68B5 /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE34832B24DA81F000CD68B5 /* SchedulerView.swift */; };
@@ -61,6 +62,7 @@
 		DE10DA312499DF6F0042D7BE /* createGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoals.swift; sourceTree = "<group>"; };
 		DE22C8CE250F38930009A3D7 /* createGoalsSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createGoalsSuccess.swift; sourceTree = "<group>"; };
 		DE22C8D025104B760009A3D7 /* RetrievedEntityObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievedEntityObjects.swift; sourceTree = "<group>"; };
+		DE240EE8256396D80051273A /* RetrievedTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievedTasks.swift; sourceTree = "<group>"; };
 		DE2EBCDE2484B2E400CFEC00 /* goalsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalsHomeView.swift; sourceTree = "<group>"; };
 		DE2EBCE02484BE2100CFEC00 /* ItemIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIconView.swift; sourceTree = "<group>"; };
 		DE34832B24DA81F000CD68B5 /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				DE650B0C2508A1BA005172F5 /* Goal+CoreDataProperties.swift */,
 				DE804FCB24EA5E2300409AD9 /* ScheduledItems+CoreDataClass.swift */,
 				DE22C8D025104B760009A3D7 /* RetrievedEntityObjects.swift */,
+				DE240EE8256396D80051273A /* RetrievedTasks.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE240EE9256396D80051273A /* RetrievedTasks.swift in Sources */,
 				DE597F772490B81E007038C1 /* DataService.swift in Sources */,
 				DE2EBCDF2484B2E400CFEC00 /* goalsHomeView.swift in Sources */,
 				DEB962A224B32E880083A82C /* Styling.swift in Sources */,

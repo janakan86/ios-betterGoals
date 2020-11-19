@@ -10,7 +10,13 @@ import SwiftUI
 
 struct TaskView: View {
     
-    @State var task:Task
+    var task:Task
+    @ObservedObject var retrievedTasks:retrievedTasks
+    
+    var taskIndex: Int {
+        retrievedTasks.tasks.firstIndex(where: { $0.taskID == task.taskID })!
+    }
+    
     
     @Environment(\.managedObjectContext) var sharedManagedContext
     
@@ -19,7 +25,20 @@ struct TaskView: View {
         VStack{
             Text(task.taskID ?? "")
             
-            Slider(value: $task.percentage, in: 0...100, step:10)
+            Button(action: {
+                self.retrievedTasks.toggleIsFavorite(index: taskIndex)
+            }) {
+                if self.retrievedTasks.tasks[self.taskIndex]
+                    .isFavorite {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(Color.yellow)
+                } else {
+                    Image(systemName: "star")
+                        .foregroundColor(Color.gray)
+                }
+            }
+            
+            Slider(value: $retrievedTasks.tasks[taskIndex].percentage, in: 0...100, step:10)
                 .accentColor(Color("pink"))
             
         }.onDisappear {

@@ -25,6 +25,7 @@ struct createGoalsSuccess: View {
               
               NavigationLink(destination:CreateTasks(
                            isParentViewActive: self.$isCreateGoalsActive,
+                                retrievedTasks: retrievedTasks(goalID: createdGoal!.goalID, sharedManagedContext: sharedManagedContext),
                                 goalID: createdGoal?.goalID, successCallBack:{
                                     
                                     

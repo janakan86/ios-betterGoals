@@ -16,6 +16,7 @@ struct CreateTasks: View {
     
     @Environment(\.managedObjectContext) var sharedManagedContext
     
+    @ObservedObject var retrievedTasks:retrievedTasks
     
     @State private var show_modal: Bool = false
     
@@ -29,9 +30,8 @@ struct CreateTasks: View {
     @State var taskID:String = ""
     
     
-    
-    
-    @State var retrievedTasks:[Task] = []
+
+   
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -60,10 +60,13 @@ struct CreateTasks: View {
                      //TODO - handle goalID and Habits ID nil values
                      //TODO validations
                     
+                    //store in persistence
                     DataService.sharedDataService.insertTask(forGoalWithID: self.goalID!, taskID: self.taskID,inContext: self.sharedManagedContext)
                         
+                    //refresh the observed object.Which in term would refresh this view
+                    self.retrievedTasks.refresh(goalID: self.goalID!, sharedManagedContext: self.sharedManagedContext)
+                
                      self.taskID = ""
-                     self.getTasksforGoal()
                      self.successCallBack()
 
                 }){
@@ -84,10 +87,10 @@ struct CreateTasks: View {
                 .customStyle(style: Heading2Style()).padding(.top,20)
             
             List{
-                ForEach(retrievedTasks, id: \.self){ task in
-                    NavigationLink(destination: TaskView(task: task))
+                ForEach(retrievedTasks.tasks, id: \.self){ task in
+                    NavigationLink(destination: TaskView(task:task,retrievedTasks: self.retrievedTasks))
                     {
-                        TaskRow(task:task,retrievedTasks: $retrievedTasks)
+                        TaskRow(task:task,retrievedTasks: self.retrievedTasks)
                     }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation
                 }.onDelete(perform: self.deleteRow)
             }
@@ -98,21 +101,6 @@ struct CreateTasks: View {
         }
         .padding(.leading,20)
         .padding(.trailing,20)
-        .onAppear(){
-            guard self.habitsID != nil || self.goalID != nil else {
-                return
-            }
-            
-            if self.habitsID != nil{
-              //TODO implement
-            }
-            else if self.goalID != nil{
-                self.getTasksforGoal()
-            }
-            
-
-            
-        }
         
         .navigationBarTitle("Add Task",displayMode: .inline)
             
@@ -138,24 +126,12 @@ struct CreateTasks: View {
         
     }
     
-    func getTasksforGoal()->(){
-        self.retrievedTasks.removeAll()
-        let tasks =  DataService.sharedDataService.getTasks(byGoalID: self.goalID!, inContext: self.sharedManagedContext)
-        self.retrievedTasks.append(contentsOf: tasks)
-    }
     
     
     func deleteRow(at offsets: IndexSet)->(){
-        let tasksToDelete = offsets.map{ self.retrievedTasks[$0]}
-        
-        for taskToDelete in tasksToDelete {
-            //delete from persistence
-            DataService.sharedDataService.deleteTask(task: taskToDelete, inContext: self.sharedManagedContext)
-            
-            //remove from array used to display
-            retrievedTasks.removeAll{$0 == taskToDelete}
-        }
 
+        self.retrievedTasks.deleteTasks(atOffsets: offsets)
+    
     }
 }
 
@@ -167,7 +143,8 @@ struct CreateTasksPreviewWrapper: View {
     @State var isParentActive:Bool = false
     
     var body: some View {
-        CreateTasks(isParentViewActive: $isParentActive, goalID:"Adfsa", successCallBack: {
+        CreateTasks(isParentViewActive: $isParentActive,
+                     retrievedTasks: retrievedTasks(goalID: "Adfsa",sharedManagedContext: PersistenceManager.shared.context),goalID:"Adfsa", successCallBack: {
             
         }).environment(\.managedObjectContext,PersistenceManager.shared.context)
     }

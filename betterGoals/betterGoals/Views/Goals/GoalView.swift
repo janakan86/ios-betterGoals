@@ -16,12 +16,16 @@ struct GoalView: View {
     
     @Environment(\.presentationMode) var presentationMode //used by the custom back button
     
+    @Environment(\.managedObjectContext) var sharedManagedContext
+    
     var body: some View {
       
         VStack{
             NavigationLink(destination:CreateTasks(
                             isParentViewActive: self.$isGoalViewActive,
-                              goalID: goalToDisplay.goalID, successCallBack:{
+                            retrievedTasks:retrievedTasks(goalID: goalToDisplay.goalID, sharedManagedContext: sharedManagedContext),
+                                  goalID: goalToDisplay.goalID,
+                            successCallBack:{
                                   
                                   
                               })// TODO handle nil
