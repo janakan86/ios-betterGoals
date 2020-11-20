@@ -138,24 +138,57 @@ struct CreateTasks: View {
 
 
 
-
-struct CreateTasksPreviewWrapper: View {
-    @State var isParentActive:Bool = false
-    
-    var body: some View {
-        CreateTasks(isParentViewActive: $isParentActive,
-                     retrievedTasks: retrievedTasks(goalID: "Adfsa",sharedManagedContext: PersistenceManager.shared.context),goalID:"Adfsa", successCallBack: {
-            
-        }).environment(\.managedObjectContext,PersistenceManager.shared.context)
-    }
-}
-
 struct CreateTasks_Previews: PreviewProvider {
-    
     
     static var previews: some View {
         CreateTasksPreviewWrapper()
     }
     
-    
 }
+
+struct CreateTasksPreviewWrapper: View {
+    @State var isParentActive:Bool = false
+    let context = PersistenceManager.shared.context
+    
+    var sampleGoal:Goal = getSampleGoal()
+    
+    var tasks = getSampleTasks()
+    
+    
+    
+    var body: some View {
+        CreateTasks(isParentViewActive: $isParentActive,
+                    retrievedTasks: retrievedTasks(tasks: tasks, sharedManagedContext:context),goalID:sampleGoal.goalID, successCallBack: {
+            
+        }).environment(\.managedObjectContext, context)
+    }
+    
+    
+    static func getSampleGoal()-> Goal{
+        let sampleGoal = Goal(context: PersistenceManager.shared.context)
+        sampleGoal.goalID = "sample Goal2"
+        sampleGoal.goalDescription = "Need to win a gold medal"
+        
+        return sampleGoal
+    
+    }
+    
+    static func getSampleTasks()-> [Task]{
+        
+        var sampleTasks: [Task] = []
+        
+        let sampleTask = Task(context: PersistenceManager.shared.context)
+        sampleTask.taskID = "ttttt"
+        
+        let sampleTask2 = Task(context: PersistenceManager.shared.context)
+        sampleTask2.taskID = "qqqqq"
+        
+        sampleTasks.append(sampleTask)
+        sampleTasks.append(sampleTask2)
+        
+        
+        return sampleTasks
+    }
+}
+
+

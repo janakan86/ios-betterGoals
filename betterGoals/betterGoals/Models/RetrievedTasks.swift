@@ -24,6 +24,12 @@ final class retrievedTasks: ObservableObject {
         
     }
     
+    init (tasks:[Task], sharedManagedContext : NSManagedObjectContext){
+        self.sharedManagedContext = sharedManagedContext
+        self.tasks = tasks
+    }
+    
+    
     func refresh(goalID:String, sharedManagedContext : NSManagedObjectContext){
         self.tasks = DataService.sharedDataService.getTasks(byGoalID: goalID, inContext : sharedManagedContext)
     }

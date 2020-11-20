@@ -14,10 +14,9 @@ struct createGoalsSuccess: View {
       @Binding var isCreateGoalsActive:Bool
       
       @EnvironmentObject var retrievedGoals:Goals
-      
-      @State var isGoalCreated:Bool = false
+
     
-      @Binding var createdGoal:Goal?
+      var goalID:String
     
       
       var body: some View {
@@ -25,8 +24,8 @@ struct createGoalsSuccess: View {
               
               NavigationLink(destination:CreateTasks(
                            isParentViewActive: self.$isCreateGoalsActive,
-                                retrievedTasks: retrievedTasks(goalID: createdGoal!.goalID, sharedManagedContext: sharedManagedContext),
-                                goalID: createdGoal?.goalID, successCallBack:{
+                                retrievedTasks: retrievedTasks(goalID: goalID, sharedManagedContext: sharedManagedContext),
+                                goalID: goalID, successCallBack:{
                                     
                                     
                                 })// TODO handle nil
@@ -41,9 +40,28 @@ struct createGoalsSuccess: View {
       }
 }
 
-/*
+
+
+
 struct createGoalsSuccess_Previews: PreviewProvider {
     static var previews: some View {
-        createGoalsSuccess()
+        return createGoalsSuccessPreviewWrapper()
     }
-}*/
+}
+
+
+struct createGoalsSuccessPreviewWrapper : View {
+    
+    @State var isCreateGoalsActive:Bool = false
+    let context = PersistenceManager.shared.context
+    
+    var body: some View {
+        
+        createGoalsSuccess(isCreateGoalsActive: $isCreateGoalsActive,
+                           goalID: "Test")
+            .environment(\.managedObjectContext, context)
+    }
+}
+
+
+

@@ -218,8 +218,9 @@ struct QuestionTwo:View{
             
             NavigationLink(destination:createGoalsSuccess(
                 isCreateGoalsActive: self.$isCreateGoalsActive,
-                createdGoal: $newlyCreatedGoal),
-                           isActive: $isGoalCreated
+                goalID: newlyCreatedGoal!.goalID),
+                
+                isActive: $isGoalCreated
                 
             ){
             }.isDetailLink(false) //setting to false is needed to pop back to root of Navigation View
