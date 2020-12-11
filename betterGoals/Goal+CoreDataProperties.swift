@@ -2,7 +2,7 @@
 //  Goal+CoreDataProperties.swift
 //  betterGoals
 //
-//  Created by K Janakan on 9/9/20.
+//  Created by K Janakan on 11/12/20.
 //  Copyright © 2020 K Janakan. All rights reserved.
 //
 //
@@ -23,6 +23,7 @@ extension Goal {
     @NSManaged public var itemUIType: Int16
     @NSManaged public var startDate: Date?
     @NSManaged public var tasks: Set<Task>?
+    @NSManaged public var scheduledGoals: NSSet?
 
 }
 
@@ -41,21 +42,26 @@ extension Goal {
     @objc(removeTasks:)
     @NSManaged public func removeFromTasks(_ values: Set<Task>)
 
+
 }
 
+// MARK: Generated accessors for scheduledGoals
+extension Goal {
 
-/*
-     class used to temporarily store the new Goal details before it is persisted
-     The object will be passed around the goal creation screens.
-     This helps in solving the complexity involved passing around a NSManagedObject Goal,
-     which may or may not get saved.
- */
-final class NewGoal : ObservableObject{
-    @Published var startDate:Date = Date()
-    @Published var endDate:Date = Date()
-    
-    //following properties are from Item Protocol
-    @Published var goalID: String = ""
-    @Published var goalDescription: String = ""
-    @Published var itemUIType: Int16 = 0
+    @objc(addScheduledGoalsObject:)
+    @NSManaged public func addToScheduledGoals(_ value: ScheduledItems)
+
+    @objc(removeScheduledGoalsObject:)
+    @NSManaged public func removeFromScheduledGoals(_ value: ScheduledItems)
+
+    @objc(addScheduledGoals:)
+    @NSManaged public func addToScheduledGoals(_ values: NSSet)
+
+    @objc(removeScheduledGoals:)
+    @NSManaged public func removeFromScheduledGoals(_ values: NSSet)
+
+}
+
+extension Goal : Identifiable {
+
 }

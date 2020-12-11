@@ -6,12 +6,17 @@
         <attribute name="goalID" attributeType="String"/>
         <attribute name="itemUIType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="scheduledGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduledItems" inverseName="goal" inverseEntity="ScheduledItems"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tasks" inverseName="parentGoal" inverseEntity="Tasks"/>
     </entity>
     <entity name="ScheduledItems" representedClassName=".ScheduledItems" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="scheduledItemId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="taskID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="iswholeday" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="timeend" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestart" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goals" inverseName="scheduledGoals" inverseEntity="Goals"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tasks" inverseName="scheduledTasks" inverseEntity="Tasks"/>
     </entity>
     <entity name="Tasks" representedClassName=".Task" syncable="YES">
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -19,10 +24,11 @@
         <attribute name="percentage" optional="YES" attributeType="Double" maxValueString="100" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="taskID" optional="YES" attributeType="String"/>
         <relationship name="parentGoal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goals" inverseName="tasks" inverseEntity="Goals"/>
+        <relationship name="scheduledTasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduledItems" inverseName="task" inverseEntity="ScheduledItems"/>
     </entity>
     <elements>
-        <element name="Goals" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="ScheduledItems" positionX="-63" positionY="18" width="128" height="88"/>
-        <element name="Tasks" positionX="-63" positionY="27" width="128" height="118"/>
+        <element name="Goals" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="ScheduledItems" positionX="-63" positionY="18" width="128" height="148"/>
+        <element name="Tasks" positionX="-63" positionY="27" width="128" height="133"/>
     </elements>
 </model>
